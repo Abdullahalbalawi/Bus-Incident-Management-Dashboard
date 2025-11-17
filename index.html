@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام ادارة بلاغات الحافلات - لوحة التحكم</title>
+    <title>نظام إدارة بلاغات الحافلات - لوحة التحكم</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -44,6 +44,7 @@
             margin: 0 auto;
             padding: 20px;
         }
+        /* Header Enhanced */
         header {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
@@ -86,9 +87,10 @@
             position: relative;
             z-index: 1;
         }
+        /* Summary Cards Enhanced - تعديل grid-template-columns */
         .summary-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* تقليل الحد الأدنى */
             gap: 15px;
             margin-bottom: 25px;
         }
@@ -136,9 +138,12 @@
         }
         .new .summary-icon { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
         .late .summary-icon { background: linear-gradient(135deg, #f093fb, #f5576c); color: white; }
-        .stopped .summary-icon { background: linear-gradient(135deg, #fa709a, #fee140); color: white; }
+        .open .summary-icon { background: linear-gradient(135deg, #4db6ac, #26a69a); color: white; } /* جديد */
+        .fixed .summary-icon { background: linear-gradient(135deg, #81c784, #4caf50); color: white; } /* جديد */
+        .not-fixed .summary-icon { background: linear-gradient(135deg, #ffab91, #ff7043); color: white; } /* جديد */
         .duplicate .summary-icon { background: linear-gradient(135deg, #30cfd0, #330867); color: white; }
         .total .summary-icon { background: linear-gradient(135deg, #a8edea, #fed6e3); color: white; }
+        /* Controls Enhanced */
         .controls {
             background: white;
             border-radius: var(--radius);
@@ -265,6 +270,7 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
         }
+        /* Table Enhanced */
         .table-container {
             background: white;
             border-radius: var(--radius);
@@ -307,25 +313,31 @@
             background: linear-gradient(90deg, #e3f2fd, #f5f5f5) !important;
             transform: scale(1.01);
         }
+        /* Status & Priority Enhanced */
         .priority-high { 
             color: #d32f2f; 
             font-weight: bold; 
+            text-shadow: 0 1px 2px rgba(211, 47, 47, 0.2);
         }
         .priority-medium { 
             color: #f57c00; 
             font-weight: bold;
+            text-shadow: 0 1px 2px rgba(245, 124, 0, 0.2);
         }
         .priority-normal { 
             color: #2e7d32; 
             font-weight: bold;
+            text-shadow: 0 1px 2px rgba(46, 125, 50, 0.2);
         }
         .priority-stop { 
             color: #7b1fa2; 
             font-weight: bold;
+            text-shadow: 0 1px 2px rgba(123, 31, 162, 0.2);
         }
         .priority-violation { 
             color: #9c27b0; 
             font-weight: bold;
+            text-shadow: 0 1px 2px rgba(156, 39, 176, 0.2);
         }
         .status-badge {
             display: inline-flex;
@@ -347,6 +359,7 @@
         .status-not-fixed { background: linear-gradient(135deg, #ffebee, #ffcdd2); color: #c62828; }
         .status-waiting { background: linear-gradient(135deg, #f3e5f5, #e1bee7); color: #7b1fa2; }
         .status-closed { background: linear-gradient(135deg, #f5f5f5, #e0e0e0); color: #616161; }
+        /* Countdown Enhanced */
         .countdown {
             font-family: 'Courier New', monospace;
             font-weight: bold;
@@ -411,6 +424,7 @@
             0%, 100% { opacity: 1; }
             50% { opacity: .7; }
         }
+        /* Action Buttons Enhanced */
         .action-buttons {
             display: flex;
             gap: 8px;
@@ -458,6 +472,10 @@
             background: linear-gradient(135deg, var(--primary), #1e88e5); 
             color: white; 
         }
+        .btn-edit { 
+            background: linear-gradient(135deg, #ff9800, #f57c00); 
+            color: white; 
+        }
         .btn-wa { 
             background: linear-gradient(135deg, #25d366, #128c7e); 
             color: white; 
@@ -466,6 +484,7 @@
             background: linear-gradient(135deg, var(--danger), #c62828); 
             color: white; 
         }
+        /* Bus Number Link Enhanced */
         .bus-number-link {
             color: var(--primary);
             text-decoration: none;
@@ -482,6 +501,7 @@
             text-decoration: underline;
             transform: scale(1.05);
         }
+        /* Loading Enhanced */
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -511,10 +531,12 @@
             font-size: 1.3rem;
             color: white;
             font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+        /* Modals Enhanced */
         .modal {
             display: none;
             position: fixed;
@@ -557,6 +579,13 @@
         }
         .modal-large {
             max-width: 900px;
+        }
+        .modal-fullscreen {
+            width: 100vw !important;
+            height: 100vh !important;
+            max-width: none !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
         }
         .modal-header {
             display: flex;
@@ -603,6 +632,7 @@
             padding-top: 20px;
             border-top: 1px solid var(--border);
         }
+        /* Password Modal */
         .password-modal {
             max-width: 400px;
         }
@@ -653,6 +683,7 @@
         .password-error.show {
             display: block;
         }
+        /* Form Enhanced */
         .form-group {
             margin-bottom: 20px;
         }
@@ -688,6 +719,7 @@
         .form-row .form-group {
             flex: 1;
         }
+        /* Toast Enhanced */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -724,6 +756,7 @@
         .toast i {
             font-size: 1.3rem;
         }
+        /* Detail Sections Enhanced */
         .detail-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -776,6 +809,7 @@
             font-size: 0.95rem;
             line-height: 1.6;
         }
+        /* SLA Settings Enhanced */
         .sla-level {
             background: linear-gradient(135deg, #f8f9fa, #ffffff);
             border-radius: var(--radius);
@@ -803,6 +837,7 @@
             font-size: 1.15rem;
             color: var(--dark);
         }
+        /* Auto Close Settings */
         .auto-close-section {
             background: linear-gradient(135deg, #f8f9fa, #ffffff);
             border-radius: var(--radius);
@@ -825,6 +860,7 @@
             font-size: 1.15rem;
             color: var(--dark);
         }
+        /* Empty State */
         .empty-state {
             text-align: center;
             padding: 60px 20px;
@@ -839,6 +875,7 @@
             font-size: 1.2rem;
             font-weight: 500;
         }
+        /* Security Badge */
         .security-badge {
             position: absolute;
             top: 20px;
@@ -857,6 +894,7 @@
         .security-badge i {
             color: #ffd700;
         }
+        /* Additional Styles */
         .tr-urgent {
             background: linear-gradient(90deg, #ffebee, #ffcdd2) !important;
             animation: pulse-row 2s infinite;
@@ -890,34 +928,7 @@
         .notes-field.active {
             opacity: 1;
         }
-        .report-actions {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        .report-content {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #dee2e6;
-            max-height: 500px;
-            overflow-y: auto;
-            font-family: 'Cairo', sans-serif;
-            line-height: 1.6;
-        }
-        .report-content pre {
-            white-space: pre-wrap;
-            margin: 0;
-            font-size: 0.95rem;
-        }
-        .report-statistics {
-            margin-top: 20px;
-            padding: 15px;
-            background: #e8f5e9;
-            border-radius: 8px;
-            border: 1px solid #c8e6c9;
-        }
+        /* Responsive Enhanced */
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -926,7 +937,7 @@
                 font-size: 1.5rem;
             }
             .summary-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); /* تقليل الحد الأدنى */
             }
             .detail-grid {
                 grid-template-columns: 1fr;
@@ -941,13 +952,6 @@
                 width: 38px;
                 height: 38px;
                 font-size: 0.95rem;
-            }
-            .report-actions {
-                flex-direction: column;
-            }
-            .report-content {
-                padding: 15px;
-                font-size: 0.9rem;
             }
         }
         @media (max-width: 480px) {
@@ -971,6 +975,7 @@
     </style>
 </head>
 <body>
+    <!-- شاشة التحميل -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner"></div>
         <div class="loading-text" id="loadingText">جاري تحميل البيانات...</div>
@@ -981,8 +986,8 @@
                 <i class="fas fa-shield-alt"></i>
                 نظام محمي
             </div>
-            <h1><i class="fas fa-bus"></i> لوحة ادارة بلاغات الحافلات</h1>
-            <p>نظام متابعة البلاغات الذكي - ادارة، تنبيهات، واتساب</p>
+            <h1><i class="fas fa-bus"></i> لوحة إدارة بلاغات الحافلات</h1>
+            <p>نظام متابعة البلاغات الذكي - إدارة، تنبيهات، واتساب</p>
         </header>
         <div class="summary-grid">
             <div class="summary-card new">
@@ -999,17 +1004,38 @@
                     <i class="fas fa-clock"></i>
                 </div>
                 <div class="summary-content">
-                    <div class="summary-title">المتاخرة</div>
+                    <div class="summary-title">المتأخرة</div>
                     <div class="summary-value" id="lateCount">0</div>
                 </div>
             </div>
-            <div class="summary-card stopped">
+            <!-- ✅ تعديل: بطاقة "المتوقفة" إلى "الإجمالي المفتوح" -->
+            <div class="summary-card open">
                 <div class="summary-icon">
                     <i class="fas fa-exclamation-triangle"></i>
                 </div>
                 <div class="summary-content">
-                    <div class="summary-title">المتوقفة</div>
-                    <div class="summary-value" id="stoppedCount">0</div>
+                    <div class="summary-title">الإجمالي المفتوح</div>
+                    <div class="summary-value" id="openCount">0</div>
+                </div>
+            </div>
+            <!-- ✅ إضافة بطاقة "تم الإصلاح" -->
+            <div class="summary-card fixed">
+                <div class="summary-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="summary-content">
+                    <div class="summary-title">تم الإصلاح</div>
+                    <div class="summary-value" id="fixedCount">0</div>
+                </div>
+            </div>
+            <!-- ✅ إضافة بطاقة "لم يتم الإصلاح" -->
+            <div class="summary-card not-fixed">
+                <div class="summary-icon">
+                    <i class="fas fa-times-circle"></i>
+                </div>
+                <div class="summary-content">
+                    <div class="summary-title">لم يتم الإصلاح</div>
+                    <div class="summary-value" id="notFixedCount">0</div>
                 </div>
             </div>
             <div class="summary-card duplicate">
@@ -1026,7 +1052,7 @@
                     <i class="fas fa-chart-bar"></i>
                 </div>
                 <div class="summary-content">
-                    <div class="summary-title">الاجمالي</div>
+                    <div class="summary-title">الإجمالي</div>
                     <div class="summary-value" id="totalCount">0</div>
                 </div>
             </div>
@@ -1041,50 +1067,39 @@
                     <option value="">جميع الحالات</option>
                     <option value="بلاغ جديد">بلاغ جديد</option>
                     <option value="تم الاستلام">تم الاستلام</option>
-                    <option value="جاري الاصلاح">جاري الاصلاح</option>
-                    <option value="تم الاصلاح">تم الاصلاح</option>
-                    <option value="لم يتم الاصلاح">لم يتم الاصلاح</option>
+                    <option value="جاري الإصلاح">جاري الإصلاح</option>
+                    <option value="تم الإصلاح">تم الإصلاح</option>
+                    <option value="لم يتم الإصلاح">لم يتم الإصلاح</option>
                     <option value="مغلق">مغلق</option>
                     <option value="انتظار توفر قطع غيار">انتظار توفر قطع غيار</option>
                     <option value="عدم توفر قطع غيار">عدم توفر قطع غيار</option>
                     <option value="انتظار الموافقة">انتظار الموافقة</option>
-                    <option value="متاخر">متاخر</option>
+                    <option value="متأخر">متأخر</option>
                 </select>
                 <select id="priorityFilter">
                     <option value="">جميع المستويات</option>
-                    <option value="عالي">عالي</option>
-                    <option value="متوسط">متوسط</option>
                     <option value="عادي">عادي</option>
+                    <option value="متوسط">متوسط</option>
+                    <option value="عالي">عالي</option>
                     <option value="مسار متوقف">مسار متوقف</option>
                     <option value="مخالفة تطوير">مخالفة تطوير</option>
                 </select>
+                <select id="locationFilter">
+                    <option value="">جميع المواقع</option>
+                    <option value="داخل الكراج">داخل الكراج</option>
+                    <option value="خارج الكراج">خارج الكراج</option>
+                </select>
                 <button class="btn btn-primary" id="refreshBtn">
                     <i class="fas fa-sync-alt"></i> تحديث
-                </button>
-                <button class="btn btn-info" id="exportBtn">
-                    <i class="fas fa-file-excel"></i> تصدير
                 </button>
                 <button class="btn btn-success" id="viewReportBtn">
                     <i class="fas fa-history"></i> سجل البلاغات
                 </button>
                 <button class="btn btn-warning" id="slaSettingsBtn">
-                    <i class="fas fa-cog"></i> اعدادات SLA
+                    <i class="fas fa-cog"></i> إعدادات SLA
                 </button>
                 <button class="btn btn-secondary" id="autoCloseSettingsBtn">
-                    <i class="fas fa-clock"></i> وقت الاغلاق
-                </button>
-            </div>
-        </div>
-        <div class="controls" style="margin-top: 15px;">
-            <div class="filter-group">
-                <button class="btn btn-primary" id="morningReportBtn">
-                    <i class="fas fa-sun"></i> التقرير الصباحي
-                </button>
-                <button class="btn btn-warning" id="eveningReportBtn">
-                    <i class="fas fa-moon"></i> التقرير المسائي
-                </button>
-                <button class="btn btn-info" id="weeklyReportBtn">
-                    <i class="fas fa-calendar-week"></i> التقرير الاسبوعي
+                    <i class="fas fa-clock"></i> وقت الإغلاق
                 </button>
             </div>
         </div>
@@ -1097,17 +1112,19 @@
                         <th>رقم الحافلة</th>
                         <th>نوع العطل</th>
                         <th>الوصف</th>
-                        <th>الاهمية</th>
+                        <th>الأهمية</th>
                         <th>الحالة</th>
                         <th>الوقت المتبقي</th>
-                        <th>الاجراءات</th>
+                        <th>الإجراءات</th>
                     </tr>
                 </thead>
                 <tbody id="reportsTableBody">
+                    <!-- البيانات سيتم تحميلها هنا -->
                 </tbody>
             </table>
         </div>
     </div>
+    <!-- Modal للتحقق من كلمة المرور -->
     <div class="modal" id="passwordModal">
         <div class="modal-content password-modal">
             <div class="modal-header">
@@ -1116,11 +1133,11 @@
             </div>
             <div class="modal-body">
                 <p style="text-align: center; margin-bottom: 20px; color: var(--gray);">
-                    يرجى ادخال كلمة المرور للوصول الى هذه الوظيفة
+                    يرجى إدخال كلمة المرور للوصول إلى هذه الوظيفة
                 </p>
                 <div class="password-input-group">
                     <input type="password" id="passwordInput" class="form-control" 
-                           placeholder="ادخل كلمة المرور" autocomplete="off">
+                           placeholder="أدخل كلمة المرور" autocomplete="off">
                     <button class="password-toggle" onclick="togglePassword()">
                         <i class="fas fa-eye" id="passwordToggleIcon"></i>
                     </button>
@@ -1131,32 +1148,36 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-success" id="passwordSubmitBtn">
-                    <i class="fas fa-check"></i> تاكيد
+                    <i class="fas fa-check"></i> تأكيد
                 </button>
                 <button class="btn btn-danger" onclick="closeModal('passwordModal')">
-                    <i class="fas fa-times"></i> الغاء
+                    <i class="fas fa-times"></i> إلغاء
                 </button>
             </div>
         </div>
     </div>
-    <div class="modal" id="viewModal">
+    <!-- Modal لعرض تفاصيل البلاغ -->
+     <div class="modal" id="viewModal">
         <div class="modal-content modal-large">
             <div class="modal-header">
                 <h3 class="modal-title"><i class="fas fa-info-circle"></i> تفاصيل البلاغ</h3>
                 <button class="close-btn" onclick="closeModal('viewModal')">&times;</button>
             </div>
             <div class="modal-body" id="viewContent">
+                <!-- المحتوى سيتم تحميله هنا -->
             </div>
         </div>
     </div>
+    <!-- Modal لعرض سجل أعطال الحافلة -->
     <div class="modal" id="busHistoryModal">
-        <div class="modal-content modal-wide">
-            <div class="modal-header">
-                <h3 class="modal-title"><i class="fas fa-history"></i> سجل اعطال الحافلة <span id="busHistoryTitle"></span></h3>
+        <div class="modal-content modal-fullscreen">
+            <div class="modal-header" style="position: sticky; top: 0; background: white; z-index: 10; border-bottom: 2px solid var(--border);">
+                <h3 class="modal-title"><i class="fas fa-history"></i> سجل أعطال الحافلة <span id="busHistoryTitle"></span></h3>
                 <button class="close-btn" onclick="closeModal('busHistoryModal')">&times;</button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="height: calc(100vh - 120px); overflow-y: auto;">
                 <div id="busHistoryContent">
+                    <!-- المحتوى سيتم تحميله هنا -->
                 </div>
             </div>
             <div class="modal-footer">
@@ -1164,15 +1185,16 @@
                     <i class="fas fa-file-excel"></i> تصدير السجل
                 </button>
                 <button class="btn btn-danger" onclick="closeModal('busHistoryModal')">
-                    <i class="fas fa-times"></i> اغلاق
+                    <i class="fas fa-times"></i> إغلاق
                 </button>
             </div>
         </div>
     </div>
+    <!-- Modal لإعدادات SLA -->
     <div class="modal" id="slaModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title"><i class="fas fa-cog"></i> اعدادات SLA</h3>
+                <h3 class="modal-title"><i class="fas fa-cog"></i> إعدادات SLA</h3>
                 <button class="close-btn" onclick="closeModal('slaModal')">&times;</button>
             </div>
             <div class="modal-body">
@@ -1244,31 +1266,32 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-success" id="saveSlaSettings">
-                    <i class="fas fa-save"></i> حفظ الاعدادات
+                    <i class="fas fa-save"></i> حفظ الإعدادات
                 </button>
                 <button class="btn btn-danger" onclick="closeModal('slaModal')">
-                    <i class="fas fa-times"></i> الغاء
+                    <i class="fas fa-times"></i> إلغاء
                 </button>
             </div>
         </div>
     </div>
+    <!-- Modal الجديد لإعدادات الإغلاق التلقائي -->
     <div class="modal" id="autoCloseModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title"><i class="fas fa-clock"></i> اعدادات الاغلاق التلقائي</h3>
+                <h3 class="modal-title"><i class="fas fa-clock"></i> إعدادات الإغلاق التلقائي</h3>
                 <button class="close-btn" onclick="closeModal('autoCloseModal')">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="auto-close-section">
                     <div class="auto-close-title">
-                        <i class="fas fa-exclamation-triangle"></i> اعدادات الاغلاق التلقائي للبلاغات المتاخرة
+                        <i class="fas fa-exclamation-triangle"></i> إعدادات الإغلاق التلقائي للبلاغات المتأخرة
                     </div>
                     <p style="margin-bottom: 15px; color: var(--gray);">
-                        يتم اغلاق البلاغات المتاخرة تلقائيا بعد مدة زمنية محددة.
+                        يتم إغلاق البلاغات المتأخرة تلقائياً بعد مدة زمنية محددة.
                     </p>
                     <div class="form-row">
                         <div class="form-group">
-                            <label>عدد الايام</label>
+                            <label>عدد الأيام</label>
                             <input type="number" id="closeDays" class="form-control" min="0" max="365" value="1">
                         </div>
                         <div class="form-group">
@@ -1279,14 +1302,14 @@
                 </div>
                 <div class="auto-close-section">
                     <div class="auto-close-title">
-                        <i class="fas fa-archive"></i> اعدادات الارشفة التلقائية
+                        <i class="fas fa-archive"></i> إعدادات الأرشفة التلقائية
                     </div>
                     <p style="margin-bottom: 15px; color: var(--gray);">
-                        يتم ارشفة البلاغات القديمة تلقائيا بعد مدة زمنية محددة.
+                        يتم أرشفة البلاغات القديمة تلقائياً بعد مدة زمنية محددة.
                     </p>
                     <div class="form-row">
                         <div class="form-group">
-                            <label>عدد الايام</label>
+                            <label>عدد الأيام</label>
                             <input type="number" id="archiveDays" class="form-control" min="0" max="365" value="30">
                         </div>
                         <div class="form-group">
@@ -1298,114 +1321,171 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-success" id="saveAutoCloseSettings">
-                    <i class="fas fa-save"></i> حفظ الاعدادات
+                    <i class="fas fa-save"></i> حفظ الإعدادات
                 </button>
                 <button class="btn btn-danger" onclick="closeModal('autoCloseModal')">
-                    <i class="fas fa-times"></i> الغاء
+                    <i class="fas fa-times"></i> إغلاق
                 </button>
             </div>
         </div>
     </div>
+    <!-- Modal لعرض سجل البلاغات الكامل -->
     <div class="modal" id="reportModal">
-        <div class="modal-content modal-large">
-            <div class="modal-header">
+        <div class="modal-content modal-fullscreen">
+            <div class="modal-header" style="position: sticky; top: 0; background: white; z-index: 10; border-bottom: 2px solid var(--border);">
                 <h3 class="modal-title"><i class="fas fa-history"></i> سجل البلاغات</h3>
                 <button class="close-btn" onclick="closeModal('reportModal')">&times;</button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="height: calc(100vh - 180px); overflow-y: auto;">
+                <!-- ✅ 1. إضافة حقل بحث -->
+                <div class="search-box" style="margin: 15px;">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="reportSearchInput" placeholder="ابحث في سجل البلاغات..." style="width: 100%;">
+                </div>
                 <div class="table-container">
                     <table id="reportTable" style="min-width: 1400px;">
                         <thead>
                             <tr>
+                                <!-- ✅ 2. إضافة عمود لمربعات التأشير -->
+                                <th>
+                                    <input type="checkbox" id="selectAllReports" onclick="toggleSelectAllReports()"> <!-- ✅ مربع تحديد الكل -->
+                                    <label for="selectAllReports" style="margin-right: 5px;">تحديد</label>
+                                </th>
                                 <th>رقم البلاغ</th>
                                 <th>التاريخ</th>
                                 <th>رقم الحافلة</th>
                                 <th>نوع العطل</th>
                                 <th>الوصف</th>
-                                <th>الجوال</th>
-                                <th>الموقع</th>
-                                <th>الاحداثيات</th>
-                                <th>الاهمية</th>
                                 <th>الحالة</th>
-                                <th>وقت الانشاء</th>
-                                <th>اخر تحديث</th>
-                                <th>قطع الغيار</th>
+                                <th>وقت آخر تحديث</th>
+                                <!-- ✅ 4. تعديل تسمية العمود -->
+                                <th>وصف الإصلاح / قطع الغيار التي تم تركيبها</th>
                                 <th>الملاحظات</th>
-                                <th>المدة المتوقعة</th>
+                                <th>مدة الإصلاح المتوقعة</th>
                             </tr>
                         </thead>
                         <tbody id="reportTableBody">
+                            <!-- سيتم ملؤه ديناميكيًا -->
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-info" id="exportReportBtn">
-                    <i class="fas fa-file-excel"></i> تصدير السجل
+                <!-- ✅ 3. تعديل وظيفة زر التصدير -->
+                <button class="btn btn-info" id="exportReportBtn" onclick="exportSelectedReports()"> <!-- ✅ تغيير اسم الدالة -->
+                    <i class="fas fa-file-excel"></i> تصدير المحدد
                 </button>
                 <button class="btn btn-danger" onclick="closeModal('reportModal')">
-                    <i class="fas fa-times"></i> اغلاق
+                    <i class="fas fa-times"></i> إغلاق
                 </button>
             </div>
         </div>
     </div>
-    <div class="modal" id="textReportModal">
+    <!-- Modal جديد لتعديل البلاغ -->
+    <div class="modal" id="editModal">
         <div class="modal-content modal-wide">
             <div class="modal-header">
-                <h3 class="modal-title"><i class="fas fa-file-alt"></i> <span id="reportModalTitle">التقرير</span></h3>
-                <button class="close-btn" onclick="closeModal('textReportModal')">&times;</button>
+                <h3 class="modal-title"><i class="fas fa-edit"></i> تعديل البلاغ</h3>
+                <button class="close-btn" onclick="closeModal('editModal')">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="report-actions">
-                    <button class="btn btn-success" id="copyReportBtn">
-                        <i class="fas fa-copy"></i> نسخ التقرير
-                    </button>
-                    <button class="btn btn-warning" id="sendWhatsAppReportBtn">
-                        <i class="fab fa-whatsapp"></i> ارسال الى واتساب
-                    </button>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editBusNumber">رقم الحافلة</label>
+                        <input type="text" id="editBusNumber" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="editFaultType">نوع العطل</label>
+                        <input type="text" id="editFaultType" class="form-control">
+                    </div>
                 </div>
-                <div class="report-content">
-                    <pre id="reportContent" style="white-space: pre-wrap; font-family: 'Cairo', sans-serif; line-height: 1.6; margin: 0;"></pre>
+                <div class="form-group">
+                    <label for="editFaultDescription">وصف العطل</label>
+                    <textarea id="editFaultDescription" class="form-control" rows="3"></textarea>
                 </div>
-                <div class="report-statistics" style="display: none;" id="reportStatistics">
-                    <h4 style="margin-bottom: 10px; color: #2e7d32;"><i class="fas fa-chart-bar"></i> الاحصائيات</h4>
-                    <div id="statsContent"></div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editPriority">مستوى الأهمية</label>
+                        <select id="editPriority" class="form-control">
+                            <option value="عادي">عادي</option>
+                            <option value="متوسط">متوسط</option>
+                            <option value="عالي">عالي</option>
+                            <option value="مسار متوقف">مسار متوقف</option>
+                            <option value="مخالفة تطوير">مخالفة تطوير</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editLocation">الموقع الحالي</label>
+                        <input type="text" id="editLocation" class="form-control">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editCoordinates">الإحداثيات</label>
+                        <input type="text" id="editCoordinates" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="editMobile">رقم الجوال</label>
+                        <input type="text" id="editMobile" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editDetailedLocation">الموقع التفصيلي</label>
+                    <input type="text" id="editDetailedLocation" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="editExpectedDuration">مدة الإصلاح المتوقعة</label>
+                    <textarea id="editExpectedDuration" class="form-control" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editSpareParts">وصف الإصلاح / قطع الغيار التي تم تركيبها</label>
+                    <textarea id="editSpareParts" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editNotes">الملاحظات</label>
+                    <textarea id="editNotes" class="form-control" rows="3"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-danger" onclick="closeModal('textReportModal')">
-                    <i class="fas fa-times"></i> اغلاق
+                <button class="btn btn-success" id="saveEditBtn">
+                    <i class="fas fa-save"></i> حفظ التعديلات
+                </button>
+                <button class="btn btn-danger" onclick="closeModal('editModal')">
+                    <i class="fas fa-times"></i> إلغاء
                 </button>
             </div>
         </div>
     </div>
+    <!-- Toast للإشعارات -->
     <div id="toast" class="toast"></div>
+    <!-- عنصر صوتي للتنبيهات -->
     <audio id="alertSound" preload="auto">
         <source src="https://assets.mixkit.co/active_storage/sfx/110/110-preview.mp3" type="audio/mpeg">
     </audio>
     <script>
+        // ===== الإعدادات والدوال الأساسية =====
         const CONFIG = {
-            APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwLUdKQ_-xZhndC9A00UlYBXP95_XzlejHM_ShI1KwqC_mmegEjiG6abHp8ABSBaSPMcA/exec',
+            APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbyal3an9uWsJjaC2Xhylg86Cl7IJKwvgMaTaDyFWqVDXVZ-kk3_OJVl0ZcB1fsAnXil/exec',
             REFRESH_INTERVAL: 30000,
             ADMIN_PASSWORD: '0000'
         };
         const STATE_FLOW = {
             'بلاغ جديد': ['تم الاستلام'],
-            'تم الاستلام': ['جاري الاصلاح'],
-            'جاري الاصلاح': ['تم الاصلاح', 'لم يتم الاصلاح', 'مغلق', 'انتظار توفر قطع غيار', 'عدم توفر قطع غيار', 'انتظار الموافقة'],
-            'لم يتم الاصلاح': ['جاري الاصلاح', 'تم الاصلاح', 'مغلق'],
-            'تم الاصلاح': [],
+            'تم الاستلام': ['جاري الإصلاح'],
+            'جاري الإصلاح': ['تم الإصلاح', 'لم يتم الإصلاح', 'مغلق', 'انتظار توفر قطع غيار', 'عدم توفر قطع غيار', 'انتظار الموافقة'],
+            'لم يتم الإصلاح': ['جاري الإصلاح', 'تم الإصلاح', 'مغلق'],
+            'تم الإصلاح': [],
             'مغلق': [],
-            'انتظار توفر قطع غيار': ['جاري الاصلاح', 'لم يتم الاصلاح', 'تم الاصلاح', 'مغلق'],
-            'عدم توفر قطع غيار': ['جاري الاصلاح', 'لم يتم الاصلاح', 'تم الاصلاح', 'مغلق'],
-            'انتظار الموافقة': ['جاري الاصلاح', 'لم يتم الاصلاح', 'تم الاصلاح', 'مغلق']
+            'انتظار توفر قطع غيار': ['جاري الإصلاح', 'لم يتم الإصلاح', 'تم الإصلاح', 'مغلق'],
+            'عدم توفر قطع غيار': ['جاري الإصلاح', 'لم يتم الإصلاح', 'تم الإصلاح', 'مغلق'],
+            'انتظار الموافقة': ['جاري الإصلاح', 'لم يتم الإصلاح', 'تم الإصلاح', 'مغلق']
         };
         const STATE_INFO = {
             'بلاغ جديد': { icon: '🆕', class: 'status-new' },
             'تم الاستلام': { icon: '📥', class: 'status-received' },
-            'جاري الاصلاح': { icon: '🔧', class: 'status-repairing' },
-            'تم الاصلاح': { icon: '✅', class: 'status-fixed' },
-            'لم يتم الاصلاح': { icon: '❌', class: 'status-not-fixed' },
+            'جاري الإصلاح': { icon: '🔧', class: 'status-repairing' },
+            'تم الإصلاح': { icon: '✅', class: 'status-fixed' },
+            'لم يتم الإصلاح': { icon: '❌', class: 'status-not-fixed' },
             'انتظار توفر قطع غيار': { icon: '⏳', class: 'status-waiting' },
             'عدم توفر قطع غيار': { icon: '🚫', class: 'status-waiting' },
             'انتظار الموافقة': { icon: '📝', class: 'status-waiting' },
@@ -1430,9 +1510,9 @@
         let monthlyDuplicates = {};
         let pendingAction = null;
         let currentBusHistory = [];
-        let currentReport = '';
-        let currentReportType = '';
+        let currentEditReport = null;
 
+        // ===== دوال الأمان =====
         function showPasswordModal(action) {
             pendingAction = action;
             document.getElementById('passwordInput').value = '';
@@ -1474,13 +1554,14 @@
             }
         }
 
+        // ===== دوال إعدادات SLA =====
         function loadLocalSlaSettings() {
             const saved = localStorage.getItem('slaSettings');
             if (saved) {
                 try {
                     SLA_SETTINGS = JSON.parse(saved);
                 } catch (e) {
-                    console.error('خطا في تحميل اعدادات SLA:', e);
+                    console.error('خطأ في تحميل إعدادات SLA:', e);
                 }
             }
         }
@@ -1502,7 +1583,7 @@
                 highHours < 0 || highMinutes < 0 || highMinutes > 59 ||
                 stopHours < 0 || stopMinutes < 0 || stopMinutes > 59 ||
                 violationHours < 0 || violationMinutes < 0 || violationMinutes > 59) {
-                showToast('❌ يرجى ادخال قيم صحيحة للوقت', 'error');
+                showToast('❌ يرجى إدخال قيم صحيحة للوقت', 'error');
                 return;
             }
 
@@ -1515,19 +1596,20 @@
             };
 
             localStorage.setItem('slaSettings', JSON.stringify(SLA_SETTINGS));
-            showToast(' تم حفظ اعدادات SLA محليا', 'success');
+            showToast(' تم حفظ إعدادات SLA محلياً', 'success');
             closeModal('slaModal');
             renderReports();
             updateSummary();
         }
 
+        // ===== دوال إعدادات الإغلاق التلقائي =====
         function loadAutoCloseSettings() {
             const saved = localStorage.getItem('autoCloseSettings');
             if (saved) {
                 try {
                     AUTO_CLOSE_SETTINGS = JSON.parse(saved);
                 } catch (e) {
-                    console.error('خطا في تحميل اعدادات الاغلاق التلقائي:', e);
+                    console.error('خطأ في تحميل إعدادات الإغلاق التلقائي:', e);
                 }
             }
         }
@@ -1540,7 +1622,7 @@
 
             if (closeDays < 0 || closeHours < 0 || closeHours > 23 ||
                 archiveDays < 0 || archiveHours < 0 || archiveHours > 23) {
-                showToast('❌ يرجى ادخال قيم صحيحة للوقت', 'error');
+                showToast('❌ يرجى إدخال قيم صحيحة للوقت', 'error');
                 return;
             }
 
@@ -1552,7 +1634,7 @@
             };
 
             localStorage.setItem('autoCloseSettings', JSON.stringify(AUTO_CLOSE_SETTINGS));
-            showToast(' تم حفظ اعدادات الاغلاق التلقائي', 'success');
+            showToast(' تم حفظ إعدادات الإغلاق التلقائي', 'success');
             closeModal('autoCloseModal');
         }
 
@@ -1567,6 +1649,7 @@
             showPasswordModal(openModal);
         }
 
+        // ===== دوال التحميل والأداء =====
         function showLoading(message = 'جاري تحميل البيانات...') {
             const overlay = document.getElementById('loadingOverlay');
             const text = document.getElementById('loadingText');
@@ -1595,13 +1678,14 @@
                     throw new Error(data.data);
                 }
             } catch (error) {
-                console.error('خطا في تحميل البيانات:', error);
+                console.error('خطأ في تحميل البيانات:', error);
                 if (!silent) showToast('❌ فشل في تحميل البيانات', 'error');
             } finally {
                 if (!silent) hideLoading();
             }
         }
 
+        // ===== دوال معالجة البيانات =====
         function calculateMonthlyDuplicates() {
             monthlyDuplicates = {};
             const currentMonth = new Date().getMonth();
@@ -1609,15 +1693,16 @@
             allReports.forEach(report => {
                 const busNumber = report['رقم الحافلة'];
                 if (!busNumber) return;
-                const reportDate = new Date(report['التاريخ'] || report['وقت الانشاء']);
+                const reportDate = new Date(report['التاريخ'] || report['وقت الإنشاء']);
                 if (reportDate.getMonth() === currentMonth && reportDate.getFullYear() === currentYear) {
                     monthlyDuplicates[busNumber] = (monthlyDuplicates[busNumber] || 0) + 1;
                 }
             });
         }
 
+        // ===== دوال العد التنازلي =====
         function getCountdownInfo(r) {
-            const hideCountdownStates = ['لم يتم الاصلاح', 'مغلق', 'تم الاصلاح', 'انتظار توفر قطع غيار', 'عدم توفر قطع غيار', 'انتظار الموافقة'];
+            const hideCountdownStates = ['لم يتم الإصلاح', 'مغلق', 'تم الإصلاح', 'انتظار توفر قطع غيار', 'عدم توفر قطع غيار', 'انتظار الموافقة'];
             if (hideCountdownStates.includes(r['الحالة'])) {
                 return { 
                     text: '-', 
@@ -1627,7 +1712,7 @@
                     showCountdown: false 
                 };
             }
-            const showCountdownStates = ['تم الاستلام', 'جاري الاصلاح'];
+            const showCountdownStates = ['تم الاستلام', 'جاري الإصلاح'];
             if (!showCountdownStates.includes(r['الحالة'])) {
                 return { 
                     text: '-', 
@@ -1637,9 +1722,9 @@
                     showCountdown: false 
                 };
             }
-            const priority = r['مستوى الاهمية'];
+            const priority = r['مستوى الأهمية'];
             const slaTime = SLA_SETTINGS[priority] || 240;
-            const start = new Date(r['وقت اخر تحديث'] || r['وقت الانشاء']);
+            const start = new Date(r['وقت آخر تحديث'] || r['وقت الإنشاء']);
             const diff = (Date.now() - start.getTime()) / 60000;
             const remain = Math.round(slaTime - diff);
             const pct = Math.max(0, Math.min(100, ((slaTime - diff) / slaTime) * 100));
@@ -1647,7 +1732,7 @@
             if (pct <= 50) color = 'orange';
             if (pct <= 10) color = 'red';
             if (remain <= 0) return { 
-                text: '⚠️ متاخر', 
+                text: '⚠️ متأخر', 
                 cls: 'urgent', 
                 rowCls: 'tr-urgent', 
                 progress: 0, 
@@ -1687,7 +1772,7 @@
                 if (countdownInfo.isLate && !alertedReports.has(r.rowId)) {
                     alertedReports.add(r.rowId);
                     playAlertSound();
-                    showToast(`🚨 الحافلة ${r['رقم الحافلة']} متاخرة!`, 'warning');
+                    showToast(`🚨 الحافلة ${r['رقم الحافلة']} متأخرة!`, 'warning');
                 }
             });
         }
@@ -1701,6 +1786,7 @@
             }
         }
 
+        // ===== دوال عرض البيانات =====
         function renderReports() {
             const body = document.getElementById('reportsTableBody');
             if (!body) return;
@@ -1722,11 +1808,11 @@
             filteredReports.forEach(r => {
                 const c = getCountdownInfo(r);
                 let finalClass = '';
-                if (['تم الاصلاح', 'مغلق'].includes(r['الحالة'])) {
+                if (['تم الإصلاح', 'مغلق'].includes(r['الحالة'])) {
                     finalClass = 'tr-final';
                 }
                 if (c.rowCls) finalClass = c.rowCls || finalClass;
-                const pr = r['مستوى الاهمية'];
+                const pr = r['مستوى الأهمية'];
                 let pClass = 'priority-normal';
                 if (pr === 'عالي') pClass = 'priority-high';
                 else if (pr === 'متوسط') pClass = 'priority-medium';
@@ -1734,7 +1820,7 @@
                 else if (pr === 'مخالفة تطوير') pClass = 'priority-violation';
                 const progressBar = c.showCountdown && c.progress > 0 ? 
                     `<div class="progress-bar"><div class="progress-fill ${c.color} ${c.blink ? 'blink' : ''}" style="width:${c.progress}%;">${c.label}</div></div>` : '';
-                const formattedDate = formatTo12Hour(r['التاريخ'] || r['وقت الانشاء'] || '');
+                const formattedDate = formatDateTimeForDisplay(r['التاريخ'] || r['وقت الإنشاء'] || '');
                 const tr = document.createElement('tr');
                 tr.className = finalClass;
                 tr.innerHTML = `
@@ -1745,11 +1831,11 @@
                             ${r['رقم الحافلة'] || '-'}
                         </span>
                         ${monthlyDuplicates[r['رقم الحافلة']] > 1 ? 
-                            `<span style="color: #d32f2f; font-size: 0.8rem; margin-right: 5px;" title="عدد الاعطال هذا الشهر">(${monthlyDuplicates[r['رقم الحافلة']]})</span>` : ''}
+                            `<span style="color: #d32f2f; font-size: 0.8rem; margin-right: 5px;" title="عدد الأعطال هذا الشهر">(${monthlyDuplicates[r['رقم الحافلة']]})</span>` : ''}
                     </td>
                     <td>${r['نوع العطل'] || '-'}</td>
                     <td>${r['وصف العطل'] || '-'}</td>
-                    <td class="${pClass}">${r['مستوى الاهمية'] || '-'}</td>
+                    <td class="${pClass}">${r['مستوى الأهمية'] || '-'}</td>
                     <td>
                         <span class="status-badge ${STATE_INFO[r['الحالة']]?.class || ''}">
                             ${STATE_INFO[r['الحالة']]?.icon || ''} ${r['الحالة']}
@@ -1764,7 +1850,10 @@
                             <button class="btn-action btn-view" onclick="viewDetails(${r.rowId})" title="عرض التفاصيل">
                                 <i class="fas fa-eye"></i>
                             </button>
-                            <button class="btn-action btn-wa" onclick="sendWhatsApp(${r.rowId})" title="ارسال واتساب">
+                            <button class="btn-action btn-edit" onclick="requestEditReport(${r.rowId})" title="تعديل البلاغ">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-action btn-wa" onclick="sendWhatsApp(${r.rowId})" title="إرسال واتساب">
                                 <i class="fab fa-whatsapp"></i>
                             </button>
                             <button class="btn-action btn-delete" onclick="requestDeleteReport(${r.rowId})" title="حذف البلاغ">
@@ -1776,7 +1865,8 @@
             });
         }
 
-        function formatTo12Hour(dateTimeStr) {
+        // ✅ دالة تنسيق التاريخ والوقت بالتنسيق المطلوب: ص/م ساعة:دقيقة سنة-شهر-يوم
+        function formatDateTimeForDisplay(dateTimeStr) {
             if (!dateTimeStr) return '-';
             try {
                 const date = new Date(dateTimeStr);
@@ -1787,10 +1877,10 @@
                 hours = hours % 12;
                 hours = hours ? hours : 12;
                 minutes = minutes < 10 ? '0' + minutes : minutes;
-                const day = String(date.getDate()).padStart(2, '0');
-                const month = String(date.getMonth() + 1).padStart(2, '0');
                 const year = date.getFullYear();
-                return `${year}-${month}-${day} ${hours}:${minutes} ${ampm}`;
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${ampm} ${hours}:${minutes} ${year}-${month}-${day}`;
             } catch (e) {
                 return dateTimeStr;
             }
@@ -1800,7 +1890,10 @@
             const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
             const statusFilter = document.getElementById('statusFilter')?.value || '';
             const priorityFilter = document.getElementById('priorityFilter')?.value || '';
+            const locationFilter = document.getElementById('locationFilter')?.value || '';
+
             let filtered = allReports;
+
             if (searchTerm) {
                 filtered = filtered.filter(r => 
                     (r['رقم الحافلة'] && r['رقم الحافلة'].toString().includes(searchTerm)) ||
@@ -1809,7 +1902,7 @@
                 );
             }
             if (statusFilter) {
-                if (statusFilter === 'متاخر') {
+                if (statusFilter === 'متأخر') {
                     filtered = filtered.filter(r => {
                         const countdownInfo = getCountdownInfo(r);
                         return countdownInfo.isLate;
@@ -1819,11 +1912,15 @@
                 }
             }
             if (priorityFilter) {
-                filtered = filtered.filter(r => r['مستوى الاهمية'] === priorityFilter);
+                filtered = filtered.filter(r => r['مستوى الأهمية'] === priorityFilter);
+            }
+            if (locationFilter) {
+                filtered = filtered.filter(r => r['الموقع الحالي'].startsWith(locationFilter));
             }
             return filtered;
         }
 
+        // ✅ دالة تحديث الإحصائيات المُعدّلة
         function updateSummary() {
             const total = allReports.length;
             const newReports = allReports.filter(r => r['الحالة'] === 'بلاغ جديد').length;
@@ -1831,11 +1928,17 @@
                 const countdownInfo = getCountdownInfo(r);
                 return countdownInfo.isLate;
             }).length;
-            const stopped = allReports.filter(r => r['مستوى الاهمية'] === 'مسار متوقف').length;
+            // ✅ تعديل: عدد البلاغات المفتوحة (التي لم يتم إصلاحها أو إغلاقها)
+            const open = allReports.filter(r => !['تم الإصلاح', 'مغلق'].includes(r['الحالة'])).length;
+            const fixed = allReports.filter(r => r['الحالة'] === 'تم الإصلاح').length;
+            const notFixed = allReports.filter(r => r['الحالة'] === 'لم يتم الإصلاح').length;
             const dup = countDuplicates(allReports.map(r => r['رقم الحافلة']));
+
             document.getElementById('newCount').innerText = newReports;
             document.getElementById('lateCount').innerText = late;
-            document.getElementById('stoppedCount').innerText = stopped;
+            document.getElementById('openCount').innerText = open; // ✅ تم التحديث
+            document.getElementById('fixedCount').innerText = fixed; // ✅ جديد
+            document.getElementById('notFixedCount').innerText = notFixed; // ✅ جديد
             document.getElementById('duplicateCount').innerText = dup;
             document.getElementById('totalCount').innerText = total;
         }
@@ -1851,14 +1954,14 @@
             return d;
         }
 
+        // ===== دالة عرض سجل البلاغات الكامل =====
         function viewReport() {
             const reportBody = document.getElementById('reportTableBody');
             reportBody.innerHTML = '';
-            
             if (!allReports.length) {
                 reportBody.innerHTML = `
                     <tr>
-                        <td colspan="15">
+                        <td colspan="12"> <!-- ✅ تحديث عدد الأعمدة ليناسب الإضافة (12 بدلاً من 15) -->
                             <div class="empty-state">
                                 <i class="fas fa-inbox"></i>
                                 <p>لا توجد بلاغات لعرضها</p>
@@ -1868,221 +1971,211 @@
                 `;
             } else {
                 allReports.forEach(r => {
-                    const pr = r['مستوى الاهمية'];
+                    const pr = r['مستوى الأهمية'];
                     let pClass = 'priority-normal';
                     if (pr === 'عالي') pClass = 'priority-high';
                     else if (pr === 'متوسط') pClass = 'priority-medium';
                     else if (pr === 'مسار متوقف') pClass = 'priority-stop';
                     else if (pr === 'مخالفة تطوير') pClass = 'priority-violation';
-
                     const statusInfo = STATE_INFO[r['الحالة']] || { icon: '', class: '' };
-                    
                     const tr = document.createElement('tr');
+                    // ✅ 2. إضافة خلية لمربع التأشير لكل صف
                     tr.innerHTML = `
+                        <td><input type="checkbox" class="report-checkbox" data-row-id="${r.rowId}"></td>
                         <td>${r['رقم البلاغ'] || '---'}</td>
-                        <td>${formatTo12Hour(r['التاريخ'] || r['وقت الانشاء'] || '')}</td>
+                        <td>${formatDateTimeForDisplay(r['التاريخ'] || r['وقت الإنشاء'] || '')}</td>
                         <td>${r['رقم الحافلة'] || '-'}</td>
                         <td>${r['نوع العطل'] || '-'}</td>
                         <td>${r['وصف العطل'] || '-'}</td>
-                        <td>${r['رقم الجوال'] || '-'}</td>
-                        <td>${r['الموقع الحالي'] || '-'}</td>
-                        <td>${r['الاحداثيات'] || '-'}</td>
-                        <td class="${pClass}">${r['مستوى الاهمية'] || '-'}</td>
                         <td>
                             <span class="status-badge ${statusInfo.class}">
                                 ${statusInfo.icon} ${r['الحالة']}
                             </span>
                         </td>
-                        <td>${formatTo12Hour(r['وقت الانشاء'] || '')}</td>
-                        <td>${formatTo12Hour(r['وقت اخر تحديث'] || '')}</td>
-                        <td>${r['قطع الغيار التي تم تركيبها']?.trim() || '-'}</td>
+                        <td>${formatDateTimeForDisplay(r['وقت آخر تحديث'] || '')}</td>
+                        <!-- ✅ 4. تعديل تسمية العمود -->
+                        <td>${r['وصف الإصلاح / قطع الغيار التي تم تركيبها']?.trim() || '-'}</td>
                         <td>${r['الملاحظات']?.trim() || '-'}</td>
-                        <td>${r['مدة الاصلاح المتوقعة']?.trim() || '-'}</td>
+                        <td>${r['مدة الإصلاح المتوقعة']?.trim() || '-'}</td>
                     `;
                     reportBody.appendChild(tr);
                 });
             }
             document.getElementById('reportModal').style.display = 'flex';
+
+            // ✅ ربط حدث البحث
+            document.getElementById('reportSearchInput').addEventListener('input', filterReportTable);
         }
 
-        async function loadMorningReport() {
-            showLoading('جاري انشاء التقرير الصباحي...');
-            try {
-                const response = await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=generateMorningReport&t=${Date.now()}`);
-                const data = await response.json();
-                if (data.status === 'success') {
-                    currentReport = data.data.report;
-                    currentReportType = 'morning';
-                    displayTextReport('التقرير الصباحي', currentReport, data.data.statistics);
+        // ===== دالة تصفية جدول السجل =====
+        function filterReportTable() {
+            const searchTerm = document.getElementById('reportSearchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#reportTableBody tr');
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                // نبدأ من index 1 لأن أول خلية هي مربع التأشير
+                const rowText = Array.from(cells).slice(1).map(cell => cell.textContent.toLowerCase()).join(' ');
+                if (rowText.includes(searchTerm)) {
+                    row.style.display = '';
                 } else {
-                    throw new Error(data.data);
+                    row.style.display = 'none';
                 }
-            } catch (error) {
-                console.error('خطا في تحميل التقرير الصباحي:', error);
-                showToast('❌ فشل في انشاء التقرير الصباحي', 'error');
-            } finally {
-                hideLoading();
-            }
-        }
-
-        async function loadEveningReport() {
-            showLoading('جاري انشاء التقرير المسائي...');
-            try {
-                const response = await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=generateEveningReport&t=${Date.now()}`);
-                const data = await response.json();
-                if (data.status === 'success') {
-                    currentReport = data.data.report;
-                    currentReportType = 'evening';
-                    displayTextReport('التقرير المسائي', currentReport, data.data.statistics);
-                } else {
-                    throw new Error(data.data);
-                }
-            } catch (error) {
-                console.error('خطا في تحميل التقرير المسائي:', error);
-                showToast('❌ فشل في انشاء التقرير المسائي', 'error');
-            } finally {
-                hideLoading();
-            }
-        }
-
-        async function loadWeeklyReport() {
-            showLoading('جاري انشاء التقرير الاسبوعي...');
-            try {
-                const response = await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=generateWeeklyReport&t=${Date.now()}`);
-                const data = await response.json();
-                if (data.status === 'success') {
-                    currentReport = data.data.report;
-                    currentReportType = 'weekly';
-                    displayTextReport('التقرير الاسبوعي', currentReport, data.data.statistics);
-                } else {
-                    throw new Error(data.data);
-                }
-            } catch (error) {
-                console.error('خطا في تحميل التقرير الاسبوعي:', error);
-                showToast('❌ فشل في انشاء التقرير الاسبوعي', 'error');
-            } finally {
-                hideLoading();
-            }
-        }
-
-        function displayTextReport(title, report, statistics = null) {
-            document.getElementById('reportModalTitle').textContent = title;
-            document.getElementById('reportContent').textContent = report;
-            if (statistics) {
-                document.getElementById('reportStatistics').style.display = 'block';
-                let statsHTML = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">';
-                
-                Object.entries(statistics).forEach(([key, value]) => {
-                    let arabicLabel = translateStatKey(key);
-                    let icon = getIconForKey(key);
-                    
-                    statsHTML += `
-                        <div style="background: white; padding: 10px; border-radius: 6px; text-align: center; border-left: 4px solid #4caf50;">
-                            <div style="font-size: 0.9rem; color: #666;">${icon} ${arabicLabel}</div>
-                            <div style="font-size: 1.2rem; font-weight: bold; color: #2e7d32;">${value}</div>
-                        </div>
-                    `;
-                });
-                
-                statsHTML += '</div>';
-                document.getElementById('statsContent').innerHTML = statsHTML;
-            } else {
-                document.getElementById('reportStatistics').style.display = 'none';
-            }
-            document.getElementById('textReportModal').style.display = 'flex';
-        }
-
-        function translateStatKey(key) {
-            const translations = {
-                'insideGarage': 'داخل الكراج',
-                'outsideGarage': 'خارج الكراج',
-                'lateReports': 'البلاغات المتاخرة',
-                'stoppedReports': 'المتوقفة',
-                'notFixed': 'لم يتم الاصلاح',
-                'highPriority': 'عالية الاهمية',
-                'totalToday': 'اجمالي اليوم',
-                'fixedToday': 'تم الاصلاح',
-                'stillOpen': 'مازالت مفتوحة',
-                'insideFixed': 'تم اصلاحها داخل الكراج',
-                'outsideFixed': 'تم اصلاحها خارج الكراج',
-                'totalWeekly': 'اجمالي الاسبوع',
-                'fixedWeekly': 'تم اصلاحها هذا الاسبوع',
-                'closeRate': 'نسبة الاغلاق',
-                'lateRate': 'نسبة المتاخرة',
-                'mostCommonFault': 'اكثر عطل متكرر',
-                'locationDominance': 'الغلبة حسب الموقع'
-            };
-            
-            return translations[key] || key;
-        }
-
-        function getIconForKey(key) {
-            const icons = {
-                'insideGarage': '🔧',
-                'outsideGarage': '🚍',
-                'lateReports': '⚠️',
-                'stoppedReports': '⛔',
-                'notFixed': '🔴',
-                'highPriority': '🔥',
-                'totalToday': '📦',
-                'fixedToday': '✅',
-                'stillOpen': '⚡',
-                'insideFixed': '🔧✅',
-                'outsideFixed': '🚍✅',
-                'totalWeekly': '📊',
-                'fixedWeekly': '✅',
-                'closeRate': '📈',
-                'lateRate': '⏰',
-                'mostCommonFault': '🔧',
-                'locationDominance': '📍'
-            };
-            
-            return icons[key] || '📊';
-        }
-
-        function copyReportToClipboard() {
-            if (!currentReport) {
-                showToast('❌ لا يوجد تقرير للنسخ', 'warning');
-                return;
-            }
-            navigator.clipboard.writeText(currentReport).then(() => {
-                showToast('✅ تم نسخ التقرير الى الحافظة', 'success');
-            }).catch(err => {
-                console.error('فشل في النسخ:', err);
-                showToast('❌ فشل في نسخ التقرير', 'error');
             });
         }
 
-        function sendReportToWhatsApp() {
-            if (!currentReport) {
-                showToast('❌ لا يوجد تقرير للارسال', 'warning');
-                return;
-            }
-            const encodedMessage = encodeURIComponent(currentReport);
-            const whatsappURL = `https://wa.me/?text=${encodedMessage}`;
-            window.open(whatsappURL, '_blank');
-            showToast('✅ تم فتح واتساب، يرجى ارسال التقرير يدويا', 'success');
+        // ===== دالة تحديد/إلغاء تحديد الكل =====
+        function toggleSelectAllReports() {
+            const selectAllCheckbox = document.getElementById('selectAllReports');
+            const checkboxes = document.querySelectorAll('#reportTableBody .report-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
         }
 
+        // ===== دالة تصدير المحدد =====
+        function exportSelectedReports() {
+            const selectedCheckboxes = document.querySelectorAll('#reportTableBody .report-checkbox:checked');
+            if (selectedCheckboxes.length === 0) {
+                showToast('❌ يرجى تحديد بلاغ واحد على الأقل للتصدير', 'warning');
+                return;
+            }
+
+            const selectedReportIds = Array.from(selectedCheckboxes).map(cb => parseInt(cb.getAttribute('data-row-id'), 10));
+            const selectedReports = allReports.filter(r => selectedReportIds.includes(r.rowId));
+
+            if (selectedReports.length === 0) {
+                 showToast('❌ لم يتم العثور على البلاغات المحددة', 'error');
+                 return;
+            }
+
+            try {
+                const ws = XLSX.utils.json_to_sheet(selectedReports.map(report => {
+                    let partsNotesDisplay = report['وصف الإصلاح / قطع الغيار التي تم تركيبها']?.trim() || 'لا يوجد';
+                    let notesDisplay = report['الملاحظات']?.trim() || 'لا يوجد';
+                    return {
+                        'رقم البلاغ': report['رقم البلاغ'] || '',
+                        'التاريخ': formatDateTimeForDisplay(report['التاريخ'] || report['وقت الإنشاء'] || ''),
+                        'رقم الحافلة': report['رقم الحافلة'] || '',
+                        'نوع العطل': report['نوع العطل'] || '',
+                        'وصف العطل': report['وصف العطل'] || '',
+                        'الحالة': report['الحالة'] || '',
+                        'وقت آخر تحديث': formatDateTimeForDisplay(report['وقت آخر تحديث'] || ''),
+                        'وصف الإصلاح / قطع الغيار التي تم تركيبها': partsNotesDisplay, // ✅ 4. تعديل تسمية الحقل
+                        'الملاحظات': notesDisplay,
+                        'مدة الإصلاح المتوقعة': report['مدة الإصلاح المتوقعة']?.trim() || ''
+                    };
+                }));
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, 'سجل البلاغات');
+                const fileName = `سجل_البلاغات_${new Date().toISOString().split('T')[0]}.xlsx`;
+                XLSX.writeFile(wb, fileName);
+                showToast(' تم تصدير البلاغات المحددة بنجاح', 'success');
+            } catch (error) {
+                console.error('خطأ في تصدير السجل:', error);
+                showToast('❌ فشل في تصدير السجل', 'error');
+            }
+        }
+
+        // ===== دوال تعديل البلاغ =====
+        function requestEditReport(id) {
+            const editAction = () => {
+                editReport(id);
+            };
+            showPasswordModal(editAction);
+        }
+
+        function editReport(id) {
+            const report = allReports.find(r => r.rowId === id);
+            if (!report) {
+                showToast('❌ لم يتم العثور على البلاغ', 'error');
+                return;
+            }
+
+            currentEditReport = report;
+
+            // تعبئة الحقول بقيم البلاغ الحالي
+            document.getElementById('editBusNumber').value = report['رقم الحافلة'] || '';
+            document.getElementById('editFaultType').value = report['نوع العطل'] || '';
+            document.getElementById('editFaultDescription').value = report['وصف العطل'] || '';
+            document.getElementById('editPriority').value = report['مستوى الأهمية'] || 'عادي';
+            document.getElementById('editLocation').value = report['الموقع الحالي'] || '';
+            document.getElementById('editCoordinates').value = report['الإحداثيات'] || '';
+            document.getElementById('editMobile').value = report['رقم الجوال'] || '';
+            document.getElementById('editDetailedLocation').value = report['الموقع التفصيلي'] || '';
+            document.getElementById('editExpectedDuration').value = report['مدة الإصلاح المتوقعة'] || '';
+            document.getElementById('editSpareParts').value = report['وصف الإصلاح / قطع الغيار التي تم تركيبها'] || '';
+            document.getElementById('editNotes').value = report['الملاحظات'] || '';
+
+            document.getElementById('editModal').style.display = 'flex';
+        }
+
+        async function saveEditedReport() {
+            if (!currentEditReport) return;
+
+            showLoading('جاري حفظ التعديلات...');
+
+            try {
+                const updatedData = {
+                    rowIndex: currentEditReport.rowId,
+                    busNumber: document.getElementById('editBusNumber').value,
+                    faultType: document.getElementById('editFaultType').value,
+                    faultDescription: document.getElementById('editFaultDescription').value,
+                    priority: document.getElementById('editPriority').value,
+                    location: document.getElementById('editLocation').value,
+                    coordinates: document.getElementById('editCoordinates').value,
+                    mobile: document.getElementById('editMobile').value,
+                    detailedLocation: document.getElementById('editDetailedLocation').value,
+                    expectedDuration: document.getElementById('editExpectedDuration').value,
+                    spareParts: document.getElementById('editSpareParts').value,
+                    notes: document.getElementById('editNotes').value
+                };
+
+                const url = new URL(CONFIG.APPS_SCRIPT_URL);
+                url.searchParams.append('action', 'updateReport');
+                Object.keys(updatedData).forEach(key => {
+                    url.searchParams.append(key, updatedData[key]);
+                });
+
+                const response = await fetch(url);
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    allReports = result.data;
+                    renderReports();
+                    updateSummary();
+                    closeModal('editModal');
+                    showToast(' تم تحديث البلاغ بنجاح', 'success');
+                } else {
+                    throw new Error(result.data);
+                }
+            } catch (error) {
+                console.error('خطأ في تحديث البلاغ:', error);
+                showToast('❌ فشل في تحديث البلاغ', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        // ===== دوال عرض التفاصيل وتغيير الحالة =====
         function viewDetails(id) {
             const r = allReports.find(x => x.rowId === id);
             if (!r) return;
             selectedRow = id;
-            let expectedDurationDisplay = r['مدة الاصلاح المتوقعة']?.trim() || 'لا يوجد';
-            let partsNotesDisplay = r['قطع الغيار التي تم تركيبها']?.trim() || 'لا يوجد';
+            let expectedDurationDisplay = r['مدة الإصلاح المتوقعة']?.trim() || 'لا يوجد';
+            let partsNotesDisplay = r['وصف الإصلاح / قطع الغيار التي تم تركيبها']?.trim() || 'لا يوجد';
             let notesDisplay = r['الملاحظات']?.trim() || 'لا يوجد';
             const viewContent = document.getElementById('viewContent');
             viewContent.innerHTML = `
                 <div class="detail-grid">
                     <div class="detail-section">
-                        <h4><i class="fas fa-info-circle"></i> المعلومات الاساسية</h4>
+                        <h4><i class="fas fa-info-circle"></i> المعلومات الأساسية</h4>
                         <div class="detail-item">
                             <span class="detail-label">رقم البلاغ:</span>
                             <span class="detail-value">${r['رقم البلاغ'] || '---'}</span>
                         </div>
                         <div class="detail-item">
                             <span class="detail-label">التاريخ:</span>
-                            <span class="detail-value">${formatTo12Hour(r['التاريخ'] || r['وقت الانشاء'] || '')}</span>
+                            <span class="detail-value">${formatDateTimeForDisplay(r['التاريخ'] || r['وقت الإنشاء'] || '')}</span>
                         </div>
                         <div class="detail-item">
                             <span class="detail-label">رقم الحافلة:</span>
@@ -2093,8 +2186,8 @@
                             <span class="detail-value">${r['نوع العطل'] || '-'}</span>
                         </div>
                         <div class="detail-item">
-                            <span class="detail-label">الاهمية:</span>
-                            <span class="detail-value ${getPriorityClass(r['مستوى الاهمية'])}">${r['مستوى الاهمية'] || '-'}</span>
+                            <span class="detail-label">الأهمية:</span>
+                            <span class="detail-value ${getPriorityClass(r['مستوى الأهمية'])}">${r['مستوى الأهمية'] || '-'}</span>
                         </div>
                     </div>
                     <div class="detail-section">
@@ -2108,8 +2201,8 @@
                             <span class="detail-value">${r['الموقع الحالي'] || '-'}</span>
                         </div>
                         <div class="detail-item">
-                            <span class="detail-label">الاحداثيات:</span>
-                            <span class="detail-value">${r['الاحداثيات'] || '-'}</span>
+                            <span class="detail-label">الإحداثيات:</span>
+                            <span class="detail-value">${r['الإحداثيات'] || '-'}</span>
                         </div>
                         <div class="detail-item">
                             <span class="detail-label">رقم الجوال:</span>
@@ -2127,8 +2220,8 @@
                             </span>
                         </div>
                         <div class="detail-item">
-                            <span class="detail-label">اخر تحديث:</span>
-                            <span class="detail-value">${formatTo12Hour(r['وقت اخر تحديث'] || r['وقت الانشاء'] || '')}</span>
+                            <span class="detail-label">آخر تحديث:</span>
+                            <span class="detail-value">${formatDateTimeForDisplay(r['وقت آخر تحديث'] || r['وقت الإنشاء'] || '')}</span>
                         </div>
                         ${getCountdownInfo(r).showCountdown ? `
                         <div class="detail-item">
@@ -2139,13 +2232,14 @@
                     </div>
                 </div>
                 <div class="detail-section">
-                    <h4><i class="fas fa-clock"></i> مدة الاصلاح المتوقعة</h4>
+                    <h4><i class="fas fa-clock"></i> مدة الإصلاح المتوقعة</h4>
                     <div class="detail-item">
                         <span class="detail-value" style="background: #fff8e1; padding: 10px; border-radius: 5px; border-right: 3px solid #ff9800;">${expectedDurationDisplay}</span>
                     </div>
                 </div>
                 <div class="detail-section">
-                    <h4><i class="fas fa-cogs"></i> قطع الغيار التي تم تركيبها</h4>
+                    <!-- ✅ تعديل العنوان -->
+                    <h4><i class="fas fa-cogs"></i> وصف الإصلاح / قطع الغيار التي تم تركيبها</h4>
                     <div class="detail-item">
                         <span class="detail-value" style="background: #e3f2fd; padding: 10px; border-radius: 5px; border-right: 3px solid #1976d2;">${partsNotesDisplay}</span>
                     </div>
@@ -2158,9 +2252,9 @@
                 </div>
                 ${monthlyDuplicates[r['رقم الحافلة']] > 1 ? `
                 <div class="detail-section">
-                    <h4><i class="fas fa-chart-bar"></i> الاحصائيات</h4>
+                    <h4><i class="fas fa-chart-bar"></i> الإحصائيات</h4>
                     <div class="detail-item">
-                        <span class="detail-label">عدد الاعطال هذا الشهر:</span>
+                        <span class="detail-label">عدد الأعطال هذا الشهر:</span>
                         <span class="detail-value" style="color: #d32f2f; font-weight: bold;">${monthlyDuplicates[r['رقم الحافلة']]} عطل</span>
                     </div>
                 </div>
@@ -2174,13 +2268,14 @@
                         </select>
                     </div>
                     <div class="form-group notes-field" id="notesField">
+                        <!-- سيتم تعبئة هذا الحقل ديناميكياً -->
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-warning" onclick="updateReportStatus()">
-                            <i class="fas fa-check"></i> تاكيد التغيير
+                            <i class="fas fa-check"></i> تأكيد التغيير
                         </button>
                         <button class="btn btn-danger" onclick="closeModal('viewModal')">
-                            <i class="fas fa-times"></i> اغلاق
+                            <i class="fas fa-times"></i> إغلاق
                         </button>
                     </div>
                 </div>
@@ -2226,20 +2321,20 @@
                 return;
             }
             let fieldHTML = '';
-            if (['جاري الاصلاح', 'انتظار توفر قطع غيار', 'عدم توفر قطع غيار', 'انتظار الموافقة'].includes(selectedState)) {
+            if (['جاري الإصلاح', 'انتظار توفر قطع غيار', 'عدم توفر قطع غيار', 'انتظار الموافقة'].includes(selectedState)) {
                 fieldHTML = `
-                    <label for="expectedDuration"><i class="fas fa-clock"></i> مدة الاصلاح المتوقعة</label>
-                    <textarea id="expectedDuration" class="form-control" placeholder="ادخل مدة الاصلاح المتوقعة..."></textarea>
+                    <label for="expectedDuration"><i class="fas fa-clock"></i> مدة الإصلاح المتوقعة</label>
+                    <textarea id="expectedDuration" class="form-control" placeholder="أدخل مدة الإصلاح المتوقعة..."></textarea>
                 `;
-            } else if (selectedState === 'تم الاصلاح') {
+            } else if (selectedState === 'تم الإصلاح') {
                 fieldHTML = `
-                    <label for="spareParts"><i class="fas fa-cogs"></i> قطع الغيار التي تم تركيبها</label>
-                    <textarea id="spareParts" class="form-control" placeholder="ادخل قطع الغيار التي تم تركيبها..."></textarea>
+                    <label for="spareParts"><i class="fas fa-cogs"></i> وصف الإصلاح / قطع الغيار التي تم تركيبها</label>
+                    <textarea id="spareParts" class="form-control" placeholder="أدخل وصف الإصلاح / قطع الغيار التي تم تركيبها..."></textarea>
                 `;
             } else {
                 fieldHTML = `
                     <label for="generalNotes"><i class="fas fa-sticky-note"></i> الملاحظات</label>
-                    <textarea id="generalNotes" class="form-control" placeholder="ادخل الملاحظات..."></textarea>
+                    <textarea id="generalNotes" class="form-control" placeholder="أدخل الملاحظات..."></textarea>
                 `;
             }
             notesField.innerHTML = `<div class="form-group">${fieldHTML}</div>`;
@@ -2255,6 +2350,7 @@
             const expectedDuration = document.getElementById('expectedDuration')?.value || '';
             const spareParts = document.getElementById('spareParts')?.value || '';
             const generalNotes = document.getElementById('generalNotes')?.value || '';
+
             showLoading('جاري تحديث حالة البلاغ...');
             try {
                 const updateTime = new Date().toISOString();
@@ -2264,38 +2360,41 @@
                 url.searchParams.append('newState', newState);
                 url.searchParams.append('updateTime', updateTime);
                 url.searchParams.append('expectedDuration', expectedDuration);
+                // ✅ استخدام المفتاح الجديد في المعلمات
                 url.searchParams.append('spareParts', spareParts);
                 url.searchParams.append('generalNotes', generalNotes);
+
                 const res = await fetch(url);
                 const j = await res.json();
                 if (j.status === 'success') {
                     allReports = j.data;
-                    renderReports();
-                    updateSummary();
+                    renderReports(); // ✅ تحديث الجدول
+                    updateSummary(); // ✅ تحديث الإحصائيات تلقائيًا
                     closeModal('viewModal');
                     showToast(' تم تحديث الحالة بنجاح', 'success');
                 } else {
                     throw new Error(j.data);
                 }
             } catch (e) {
-                console.error('خطا في تحديث الحالة:', e);
+                console.error('خطأ في تحديث الحالة:', e);
                 showToast('❌ ' + e.message, 'error');
             } finally {
                 hideLoading();
             }
         }
 
+        // ===== دوال سجل أعطال الحافلة =====
         function showBusHistory(busNumber) {
             const busReports = allReports.filter(r => r['رقم الحافلة'] === busNumber);
             if (busReports.length === 0) {
-                showToast('❌ لا توجد اعطال مسجلة لهذه الحافلة', 'warning');
+                showToast('❌ لا توجد أعطال مسجلة لهذه الحافلة', 'warning');
                 return;
             }
             currentBusHistory = busReports;
             document.getElementById('busHistoryTitle').textContent = `(${busNumber})`;
             let historyHTML = `
                 <p style="margin-bottom: 20px; font-size: 1.1rem; color: var(--primary);">
-                    <i class="fas fa-chart-bar"></i> عدد الاعطال المسجلة: <strong>${busReports.length}</strong>
+                    <i class="fas fa-chart-bar"></i> عدد الأعطال المسجلة: <strong>${busReports.length}</strong>
                 </p>
                 <div class="table-container">
                     <table style="width: 100%; border-collapse: collapse; min-width: 1000px;">
@@ -2306,20 +2405,22 @@
                                 <th style="padding: 12px; border: 1px solid var(--border);">نوع العطل</th>
                                 <th style="padding: 12px; border: 1px solid var(--border);">وصف العطل</th>
                                 <th style="padding: 12px; border: 1px solid var(--border);">الملاحظات</th>
-                                <th style="padding: 12px; border: 1px solid var(--border);">قطع الغيار التي تم تركيبها</th>
+                                <!-- ✅ تعديل العنوان -->
+                                <th style="padding: 12px; border: 1px solid var(--border);">وصف الإصلاح / قطع الغيار التي تم تركيبها</th>
                                 <th style="padding: 12px; border: 1px solid var(--border);">مدة معالجة العطل</th>
                             </tr>
                         </thead>
                         <tbody>
             `;
             busReports.forEach(report => {
-                let partsNotesDisplay = report['قطع الغيار التي تم تركيبها']?.trim() || 'لا يوجد';
+                // ✅ تعديل المتغير
+                let partsNotesDisplay = report['وصف الإصلاح / قطع الغيار التي تم تركيبها']?.trim() || 'لا يوجد';
                 let notesDisplay = report['الملاحظات']?.trim() || 'لا يوجد';
                 const repairDuration = calculateRepairDuration(report);
                 historyHTML += `
                     <tr>
                         <td style="padding: 10px; border: 1px solid var(--border);">${report['رقم البلاغ'] || '---'}</td>
-                        <td style="padding: 10px; border: 1px solid var(--border);">${formatTo12Hour(report['التاريخ'] || report['وقت الانشاء'] || '')}</td>
+                        <td style="padding: 10px; border: 1px solid var(--border);">${formatDateTimeForDisplay(report['التاريخ'] || report['وقت الإنشاء'] || '')}</td>
                         <td style="padding: 10px; border: 1px solid var(--border);">${report['نوع العطل'] || '-'}</td>
                         <td style="padding: 10px; border: 1px solid var(--border);">${report['وصف العطل'] || '-'}</td>
                         <td style="padding: 10px; border: 1px solid var(--border);">${notesDisplay}</td>
@@ -2338,10 +2439,10 @@
         }
 
         function calculateRepairDuration(report) {
-            const startDate = new Date(report['التاريخ'] || report['وقت الانشاء']);
-            const finalStates = ['تم الاصلاح', 'مغلق', 'انتظار توفر قطع غيار', 'عدم توفر قطع غيار', 'انتظار الموافقة'];
+            const startDate = new Date(report['التاريخ'] || report['وقت الإنشاء']);
+            const finalStates = ['تم الإصلاح', 'مغلق', 'انتظار توفر قطع غيار', 'عدم توفر قطع غيار', 'انتظار الموافقة'];
             if (finalStates.includes(report['الحالة'])) {
-                const endDate = new Date(report['وقت اخر تحديث'] || report['التاريخ'] || report['وقت الانشاء']);
+                const endDate = new Date(report['وقت آخر تحديث'] || report['التاريخ'] || report['وقت الإنشاء']);
                 const durationMs = endDate - startDate;
                 if (durationMs > 0) {
                     const days = Math.floor(durationMs / (1000 * 60 * 60 * 24));
@@ -2366,161 +2467,209 @@
             }
             try {
                 const ws = XLSX.utils.json_to_sheet(currentBusHistory.map(report => {
-                    let partsNotesDisplay = report['قطع الغيار التي تم تركيبها']?.trim() || 'لا يوجد';
+                    // ✅ تعديل المتغير
+                    let partsNotesDisplay = report['وصف الإصلاح / قطع الغيار التي تم تركيبها']?.trim() || 'لا يوجد';
                     let notesDisplay = report['الملاحظات']?.trim() || 'لا يوجد';
                     return {
                         'رقم البلاغ': report['رقم البلاغ'] || '',
-                        'التاريخ': formatTo12Hour(report['التاريخ'] || report['وقت الانشاء'] || ''),
+                        'التاريخ': formatDateTimeForDisplay(report['التاريخ'] || report['وقت الإنشاء'] || ''),
                         'رقم الحافلة': report['رقم الحافلة'] || '',
                         'نوع العطل': report['نوع العطل'] || '',
                         'وصف العطل': report['وصف العطل'] || '',
                         'الملاحظات': notesDisplay,
-                        'قطع الغيار التي تم تركيبها': partsNotesDisplay,
+                        // ✅ تعديل العنوان
+                        'وصف الإصلاح / قطع الغيار التي تم تركيبها': partsNotesDisplay,
                         'مدة معالجة العطل': calculateRepairDuration(report),
-                        'الاهمية': report['مستوى الاهمية'] || '',
+                        'الأهمية': report['مستوى الأهمية'] || '',
                         'الموقع الحالي': report['الموقع الحالي'] || '',
-                        'الاحداثيات': report['الاحداثيات'] || ''
+                        'الإحداثيات': report['الإحداثيات'] || ''
                     };
                 }));
                 const wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, 'سجل الاعطال');
+                XLSX.utils.book_append_sheet(wb, ws, 'سجل الأعطال');
                 const busNumber = currentBusHistory[0]?.['رقم الحافلة'] || 'غير معروف';
-                const fileName = `سجل_اعطال_الحافلة_${busNumber}_${new Date().toISOString().split('T')[0]}.xlsx`;
+                const fileName = `سجل_أعطال_الحافلة_${busNumber}_${new Date().toISOString().split('T')[0]}.xlsx`;
                 XLSX.writeFile(wb, fileName);
-                showToast(' تم تصدير سجل الاعطال بنجاح', 'success');
+                showToast(' تم تصدير سجل الأعطال بنجاح', 'success');
             } catch (error) {
-                console.error('خطا في تصدير السجل:', error);
+                console.error('خطأ في تصدير السجل:', error);
                 showToast('❌ فشل في تصدير السجل', 'error');
             }
         }
 
-        function sendWhatsApp(id) {
-            const r = allReports.find(x => x.rowId === id);
-            if (!r) return;
-            const timeStr = formatTo12Hour(r['وقت اخر تحديث'] || r['التاريخ'] || r['وقت الانشاء'] || '');
-            const locationText = r['الموقع الحالي'] || 'غير محدد';
-            const coordinatesText = r['الاحداثيات'] || '';
-            const isOutside = r['الموقع الحالي']?.startsWith('خارج الكراج');
-            let message = '';
-            switch (r['الحالة']) {
-                case 'تم الاصلاح':
-                    message = `🔔 *حالة البلاغ (${r['الحالة']})*\n`;
-                    message += `*🚍 رقم البلاغ:* ${r['رقم البلاغ'] || '---'}\n`;
-                    message += `*🚌 رقم الحافلة:* ${r['رقم الحافلة'] || 'غير معروف'}\n`;
-                    message += `*🔧 نوع العطل:* ${r['نوع العطل'] || 'غير محدد'}\n`;
-                    message += `*📝 الوصف:* ${r['وصف العطل'] || 'لا يوجد'}\n`;
-                    message += `*📍 الموقع الحالي:* ${locationText}\n`;
-                    if (coordinatesText) {
-                        message += `*🧭 الاحداثيات:* ${coordinatesText}\n`;
-                    }
-                    if (r['رقم الجوال']) {
-                        message += `*📞 الجوال:* ${r['رقم الجوال']}\n`;
-                    }
-                    message += `*⚡ الاهمية:* ${r['مستوى الاهمية'] || 'متوسط'}\n`;
-                    message += `*🔔 الحالة:* ${r['الحالة']}\n`;
-                    message += `*🗒 الملاحظات:* ${r['الملاحظات']?.trim() || 'لا يوجد'}\n`;
-                    message += `*⚙ قطع الغيار التي تم تركيبها:* ${r['قطع الغيار التي تم تركيبها']?.trim() || 'لا يوجد'}\n`;
-                    message += `*🕓 التاريخ و الوقت:* ${timeStr}\n`;
-                    message += `⚙ نظام ادارة البلاغات`;
-                    break;
-                case 'لم يتم الاصلاح':
-                    message = `❌ *${r['الحالة']}*\n`;
-                    message += `*🚍 البلاغ:* ${r['رقم البلاغ'] || '---'}\n`;
-                    message += `*🚌 الحافلة:* ${r['رقم الحافلة'] || 'غير معروف'}\n`;
-                    message += `*🔧 العطل:* ${r['نوع العطل'] || 'غير محدد'}\n`;
-                    message += `*📝 السبب:* ${r['الملاحظات']?.trim() || 'غير محدد'}\n`;
-                    message += `*📍 الموقع الحالي:* ${locationText}\n`;
-                    if (coordinatesText) {
-                        message += `*🧭 الاحداثيات:* ${coordinatesText}\n`;
-                    }
-                    message += `*⚡ الاهمية:* ${r['مستوى الاهمية'] || 'متوسط'}\n`;
-                    message += `*🕓 وقت التحديث:* ${timeStr}\n`;
-                    message += `⚙ نظام ادارة البلاغات`;
-                    break;
-                case 'مغلق':
-                    message = `🔒 *البلاغ مغلق*\n`;
-                    message += `*🚍 رقم البلاغ:* ${r['رقم البلاغ'] || '---'}\n`;
-                    message += `*🚌 الحافلة:* ${r['رقم الحافلة'] || 'غير معروف'}\n`;
-                    message += `*📌 السبب:* ${r['الملاحظات']?.trim() || 'تم الاغلاق بعد المراجعة'}\n`;
-                    message += `*📍 الموقع الحالي:* ${locationText}\n`;
-                    if (coordinatesText) {
-                        message += `*🧭 الاحداثيات:* ${coordinatesText}\n`;
-                    }
-                    message += `*🕓 وقت الاغلاق:* ${timeStr}\n`;
-                    message += `⚙ نظام ادارة البلاغات`;
-                    break;
-                case 'بلاغ جديد':
-                    if (isOutside) {
-                        message = `*🔔 بلاغ جديد تم تسجيله (خارج الكراج)*\n`;
-                        message += `*🚍 رقم البلاغ:* ${r['رقم البلاغ'] || '---'}\n`;
-                        message += `*🚌 رقم الحافلة:* ${r['رقم الحافلة'] || 'غير معروف'}\n`;
-                        message += `*🔧 نوع العطل:* ${r['نوع العطل'] || 'غير محدد'}\n`;
-                        message += `*📝 الوصف:* ${r['وصف العطل'] || 'لا يوجد'}\n`;
-                        message += `*📍 الموقع الحالي:* ${locationText}\n`;
-                        if (coordinatesText) {
-                            message += `*🧭 الاحداثيات:* ${coordinatesText}\n`;
-                        }
-                        if (r['الموقع التفصيلي']) {
-                            message += `*🌍 الرابط:* ${r['الموقع التفصيلي']}\n`;
-                        }
-                        if (r['رقم الجوال']) {
-                            message += `*📞 الجوال:* ${r['رقم الجوال']}\n`;
-                        }
-                        message += `*⚡ الاهمية:* ${r['مستوى الاهمية'] || 'غير محدد'}\n`;
-                        message += `*🕓 وقت الانشاء:* ${timeStr}\n`;
-                        message += `⚙️ *تم انشاء البلاغ عبر نظام ادارة البلاغات*`;
-                    } else {
-                        message = `*🔔 بلاغ جديد تم تسجيله (داخل الكراج)*\n-\n`;
-                        message += `*🚍 رقم البلاغ:* ${r['رقم البلاغ'] || '---'}\n`;
-                        message += `*🚌 رقم الحافلة:* ${r['رقم الحافلة'] || 'غير معروف'}\n`;
-                        message += `*🔧 نوع العطل:* ${r['نوع العطل'] || 'غير محدد'}\n`;
-                        message += `*📝 الوصف:* ${r['وصف العطل'] || 'لا يوجد'}\n`;
-                        message += `*📍 الموقع الحالي:* ${locationText}\n`;
-                        if (coordinatesText) {
-                            message += `*🧭 الاحداثيات:* ${coordinatesText}\n`;
-                        }
-                        message += `*⚡ الاهمية:* ${r['مستوى الاهمية'] || 'غير محدد'}\n`;
-                        message += `*🕓 وقت الانشاء:* ${timeStr}\n`;
-                        message += `⚙️ *تم انشاء البلاغ عبر نظام ادارة البلاغات*`;
-                    }
-                    break;
-                case 'جاري الاصلاح':
-                case 'انتظار توفر قطع غيار':
-                case 'عدم توفر قطع غيار':
-                case 'انتظار الموافقة':
-                    message = `🔄 *${r['الحالة']}*\n`;
-                    message += `*🚍 البلاغ:* ${r['رقم البلاغ'] || '---'}\n`;
-                    message += `*🚌 الحافلة:* ${r['رقم الحافلة'] || 'غير معروف'}\n`;
-                    message += `*🔧 العطل:* ${r['نوع العطل'] || 'غير محدد'}\n`;
-                    message += `*📍 الموقع الحالي:* ${locationText}\n`;
-                    if (coordinatesText) {
-                        message += `*🧭 الاحداثيات:* ${coordinatesText}\n`;
-                    }
-                    if (r['مدة الاصلاح المتوقعة']?.trim()) {
-                        message += `*⏱ المدة المتوقعة:* ${r['مدة الاصلاح المتوقعة']}\n`;
-                    }
-                    if (r['الملاحظات']?.trim()) {
-                        message += `*🗒 الملاحظات:* ${r['الملاحظات']}\n`;
-                    }
-                    message += `*🕓 اخر تحديث:* ${timeStr}\n`;
-                    message += `⚙ نظام ادارة البلاغات`;
-                    break;
-                default:
-                    message = `📌 *حالة البلاغ: ${r['الحالة'] || '---'}*\n`;
-                    message += `*🚍 البلاغ:* ${r['رقم البلاغ'] || '---'}\n`;
-                    message += `*🚌 الحافلة:* ${r['رقم الحافلة'] || '---'}\n`;
-                    message += `*📍 الموقع الحالي:* ${locationText}\n`;
-                    if (coordinatesText) {
-                        message += `*🧭 الاحداثيات:* ${coordinatesText}\n`;
-                    }
-                    message += `*🕓 الوقت:* ${timeStr}\n`;
-                    message += `⚙ نظام ادارة البلاغات`;
-            }
-            const encodedMessage = encodeURIComponent(message);
-            const url = `https://wa.me/?text=${encodedMessage}`;
-            window.open(url, '_blank');
+        // ===== دالة إرسال واتساب معدّلة حسب المتطلبات =====
+        // ===== دالة إرسال واتساب محدثة ومصححة =====
+async function sendWhatsApp(id) {
+    try {
+        const r = allReports.find(x => x.rowId === id);
+        if (!r) {
+            showToast('❌ البلاغ غير موجود', 'error');
+            return;
         }
 
+        const timeStr = formatDateTimeForDisplay(r['وقت آخر تحديث'] || r['التاريخ'] || r['وقت الإنشاء'] || '');
+        const locationText = r['الموقع الحالي'] || 'غير محدد';
+        const coordinatesText = r['الإحداثيات'] || '';
+        const isOutside = r['الموقع الحالي']?.startsWith('خارج الكراج');
+
+        let message = '';
+        
+        switch (r['الحالة']) {
+            case 'تم الإصلاح':
+                message = `*✅ تم الإصلاح بنجاح*
+
+📋 رقم البلاغ: ${r['رقم البلاغ'] || '---'}
+🚍 رقم الحافلة: ${r['رقم الحافلة'] || 'غير معروف'}
+🔧 نوع العطل: ${r['نوع العطل'] || 'غير محدد'}
+📝 الوصف: ${r['وصف العطل'] || 'لا يوجد'}
+📍 الموقع: ${locationText}`;
+                
+                if (coordinatesText) {
+                    message += `\n🌐 الإحداثيات: ${coordinatesText}`;
+                }
+                if (r['رقم الجوال']) {
+                    message += `\n📱 الجوال: ${r['رقم الجوال']}`;
+                }
+                
+                message += `\n⚡ الأهمية: ${r['مستوى الأهمية'] || 'متوسط'}
+📌 الملاحظات: ${r['الملاحظات']?.trim() || 'لا يوجد'}
+🔧 وصف الإصلاح: ${r['وصف الإصلاح / قطع الغيار التي تم تركيبها']?.trim() || 'لا يوجد'}
+🕓 وقت الإصلاح: ${timeStr}
+
+⚙️ نظام إدارة بلاغات الحافلات`;
+                break;
+                
+            case 'لم يتم الإصلاح':
+                message = `*❌ لم يتم الإصلاح*
+
+📋 رقم البلاغ: ${r['رقم البلاغ'] || '---'}
+🚍 رقم الحافلة: ${r['رقم الحافلة'] || 'غير معروف'}
+🔧 نوع العطل: ${r['نوع العطل'] || 'غير محدد'}
+📍 الموقع: ${locationText}`;
+                
+                if (coordinatesText) {
+                    message += `\n🌐 الإحداثيات: ${coordinatesText}`;
+                }
+                
+                message += `\n⚡ الأهمية: ${r['مستوى الأهمية'] || 'متوسط'}
+📌 السبب: ${r['الملاحظات']?.trim() || 'غير محدد'}
+🕓 وقت التحديث: ${timeStr}
+
+⚙️ نظام إدارة بلاغات الحافلات`;
+                break;
+                
+            case 'مغلق':
+                message = `*🔒 البلاغ مغلق*
+
+📋 رقم البلاغ: ${r['رقم البلاغ'] || '---'}
+🚍 رقم الحافلة: ${r['رقم الحافلة'] || 'غير معروف'}
+📍 الموقع: ${locationText}`;
+                
+                if (coordinatesText) {
+                    message += `\n🌐 الإحداثيات: ${coordinatesText}`;
+                }
+                
+                message += `\n📌 سبب الإغلاق: ${r['الملاحظات']?.trim() || 'تم الإغلاق بعد المراجعة'}
+🕓 وقت الإغلاق: ${timeStr}
+
+⚙️ نظام إدارة بلاغات الحافلات`;
+                break;
+                
+            case 'بلاغ جديد':
+                if (isOutside) {
+                    message = `*🔔 بلاغ جديد تم تسجيله (خارج الكراج)*
+
+📋 رقم البلاغ: ${r['رقم البلاغ'] || '---'}
+🚍 رقم الحافلة: ${r['رقم الحافلة'] || 'غير معروف'}
+🔧 نوع العطل: ${r['نوع العطل'] || 'غير محدد'}
+📝 الوصف: ${r['وصف العطل'] || 'لا يوجد'}
+📍 الموقع الحالي: ${locationText}`;
+                    
+                    if (coordinatesText) {
+                        message += `\n🌐 الإحداثيات: ${coordinatesText}`;
+                    }
+                    if (r['رقم الجوال']) {
+                        message += `\n📱 الجوال: ${r['رقم الجوال']}`;
+                    }
+                    
+                    message += `\n⚡ الأهمية: ${r['مستوى الأهمية'] || 'غير محدد'}
+🕓 وقت الإنشاء: ${timeStr}
+
+⚙️ نظام إدارة بلاغات الحافلات`;
+                } else {
+                    message = `*🔔 بلاغ جديد تم تسجيله (داخل الكراج)*
+
+📋 رقم البلاغ: ${r['رقم البلاغ'] || '---'}
+🚍 رقم الحافلة: ${r['رقم الحافلة'] || 'غير معروف'}
+🔧 نوع العطل: ${r['نوع العطل'] || 'غير محدد'}
+📝 الوصف: ${r['وصف العطل'] || 'لا يوجد'}
+⚡ الأهمية: ${r['مستوى الأهمية'] || 'غير محدد'}
+🕓 وقت الإنشاء: ${timeStr}
+
+⚙️ نظام إدارة بلاغات الحافلات`;
+                }
+                break;
+                
+            case 'جاري الإصلاح':
+            case 'انتظار توفر قطع غيار':
+            case 'عدم توفر قطع غيار':
+            case 'انتظار الموافقة':
+                message = `*🔄 ${r['الحالة']}*
+
+📋 رقم البلاغ: ${r['رقم البلاغ'] || '---'}
+🚍 رقم الحافلة: ${r['رقم الحافلة'] || 'غير معروف'}
+🔧 نوع العطل: ${r['نوع العطل'] || 'غير محدد'}
+📍 الموقع: ${locationText}`;
+                
+                if (coordinatesText) {
+                    message += `\n🌐 الإحداثيات: ${coordinatesText}`;
+                }
+                
+                if (r['مدة الإصلاح المتوقعة']?.trim()) {
+                    message += `\n⏱️ المدة المتوقعة: ${r['مدة الإصلاح المتوقعة']}`;
+                }
+                if (r['الملاحظات']?.trim()) {
+                    message += `\n📌 الملاحظات: ${r['الملاحظات']}`;
+                }
+                
+                message += `\n🕓 آخر تحديث: ${timeStr}
+
+⚙️ نظام إدارة بلاغات الحافلات`;
+                break;
+                
+            default:
+                message = `*📌 تحديث حالة - ${r['الحالة'] || '---'}*
+
+📋 رقم البلاغ: ${r['رقم البلاغ'] || '---'}
+🚍 رقم الحافلة: ${r['رقم الحافلة'] || '---'}
+📍 الموقع: ${locationText}`;
+                
+                if (coordinatesText) {
+                    message += `\n🌐 الإحداثيات: ${coordinatesText}`;
+                }
+                
+                message += `\n🕓 وقت التحديث: ${timeStr}
+
+⚙️ نظام إدارة بلاغات الحافلات`;
+        }
+
+        // إضافة تنبيهات خاصة للحالات الحرجة
+        if (r['مستوى الأهمية'] === 'عالي' && r['الحالة'] === 'بلاغ جديد') {
+            message += `\n\n🚨 تنبيه: هذا بلاغ عالي الأهمية يتطلب إجراء فوري!`;
+        } else if (r['مستوى الأهمية'] === 'مسار متوقف') {
+            message += `\n\n🛑 تنبيه: مسار الحافلة متوقف - يتطلب تدخل عاجل!`;
+        }
+
+        const encodedMessage = encodeURIComponent(message);
+        const url = `https://wa.me/?text=${encodedMessage}`;
+        window.open(url, '_blank');
+        
+    } catch (error) {
+        console.error('خطأ في إرسال واتساب:', error);
+        showToast('❌ حدث خطأ في إعداد الرسالة', 'error');
+    }
+}
+        // ===== دوال الإجراءات =====
         function requestDeleteReport(id) {
             const deleteAction = () => {
                 deleteReport(id);
@@ -2529,7 +2678,7 @@
         }
 
         async function deleteReport(id) {
-            if (!confirm('⚠️ هل انت متاكد من حذف هذا البلاغ؟')) return;
+            if (!confirm('⚠️ هل أنت متأكد من حذف هذا البلاغ؟')) return;
             showLoading('جاري حذف البلاغ...');
             try {
                 const res = await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=deleteReport&rowIndex=${id}`);
@@ -2543,13 +2692,14 @@
                     throw new Error(j.data);
                 }
             } catch (e) {
-                console.error('خطا في حذف البلاغ:', e);
+                console.error('خطأ في حذف البلاغ:', e);
                 showToast('❌ ' + e.message, 'error');
             } finally {
                 hideLoading();
             }
         }
 
+        // ===== إعدادات SLA =====
         function openSlaSettings() {
             const openModal = () => {
                 document.getElementById('normalHours').value = Math.floor(SLA_SETTINGS['عادي'] / 60);
@@ -2567,6 +2717,7 @@
             showPasswordModal(openModal);
         }
 
+        // ✅ دالة تصدير Excel معدلة لاستخدام formatDateTimeForDisplay
         function exportToExcel() {
             if (!allReports.length) {
                 showToast('❌ لا توجد بيانات للتصدير', 'warning');
@@ -2574,63 +2725,41 @@
             }
             try {
                 const ws = XLSX.utils.json_to_sheet(allReports.map(report => {
-                    let partsNotesDisplay = report['قطع الغيار التي تم تركيبها']?.trim() || 'لا يوجد';
+                    // ✅ تعديل المتغير
+                    let partsNotesDisplay = report['وصف الإصلاح / قطع الغيار التي تم تركيبها']?.trim() || 'لا يوجد';
                     let notesDisplay = report['الملاحظات']?.trim() || 'لا يوجد';
-                    
-                    const formatDateForExport = (dateStr) => {
-                        if (!dateStr) return '';
-                        try {
-                            const date = new Date(dateStr);
-                            if (isNaN(date.getTime())) return dateStr;
-                            
-                            const day = String(date.getDate()).padStart(2, '0');
-                            const month = String(date.getMonth() + 1).padStart(2, '0');
-                            const year = date.getFullYear();
-                            
-                            let hours = date.getHours();
-                            let minutes = date.getMinutes();
-                            const ampm = hours >= 12 ? 'PM' : 'AM';
-                            hours = hours % 12;
-                            hours = hours ? hours : 12;
-                            minutes = minutes < 10 ? '0' + minutes : minutes;
-                            
-                            return `${day}-${month}-${year}, ${hours}:${minutes} ${ampm}`;
-                        } catch (e) {
-                            return dateStr;
-                        }
-                    };
-
                     return {
                         'رقم البلاغ': report['رقم البلاغ'] || '',
-                        'التاريخ': formatDateForExport(report['التاريخ'] || report['وقت الانشاء'] || ''),
+                        'التاريخ': formatDateTimeForDisplay(report['التاريخ'] || report['وقت الإنشاء'] || ''),
                         'رقم الحافلة': report['رقم الحافلة'] || '',
                         'نوع العطل': report['نوع العطل'] || '',
                         'وصف العطل': report['وصف العطل'] || '',
                         'رقم الجوال': report['رقم الجوال'] || '',
                         'الموقع الحالي': report['الموقع الحالي'] || '',
-                        'الاحداثيات': report['الاحداثيات'] || '',
+                        'الإحداثيات': report['الإحداثيات'] || '',
                         'الموقع التفصيلي': report['الموقع التفصيلي'] || '',
-                        'مستوى الاهمية': report['مستوى الاهمية'] || '',
+                        'مستوى الأهمية': report['مستوى الأهمية'] || '',
                         'الحالة': report['الحالة'] || '',
-                        'وقت الانشاء': formatDateForExport(report['وقت الانشاء'] || ''),
-                        'وقت اخر تحديث': formatDateForExport(report['وقت اخر تحديث'] || ''),
+                        'وقت الإنشاء': formatDateTimeForDisplay(report['وقت الإنشاء'] || ''),
+                        'وقت آخر تحديث': formatDateTimeForDisplay(report['وقت آخر تحديث'] || ''),
+                        // ✅ تعديل العنوان
+                        'وصف الإصلاح / قطع الغيار التي تم تركيبها': partsNotesDisplay,
                         'الملاحظات': notesDisplay,
-                        'قطع الغيار التي تم تركيبها': partsNotesDisplay,
-                        'مدة الاصلاح المتوقعة': report['مدة الاصلاح المتوقعة']?.trim() || ''
+                        'مدة الإصلاح المتوقعة': report['مدة الإصلاح المتوقعة']?.trim() || ''
                     };
                 }));
-                
                 const wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, 'بلاغات الحافلات');
                 const fileName = `بلاغات_الحافلات_${new Date().toISOString().split('T')[0]}.xlsx`;
                 XLSX.writeFile(wb, fileName);
                 showToast(' تم تصدير البيانات بنجاح', 'success');
             } catch (error) {
-                console.error('خطا في التصدير:', error);
+                console.error('خطأ في التصدير:', error);
                 showToast('❌ فشل في تصدير البيانات', 'error');
             }
         }
 
+        // ✅ دالة تصدير سجل البلاغات معدلة لاستخدام formatDateTimeForDisplay
         function exportReport() {
             if (!allReports.length) {
                 showToast('❌ لا توجد بيانات للتصدير', 'warning');
@@ -2638,63 +2767,41 @@
             }
             try {
                 const ws = XLSX.utils.json_to_sheet(allReports.map(report => {
-                    let partsNotesDisplay = report['قطع الغيار التي تم تركيبها']?.trim() || 'لا يوجد';
+                    // ✅ تعديل المتغير
+                    let partsNotesDisplay = report['وصف الإصلاح / قطع الغيار التي تم تركيبها']?.trim() || 'لا يوجد';
                     let notesDisplay = report['الملاحظات']?.trim() || 'لا يوجد';
-                    
-                    const formatDateForExport = (dateStr) => {
-                        if (!dateStr) return '';
-                        try {
-                            const date = new Date(dateStr);
-                            if (isNaN(date.getTime())) return dateStr;
-                            
-                            const day = String(date.getDate()).padStart(2, '0');
-                            const month = String(date.getMonth() + 1).padStart(2, '0');
-                            const year = date.getFullYear();
-                            
-                            let hours = date.getHours();
-                            let minutes = date.getMinutes();
-                            const ampm = hours >= 12 ? 'PM' : 'AM';
-                            hours = hours % 12;
-                            hours = hours ? hours : 12;
-                            minutes = minutes < 10 ? '0' + minutes : minutes;
-                            
-                            return `${day}-${month}-${year}, ${hours}:${minutes} ${ampm}`;
-                        } catch (e) {
-                            return dateStr;
-                        }
-                    };
-
                     return {
                         'رقم البلاغ': report['رقم البلاغ'] || '',
-                        'التاريخ': formatDateForExport(report['التاريخ'] || report['وقت الانشاء'] || ''),
+                        'التاريخ': formatDateTimeForDisplay(report['التاريخ'] || report['وقت الإنشاء'] || ''),
                         'رقم الحافلة': report['رقم الحافلة'] || '',
                         'نوع العطل': report['نوع العطل'] || '',
                         'وصف العطل': report['وصف العطل'] || '',
                         'رقم الجوال': report['رقم الجوال'] || '',
                         'الموقع الحالي': report['الموقع الحالي'] || '',
-                        'الاحداثيات': report['الاحداثيات'] || '',
+                        'الإحداثيات': report['الإحداثيات'] || '',
                         'الموقع التفصيلي': report['الموقع التفصيلي'] || '',
-                        'مستوى الاهمية': report['مستوى الاهمية'] || '',
+                        'مستوى الأهمية': report['مستوى الأهمية'] || '',
                         'الحالة': report['الحالة'] || '',
-                        'وقت الانشاء': formatDateForExport(report['وقت الانشاء'] || ''),
-                        'وقت اخر تحديث': formatDateForExport(report['وقت اخر تحديث'] || ''),
+                        'وقت الإنشاء': formatDateTimeForDisplay(report['وقت الإنشاء'] || ''),
+                        'وقت آخر تحديث': formatDateTimeForDisplay(report['وقت آخر تحديث'] || ''),
+                        // ✅ تعديل العنوان
+                        'وصف الإصلاح / قطع الغيار التي تم تركيبها': partsNotesDisplay,
                         'الملاحظات': notesDisplay,
-                        'قطع الغيار التي تم تركيبها': partsNotesDisplay,
-                        'مدة الاصلاح المتوقعة': report['مدة الاصلاح المتوقعة']?.trim() || ''
+                        'مدة الإصلاح المتوقعة': report['مدة الإصلاح المتوقعة']?.trim() || ''
                     };
                 }));
-                
                 const wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, 'سجل البلاغات');
                 const fileName = `سجل_البلاغات_${new Date().toISOString().split('T')[0]}.xlsx`;
                 XLSX.writeFile(wb, fileName);
                 showToast(' تم تصدير السجل بنجاح', 'success');
             } catch (error) {
-                console.error('خطا في تصدير السجل:', error);
+                console.error('خطأ في تصدير السجل:', error);
                 showToast('❌ فشل في تصدير السجل', 'error');
             }
         }
 
+        // ===== الأدوات المساعدة =====
         function closeModal(id) {
             document.getElementById(id).style.display = 'none';
         }
@@ -2716,32 +2823,30 @@
             }, 4000);
         }
 
+        // ===== تهيئة الأحداث =====
         document.addEventListener('DOMContentLoaded', function() {
             loadLocalSlaSettings();
             loadAutoCloseSettings();
             document.getElementById('refreshBtn').addEventListener('click', () => loadReports());
-            document.getElementById('exportBtn').addEventListener('click', exportToExcel);
             document.getElementById('viewReportBtn').addEventListener('click', viewReport);
             document.getElementById('searchInput').addEventListener('input', renderReports);
             document.getElementById('statusFilter').addEventListener('change', renderReports);
             document.getElementById('priorityFilter').addEventListener('change', renderReports);
+            document.getElementById('locationFilter').addEventListener('change', renderReports);
             document.getElementById('slaSettingsBtn').addEventListener('click', openSlaSettings);
             document.getElementById('saveSlaSettings').addEventListener('click', saveLocalSlaSettings);
             document.getElementById('autoCloseSettingsBtn').addEventListener('click', openAutoCloseSettings);
             document.getElementById('saveAutoCloseSettings').addEventListener('click', saveAutoCloseSettings);
             document.getElementById('exportBusHistoryBtn').addEventListener('click', exportBusHistory);
             document.getElementById('passwordSubmitBtn').addEventListener('click', verifyPassword);
-            document.getElementById('exportReportBtn').addEventListener('click', exportReport);
+            document.getElementById('saveEditBtn').addEventListener('click', saveEditedReport);
+            // ❌ حذف هذا السطر لأن التصدير يتم الآن عبر exportSelectedReports
+            // document.getElementById('exportReportBtn').addEventListener('click', exportReport);
             document.getElementById('passwordInput').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     verifyPassword();
                 }
             });
-            document.getElementById('morningReportBtn').addEventListener('click', loadMorningReport);
-            document.getElementById('eveningReportBtn').addEventListener('click', loadEveningReport);
-            document.getElementById('weeklyReportBtn').addEventListener('click', loadWeeklyReport);
-            document.getElementById('copyReportBtn').addEventListener('click', copyReportToClipboard);
-            document.getElementById('sendWhatsAppReportBtn').addEventListener('click', sendReportToWhatsApp);
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
                     const modals = document.querySelectorAll('.modal');
@@ -2762,6 +2867,12 @@
             });
             setInterval(() => loadReports(true), CONFIG.REFRESH_INTERVAL);
             loadReports();
+        });
+
+        // إضافة معالجة الأخطاء العامة
+        window.addEventListener('error', function(e) {
+            console.error('❌ خطأ في النظام:', e.error);
+            showToast('حدث خطأ في النظام، يرجى تحديث الصفحة', 'error');
         });
     </script>
 </body>
