@@ -44,7 +44,6 @@
             margin: 0 auto;
             padding: 20px;
         }
-        /* Header Enhanced */
         header {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
@@ -87,7 +86,6 @@
             position: relative;
             z-index: 1;
         }
-        /* Summary Cards Enhanced */
         .summary-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -143,7 +141,6 @@
         .not-fixed .summary-icon { background: linear-gradient(135deg, #ffab91, #ff7043); color: white; }
         .duplicate .summary-icon { background: linear-gradient(135deg, #30cfd0, #330867); color: white; }
         .total .summary-icon { background: linear-gradient(135deg, #a8edea, #fed6e3); color: white; }
-        /* Controls Enhanced */
         .controls {
             background: white;
             border-radius: var(--radius);
@@ -270,7 +267,6 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
         }
-        /* Table Enhanced */
         .table-container {
             background: white;
             border-radius: var(--radius);
@@ -313,7 +309,6 @@
             background: linear-gradient(90deg, #e3f2fd, #f5f5f5) !important;
             transform: scale(1.01);
         }
-        /* Status & Priority Enhanced */
         .priority-high { 
             color: #d32f2f; 
             font-weight: bold; 
@@ -359,7 +354,6 @@
         .status-not-fixed { background: linear-gradient(135deg, #ffebee, #ffcdd2); color: #c62828; }
         .status-waiting { background: linear-gradient(135deg, #f3e5f5, #e1bee7); color: #7b1fa2; }
         .status-closed { background: linear-gradient(135deg, #f5f5f5, #e0e0e0); color: #616161; }
-        /* Countdown Enhanced */
         .countdown {
             font-family: 'Courier New', monospace;
             font-weight: bold;
@@ -424,7 +418,6 @@
             0%, 100% { opacity: 1; }
             50% { opacity: .7; }
         }
-        /* Action Buttons Enhanced */
         .action-buttons {
             display: flex;
             gap: 8px;
@@ -484,7 +477,6 @@
             background: linear-gradient(135deg, var(--danger), #c62828); 
             color: white; 
         }
-        /* Bus Number Link Enhanced */
         .bus-number-link {
             color: var(--primary);
             text-decoration: none;
@@ -501,7 +493,6 @@
             text-decoration: underline;
             transform: scale(1.05);
         }
-        /* Loading Enhanced */
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -536,7 +527,6 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-        /* Modals Enhanced */
         .modal {
             display: none;
             position: fixed;
@@ -635,7 +625,6 @@
             padding-top: 20px;
             border-top: 1px solid var(--border);
         }
-        /* Password Modal */
         .password-modal {
             max-width: 400px;
         }
@@ -686,7 +675,6 @@
         .password-error.show {
             display: block;
         }
-        /* Form Enhanced */
         .form-group {
             margin-bottom: 20px;
         }
@@ -722,7 +710,6 @@
         .form-row .form-group {
             flex: 1;
         }
-        /* Toast Enhanced */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -759,7 +746,6 @@
         .toast i {
             font-size: 1.3rem;
         }
-        /* Detail Sections Enhanced */
         .detail-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -812,7 +798,6 @@
             font-size: 0.95rem;
             line-height: 1.6;
         }
-        /* SLA Settings Enhanced */
         .sla-level {
             background: linear-gradient(135deg, #f8f9fa, #ffffff);
             border-radius: var(--radius);
@@ -840,7 +825,6 @@
             font-size: 1.15rem;
             color: var(--dark);
         }
-        /* Auto Close Settings */
         .auto-close-section {
             background: linear-gradient(135deg, #f8f9fa, #ffffff);
             border-radius: var(--radius);
@@ -863,7 +847,6 @@
             font-size: 1.15rem;
             color: var(--dark);
         }
-        /* Empty State */
         .empty-state {
             text-align: center;
             padding: 60px 20px;
@@ -878,7 +861,6 @@
             font-size: 1.2rem;
             font-weight: 500;
         }
-        /* Security Badge */
         .security-badge {
             position: absolute;
             top: 20px;
@@ -897,7 +879,6 @@
         .security-badge i {
             color: #ffd700;
         }
-        /* Additional Styles */
         .tr-urgent {
             background: linear-gradient(90deg, #ffebee, #ffcdd2) !important;
             animation: pulse-row 2s infinite;
@@ -931,7 +912,6 @@
         .notes-field.active {
             opacity: 1;
         }
-        /* Responsive Enhanced */
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -1471,7 +1451,7 @@
     <script>
         // ===== الإعدادات والدوال الأساسية =====
         const CONFIG = {
-            APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwa8A1JayUHxJ9Y3KXTY8PHsDZjtO0W1y50rA7ZNZz0maZ2IB8FBAS_emF9-jaPeMsW0Q/exec',
+            APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxN5s0icdPkZhC8CU7Ilb0GM0ZqisRTyMsdlQthxoeb6ojHC5m5iQNyUzlSxXXCUzNwUA/exec',
             REFRESH_INTERVAL: 30000,
             ADMIN_PASSWORD: '0000'
         };
@@ -1558,19 +1538,57 @@
             }
         }
 
-        // ===== دوال إعدادات SLA =====
+        // ===== دوال إعدادات SLA المحسنة =====
         function loadLocalSlaSettings() {
             const saved = localStorage.getItem('slaSettings');
             if (saved) {
                 try {
                     SLA_SETTINGS = JSON.parse(saved);
+                    console.log('✅ تم تحميل إعدادات SLA محلية:', SLA_SETTINGS);
                 } catch (e) {
-                    console.error('خطأ في تحميل إعدادات SLA:', e);
+                    console.error('❌ خطأ في تحميل إعدادات SLA:', e);
+                    SLA_SETTINGS = {
+                        'عادي': 240,
+                        'متوسط': 120,
+                        'عالي': 60,
+                        'مسار متوقف': 30,
+                        'مخالفة تطوير': 15
+                    };
                 }
+            } else {
+                SLA_SETTINGS = {
+                    'عادي': 240,
+                    'متوسط': 120,
+                    'عالي': 60,
+                    'مسار متوقف': 30,
+                    'مخالفة تطوير': 15
+                };
             }
         }
 
-        function saveLocalSlaSettings() {
+        async function loadSLASettingsFromServer() {
+            try {
+                const response = await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=getSLASettings`);
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    Object.keys(result.data).forEach(level => {
+                        const settings = result.data[level];
+                        SLA_SETTINGS[level] = settings.totalMinutes || (settings.hours * 60 + settings.minutes);
+                    });
+                    
+                    localStorage.setItem('slaSettings', JSON.stringify(SLA_SETTINGS));
+                    console.log('✅ تم تحميل إعدادات SLA من الخادم:', SLA_SETTINGS);
+                    return true;
+                }
+            } catch (error) {
+                console.error('❌ خطأ في تحميل إعدادات SLA من الخادم:', error);
+                loadLocalSlaSettings();
+            }
+            return false;
+        }
+
+        async function saveSlaSettings() {
             const normalHours = parseInt(document.getElementById('normalHours').value) || 0;
             const normalMinutes = parseInt(document.getElementById('normalMinutes').value) || 0;
             const mediumHours = parseInt(document.getElementById('mediumHours').value) || 0;
@@ -1600,10 +1618,60 @@
             };
 
             localStorage.setItem('slaSettings', JSON.stringify(SLA_SETTINGS));
-            showToast(' تم حفظ إعدادات SLA محلياً', 'success');
-            closeModal('slaModal');
-            renderReports();
-            updateSummary();
+
+            try {
+                const slaParams = {
+                    'عادي': JSON.stringify({ hours: normalHours, minutes: normalMinutes }),
+                    'متوسط': JSON.stringify({ hours: mediumHours, minutes: mediumMinutes }),
+                    'عالي': JSON.stringify({ hours: highHours, minutes: highMinutes }),
+                    'مسار متوقف': JSON.stringify({ hours: stopHours, minutes: stopMinutes }),
+                    'مخالفة تطوير': JSON.stringify({ hours: violationHours, minutes: violationMinutes })
+                };
+
+                const url = new URL(CONFIG.APPS_SCRIPT_URL);
+                url.searchParams.append('action', 'updateSlaSettings');
+                Object.keys(slaParams).forEach(key => {
+                    url.searchParams.append(key, slaParams[key]);
+                });
+
+                const response = await fetch(url, { method: 'POST' });
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    showToast('✅ تم حفظ إعدادات SLA على الخادم والمحلي', 'success');
+                    closeModal('slaModal');
+                    renderReports();
+                    updateSummary();
+                } else {
+                    throw new Error(result.data);
+                }
+            } catch (error) {
+                console.error('❌ خطأ في حفظ إعدادات SLA على الخادم:', error);
+                showToast('⚠️ تم الحفظ محلياً فقط - تعذر الاتصال بالخادم', 'warning');
+                closeModal('slaModal');
+                renderReports();
+                updateSummary();
+            }
+        }
+
+        async function openSlaSettings() {
+            const openModal = async () => {
+                await loadSLASettingsFromServer();
+                
+                document.getElementById('normalHours').value = Math.floor(SLA_SETTINGS['عادي'] / 60);
+                document.getElementById('normalMinutes').value = SLA_SETTINGS['عادي'] % 60;
+                document.getElementById('mediumHours').value = Math.floor(SLA_SETTINGS['متوسط'] / 60);
+                document.getElementById('mediumMinutes').value = SLA_SETTINGS['متوسط'] % 60;
+                document.getElementById('highHours').value = Math.floor(SLA_SETTINGS['عالي'] / 60);
+                document.getElementById('highMinutes').value = SLA_SETTINGS['عالي'] % 60;
+                document.getElementById('stopHours').value = Math.floor(SLA_SETTINGS['مسار متوقف'] / 60);
+                document.getElementById('stopMinutes').value = SLA_SETTINGS['مسار متوقف'] % 60;
+                document.getElementById('violationHours').value = Math.floor(SLA_SETTINGS['مخالفة تطوير'] / 60);
+                document.getElementById('violationMinutes').value = SLA_SETTINGS['مخالفة تطوير'] % 60;
+                
+                document.getElementById('slaModal').style.display = 'flex';
+            };
+            showPasswordModal(openModal);
         }
 
         // ===== دوال إعدادات الإغلاق التلقائي =====
@@ -1613,7 +1681,7 @@
                 try {
                     AUTO_CLOSE_SETTINGS = JSON.parse(saved);
                 } catch (e) {
-                    console.error('خطأ في تحميل إعدادات الإغلاق التلقائي:', e);
+                    console.error('❌ خطأ في تحميل إعدادات الإغلاق التلقائي:', e);
                 }
             }
         }
@@ -1666,7 +1734,6 @@
             overlay.classList.remove('active');
         }
 
-        // ✅ دالة محسنة لمعالجة الأخطاء
         function handleError(error, context = '') {
             console.error(`❌ خطأ في ${context}:`, error);
             showToast(`حدث خطأ في ${context}: ${error.message}`, 'error');
@@ -1678,7 +1745,6 @@
             }
         }
 
-        // ✅ دالة تحميل البيانات المحسنة
         async function loadReports(silent = false) {
             if (!silent) showLoading('جاري تحديث البيانات...');
             
@@ -1886,7 +1952,6 @@
             });
         }
 
-        // ✅ دالة تنسيق التاريخ والوقت المعدلة
         function formatDateTimeForDisplay(dateTimeStr) {
             if (!dateTimeStr) return '-';
             try {
@@ -1904,7 +1969,7 @@
                 const month = String(date.getMonth() + 1).padStart(2, '0');
                 const day = String(date.getDate()).padStart(2, '0');
                 
-                return `${ampم} ${hours}:${minutes} ${year}-${month}-${day}`;
+                return `${ampm} ${hours}:${minutes} ${year}-${month}-${day}`;
             } catch (e) {
                 console.error('خطأ في تنسيق التاريخ:', e);
                 return dateTimeStr;
@@ -1943,7 +2008,6 @@
             return filtered;
         }
 
-        // ✅ دالة تحديث الإحصائيات المُعدّلة
         function updateSummary() {
             const total = allReports.length;
             const newReports = allReports.filter(r => r['الحالة'] === 'بلاغ جديد').length;
@@ -1975,196 +2039,7 @@
             return d;
         }
 
-        // ===== دالة عرض سجل البلاغات الكامل =====
-        function viewReport() {
-            const reportBody = document.getElementById('reportTableBody');
-            reportBody.innerHTML = '';
-            if (!allReports.length) {
-                reportBody.innerHTML = `
-                    <tr>
-                        <td colspan="11">
-                            <div class="empty-state">
-                                <i class="fas fa-inbox"></i>
-                                <p>لا توجد بلاغات لعرضها</p>
-                            </div>
-                        </td>
-                    </tr>
-                `;
-            } else {
-                allReports.forEach(r => {
-                    const pr = r['مستوى الأهمية'];
-                    let pClass = 'priority-normal';
-                    if (pr === 'عالي') pClass = 'priority-high';
-                    else if (pr === 'متوسط') pClass = 'priority-medium';
-                    else if (pr === 'مسار متوقف') pClass = 'priority-stop';
-                    else if (pr === 'مخالفة تطوير') pClass = 'priority-violation';
-                    const statusInfo = STATE_INFO[r['الحالة']] || { icon: '', class: '' };
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td><input type="checkbox" class="report-checkbox" data-row-id="${r.rowId}"></td>
-                        <td>${r['رقم البلاغ'] || '---'}</td>
-                        <td>${formatDateTimeForDisplay(r['التاريخ'] || r['وقت الإنشاء'] || '')}</td>
-                        <td>${r['رقم الحافلة'] || '-'}</td>
-                        <td>${r['نوع العطل'] || '-'}</td>
-                        <td>${r['الوصف'] || '-'}</td>
-                        <td>
-                            <span class="status-badge ${statusInfo.class}">
-                                ${statusInfo.icon} ${r['الحالة']}
-                            </span>
-                        </td>
-                        <td>${formatDateTimeForDisplay(r['وقت آخر تحديث'] || '')}</td>
-                        <td>${r['وصف الإصلاح / قطع الغيار التي تم تركيبها']?.trim() || '-'}</td>
-                        <td>${r['الملاحظات']?.trim() || '-'}</td>
-                        <td>${r['مدة الإصلاح المتوقعة']?.trim() || '-'}</td>
-                    `;
-                    reportBody.appendChild(tr);
-                });
-            }
-            document.getElementById('reportModal').style.display = 'flex';
-            document.getElementById('reportSearchInput').addEventListener('input', filterReportTable);
-        }
-
-        // ===== دالة تصفية جدول السجل =====
-        function filterReportTable() {
-            const searchTerm = document.getElementById('reportSearchInput').value.toLowerCase();
-            const rows = document.querySelectorAll('#reportTableBody tr');
-            rows.forEach(row => {
-                const cells = row.querySelectorAll('td');
-                const rowText = Array.from(cells).slice(1).map(cell => cell.textContent.toLowerCase()).join(' ');
-                if (rowText.includes(searchTerm)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        }
-
-        // ===== دالة تحديد/إلغاء تحديد الكل =====
-        function toggleSelectAllReports() {
-            const selectAllCheckbox = document.getElementById('selectAllReports');
-            const checkboxes = document.querySelectorAll('#reportTableBody .report-checkbox');
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = selectAllCheckbox.checked;
-            });
-        }
-
-        // ===== دالة تصدير المحدد =====
-        function exportSelectedReports() {
-            const selectedCheckboxes = document.querySelectorAll('#reportTableBody .report-checkbox:checked');
-            if (selectedCheckboxes.length === 0) {
-                showToast('❌ يرجى تحديد بلاغ واحد على الأقل للتصدير', 'warning');
-                return;
-            }
-            const selectedReportIds = Array.from(selectedCheckboxes).map(cb => parseInt(cb.getAttribute('data-row-id'), 10));
-            const selectedReports = allReports.filter(r => selectedReportIds.includes(r.rowId));
-            if (selectedReports.length === 0) {
-                 showToast('❌ لم يتم العثور على البلاغات المحددة', 'error');
-                 return;
-            }
-            try {
-                const ws = XLSX.utils.json_to_sheet(selectedReports.map(report => {
-                    let partsNotesDisplay = report['وصف الإصلاح / قطع الغيار التي تم تركيبها']?.trim() || 'لا يوجد';
-                    let notesDisplay = report['الملاحظات']?.trim() || 'لا يوجد';
-                    return {
-                        'رقم البلاغ': report['رقم البلاغ'] || '',
-                        'التاريخ': formatDateTimeForDisplay(report['التاريخ'] || report['وقت الإنشاء'] || ''),
-                        'رقم الحافلة': report['رقم الحافلة'] || '',
-                        'نوع العطل': report['نوع العطل'] || '',
-                        'الوصف': report['الوصف'] || '',
-                        'الحالة': report['الحالة'] || '',
-                        'وقت آخر تحديث': formatDateTimeForDisplay(report['وقت آخر تحديث'] || ''),
-                        'وصف الإصلاح / قطع الغيار التي تم تركيبها': partsNotesDisplay,
-                        'الملاحظات': notesDisplay,
-                        'مدة الإصلاح المتوقعة': report['مدة الإصلاح المتوقعة']?.trim() || ''
-                    };
-                }));
-                const wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, 'سجل البلاغات');
-                const fileName = `سجل_البلاغات_${new Date().toISOString().split('T')[0]}.xlsx`;
-                XLSX.writeFile(wb, fileName);
-                showToast(' تم تصدير البلاغات المحددة بنجاح', 'success');
-            } catch (error) {
-                console.error('خطأ في تصدير السجل:', error);
-                showToast('❌ فشل في تصدير السجل', 'error');
-            }
-        }
-
-        // ===== دوال تعديل البلاغ =====
-        function requestEditReport(id) {
-            const editAction = () => {
-                editReport(id);
-            };
-            showPasswordModal(editAction);
-        }
-
-        function editReport(id) {
-            const report = allReports.find(r => r.rowId === id);
-            if (!report) {
-                showToast('❌ لم يتم العثور على البلاغ', 'error');
-                return;
-            }
-            currentEditReport = report;
-            document.getElementById('editReportNumber').value = report['رقم البلاغ'] || '';
-            document.getElementById('editDateTime').value = formatDateTimeForDisplay(report['التاريخ'] || report['وقت الإنشاء'] || '');
-            document.getElementById('editBusNumber').value = report['رقم الحافلة'] || '';
-            document.getElementById('editFaultType').value = report['نوع العطل'] || '';
-            document.getElementById('editFaultDescription').value = report['الوصف'] || '';
-            document.getElementById('editPriority').value = report['مستوى الأهمية'] || 'عادي';
-            document.getElementById('editLocation').value = report['الموقع الحالي'] || '';
-            document.getElementById('editCoordinates').value = report['الإحداثيات'] || '';
-            document.getElementById('editMobile').value = report['رقم الجوال'] || '';
-            document.getElementById('editDetailedLocation').value = report['الموقع التفصيلي'] || '';
-            document.getElementById('editExpectedDuration').value = report['مدة الإصلاح المتوقعة'] || '';
-            document.getElementById('editSpareParts').value = report['وصف الإصلاح / قطع الغيار التي تم تركيبها'] || '';
-            document.getElementById('editNotes').value = report['الملاحظات'] || '';
-            document.getElementById('editModal').style.display = 'flex';
-        }
-
-        async function saveEditedReport() {
-            if (!currentEditReport) return;
-            showLoading('جاري حفظ التعديلات...');
-            try {
-                const updatedData = {
-                    rowIndex: currentEditReport.rowId,
-                    reportNumber: document.getElementById('editReportNumber').value,
-                    dateTime: document.getElementById('editDateTime').value,
-                    busNumber: document.getElementById('editBusNumber').value,
-                    faultType: document.getElementById('editFaultType').value,
-                    faultDescription: document.getElementById('editFaultDescription').value,
-                    priority: document.getElementById('editPriority').value,
-                    location: document.getElementById('editLocation').value,
-                    coordinates: document.getElementById('editCoordinates').value,
-                    mobile: document.getElementById('editMobile').value,
-                    detailedLocation: document.getElementById('editDetailedLocation').value,
-                    expectedDuration: document.getElementById('editExpectedDuration').value,
-                    spareParts: document.getElementById('editSpareParts').value,
-                    notes: document.getElementById('editNotes').value
-                };
-                const url = new URL(CONFIG.APPS_SCRIPT_URL);
-                url.searchParams.append('action', 'updateReport');
-                Object.keys(updatedData).forEach(key => {
-                    url.searchParams.append(key, updatedData[key]);
-                });
-                const response = await fetch(url);
-                const result = await response.json();
-                if (result.status === 'success') {
-                    allReports = result.data;
-                    renderReports();
-                    updateSummary();
-                    closeModal('editModal');
-                    showToast(' تم تحديث البلاغ بنجاح', 'success');
-                } else {
-                    throw new Error(result.data);
-                }
-            } catch (error) {
-                console.error('خطأ في تحديث البلاغ:', error);
-                showToast('❌ فشل في تحديث البلاغ', 'error');
-            } finally {
-                hideLoading();
-            }
-        }
-
-        // ===== دوال عرض التفاصيل وتغيير الحالة =====
+        // ===== دوال إضافية =====
         function viewDetails(id) {
             const r = allReports.find(x => x.rowId === id);
             if (!r) return;
@@ -2511,7 +2386,220 @@
             }
         }
 
-        // ===== دالة إرسال واتساب محدثة =====
+        // ===== دوال إضافية =====
+        function requestEditReport(id) {
+            const editAction = () => {
+                editReport(id);
+            };
+            showPasswordModal(editAction);
+        }
+
+        function editReport(id) {
+            const report = allReports.find(r => r.rowId === id);
+            if (!report) {
+                showToast('❌ لم يتم العثور على البلاغ', 'error');
+                return;
+            }
+            currentEditReport = report;
+            document.getElementById('editReportNumber').value = report['رقم البلاغ'] || '';
+            document.getElementById('editDateTime').value = formatDateTimeForDisplay(report['التاريخ'] || report['وقت الإنشاء'] || '');
+            document.getElementById('editBusNumber').value = report['رقم الحافلة'] || '';
+            document.getElementById('editFaultType').value = report['نوع العطل'] || '';
+            document.getElementById('editFaultDescription').value = report['الوصف'] || '';
+            document.getElementById('editPriority').value = report['مستوى الأهمية'] || 'عادي';
+            document.getElementById('editLocation').value = report['الموقع الحالي'] || '';
+            document.getElementById('editCoordinates').value = report['الإحداثيات'] || '';
+            document.getElementById('editMobile').value = report['رقم الجوال'] || '';
+            document.getElementById('editDetailedLocation').value = report['الموقع التفصيلي'] || '';
+            document.getElementById('editExpectedDuration').value = report['مدة الإصلاح المتوقعة'] || '';
+            document.getElementById('editSpareParts').value = report['وصف الإصلاح / قطع الغيار التي تم تركيبها'] || '';
+            document.getElementById('editNotes').value = report['الملاحظات'] || '';
+            document.getElementById('editModal').style.display = 'flex';
+        }
+
+        async function saveEditedReport() {
+            if (!currentEditReport) return;
+            showLoading('جاري حفظ التعديلات...');
+            try {
+                const updatedData = {
+                    rowIndex: currentEditReport.rowId,
+                    reportNumber: document.getElementById('editReportNumber').value,
+                    dateTime: document.getElementById('editDateTime').value,
+                    busNumber: document.getElementById('editBusNumber').value,
+                    faultType: document.getElementById('editFaultType').value,
+                    faultDescription: document.getElementById('editFaultDescription').value,
+                    priority: document.getElementById('editPriority').value,
+                    location: document.getElementById('editLocation').value,
+                    coordinates: document.getElementById('editCoordinates').value,
+                    mobile: document.getElementById('editMobile').value,
+                    detailedLocation: document.getElementById('editDetailedLocation').value,
+                    expectedDuration: document.getElementById('editExpectedDuration').value,
+                    spareParts: document.getElementById('editSpareParts').value,
+                    notes: document.getElementById('editNotes').value
+                };
+                const url = new URL(CONFIG.APPS_SCRIPT_URL);
+                url.searchParams.append('action', 'updateReport');
+                Object.keys(updatedData).forEach(key => {
+                    url.searchParams.append(key, updatedData[key]);
+                });
+                const response = await fetch(url);
+                const result = await response.json();
+                if (result.status === 'success') {
+                    allReports = result.data;
+                    renderReports();
+                    updateSummary();
+                    closeModal('editModal');
+                    showToast(' تم تحديث البلاغ بنجاح', 'success');
+                } else {
+                    throw new Error(result.data);
+                }
+            } catch (error) {
+                console.error('خطأ في تحديث البلاغ:', error);
+                showToast('❌ فشل في تحديث البلاغ', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function requestDeleteReport(id) {
+            const deleteAction = () => {
+                deleteReport(id);
+            };
+            showPasswordModal(deleteAction);
+        }
+
+        async function deleteReport(id) {
+            if (!confirm('⚠️ هل أنت متأكد من حذف هذا البلاغ؟')) return;
+            showLoading('جاري حذف البلاغ...');
+            try {
+                const res = await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=deleteReport&rowIndex=${id}`);
+                const j = await res.json();
+                if (j.status === 'success') {
+                    allReports = j.data;
+                    renderReports();
+                    updateSummary();
+                    showToast(' تم حذف البلاغ', 'success');
+                } else {
+                    throw new Error(j.data);
+                }
+            } catch (e) {
+                console.error('خطأ في حذف البلاغ:', e);
+                showToast('❌ ' + e.message, 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function viewReport() {
+            const reportBody = document.getElementById('reportTableBody');
+            reportBody.innerHTML = '';
+            if (!allReports.length) {
+                reportBody.innerHTML = `
+                    <tr>
+                        <td colspan="11">
+                            <div class="empty-state">
+                                <i class="fas fa-inbox"></i>
+                                <p>لا توجد بلاغات لعرضها</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            } else {
+                allReports.forEach(r => {
+                    const pr = r['مستوى الأهمية'];
+                    let pClass = 'priority-normal';
+                    if (pr === 'عالي') pClass = 'priority-high';
+                    else if (pr === 'متوسط') pClass = 'priority-medium';
+                    else if (pr === 'مسار متوقف') pClass = 'priority-stop';
+                    else if (pr === 'مخالفة تطوير') pClass = 'priority-violation';
+                    const statusInfo = STATE_INFO[r['الحالة']] || { icon: '', class: '' };
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td><input type="checkbox" class="report-checkbox" data-row-id="${r.rowId}"></td>
+                        <td>${r['رقم البلاغ'] || '---'}</td>
+                        <td>${formatDateTimeForDisplay(r['التاريخ'] || r['وقت الإنشاء'] || '')}</td>
+                        <td>${r['رقم الحافلة'] || '-'}</td>
+                        <td>${r['نوع العطل'] || '-'}</td>
+                        <td>${r['الوصف'] || '-'}</td>
+                        <td>
+                            <span class="status-badge ${statusInfo.class}">
+                                ${statusInfo.icon} ${r['الحالة']}
+                            </span>
+                        </td>
+                        <td>${formatDateTimeForDisplay(r['وقت آخر تحديث'] || '')}</td>
+                        <td>${r['وصف الإصلاح / قطع الغيار التي تم تركيبها']?.trim() || '-'}</td>
+                        <td>${r['الملاحظات']?.trim() || '-'}</td>
+                        <td>${r['مدة الإصلاح المتوقعة']?.trim() || '-'}</td>
+                    `;
+                    reportBody.appendChild(tr);
+                });
+            }
+            document.getElementById('reportModal').style.display = 'flex';
+            document.getElementById('reportSearchInput').addEventListener('input', filterReportTable);
+        }
+
+        function filterReportTable() {
+            const searchTerm = document.getElementById('reportSearchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#reportTableBody tr');
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const rowText = Array.from(cells).slice(1).map(cell => cell.textContent.toLowerCase()).join(' ');
+                if (rowText.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function toggleSelectAllReports() {
+            const selectAllCheckbox = document.getElementById('selectAllReports');
+            const checkboxes = document.querySelectorAll('#reportTableBody .report-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+        }
+
+        function exportSelectedReports() {
+            const selectedCheckboxes = document.querySelectorAll('#reportTableBody .report-checkbox:checked');
+            if (selectedCheckboxes.length === 0) {
+                showToast('❌ يرجى تحديد بلاغ واحد على الأقل للتصدير', 'warning');
+                return;
+            }
+            const selectedReportIds = Array.from(selectedCheckboxes).map(cb => parseInt(cb.getAttribute('data-row-id'), 10));
+            const selectedReports = allReports.filter(r => selectedReportIds.includes(r.rowId));
+            if (selectedReports.length === 0) {
+                 showToast('❌ لم يتم العثور على البلاغات المحددة', 'error');
+                 return;
+            }
+            try {
+                const ws = XLSX.utils.json_to_sheet(selectedReports.map(report => {
+                    let partsNotesDisplay = report['وصف الإصلاح / قطع الغيار التي تم تركيبها']?.trim() || 'لا يوجد';
+                    let notesDisplay = report['الملاحظات']?.trim() || 'لا يوجد';
+                    return {
+                        'رقم البلاغ': report['رقم البلاغ'] || '',
+                        'التاريخ': formatDateTimeForDisplay(report['التاريخ'] || report['وقت الإنشاء'] || ''),
+                        'رقم الحافلة': report['رقم الحافلة'] || '',
+                        'نوع العطل': report['نوع العطل'] || '',
+                        'الوصف': report['الوصف'] || '',
+                        'الحالة': report['الحالة'] || '',
+                        'وقت آخر تحديث': formatDateTimeForDisplay(report['وقت آخر تحديث'] || ''),
+                        'وصف الإصلاح / قطع الغيار التي تم تركيبها': partsNotesDisplay,
+                        'الملاحظات': notesDisplay,
+                        'مدة الإصلاح المتوقعة': report['مدة الإصلاح المتوقعة']?.trim() || ''
+                    };
+                }));
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, 'سجل البلاغات');
+                const fileName = `سجل_البلاغات_${new Date().toISOString().split('T')[0]}.xlsx`;
+                XLSX.writeFile(wb, fileName);
+                showToast(' تم تصدير البلاغات المحددة بنجاح', 'success');
+            } catch (error) {
+                console.error('خطأ في تصدير السجل:', error);
+                showToast('❌ فشل في تصدير السجل', 'error');
+            }
+        }
+
         async function sendWhatsApp(id) {
             try {
                 const r = allReports.find(x => x.rowId === id);
@@ -2662,55 +2750,6 @@
             }
         }
 
-        // ===== دوال الإجراءات =====
-        function requestDeleteReport(id) {
-            const deleteAction = () => {
-                deleteReport(id);
-            };
-            showPasswordModal(deleteAction);
-        }
-
-        async function deleteReport(id) {
-            if (!confirm('⚠️ هل أنت متأكد من حذف هذا البلاغ؟')) return;
-            showLoading('جاري حذف البلاغ...');
-            try {
-                const res = await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=deleteReport&rowIndex=${id}`);
-                const j = await res.json();
-                if (j.status === 'success') {
-                    allReports = j.data;
-                    renderReports();
-                    updateSummary();
-                    showToast(' تم حذف البلاغ', 'success');
-                } else {
-                    throw new Error(j.data);
-                }
-            } catch (e) {
-                console.error('خطأ في حذف البلاغ:', e);
-                showToast('❌ ' + e.message, 'error');
-            } finally {
-                hideLoading();
-            }
-        }
-
-        // ===== إعدادات SLA =====
-        function openSlaSettings() {
-            const openModal = () => {
-                document.getElementById('normalHours').value = Math.floor(SLA_SETTINGS['عادي'] / 60);
-                document.getElementById('normalMinutes').value = SLA_SETTINGS['عادي'] % 60;
-                document.getElementById('mediumHours').value = Math.floor(SLA_SETTINGS['متوسط'] / 60);
-                document.getElementById('mediumMinutes').value = SLA_SETTINGS['متوسط'] % 60;
-                document.getElementById('highHours').value = Math.floor(SLA_SETTINGS['عالي'] / 60);
-                document.getElementById('highMinutes').value = SLA_SETTINGS['عالي'] % 60;
-                document.getElementById('stopHours').value = Math.floor(SLA_SETTINGS['مسار متوقف'] / 60);
-                document.getElementById('stopMinutes').value = SLA_SETTINGS['مسار متوقف'] % 60;
-                document.getElementById('violationHours').value = Math.floor(SLA_SETTINGS['مخالفة تطوير'] / 60);
-                document.getElementById('violationMinutes').value = SLA_SETTINGS['مخالفة تطوير'] % 60;
-                document.getElementById('slaModal').style.display = 'flex';
-            };
-            showPasswordModal(openModal);
-        }
-
-        // ✅ دالة تصدير Excel معدلة
         function exportToExcel() {
             if (!allReports.length) {
                 showToast('❌ لا توجد بيانات للتصدير', 'warning');
@@ -2750,7 +2789,6 @@
             }
         }
 
-        // ✅ دالة تصدير سجل البلاغات معدلة
         function exportReport() {
             if (!allReports.length) {
                 showToast('❌ لا توجد بيانات للتصدير', 'warning');
@@ -2812,7 +2850,6 @@
             }, 4000);
         }
 
-        // ✅ دالة التحقق من الاتصال بالإنترنت
         async function checkInternetConnection() {
             try {
                 const response = await fetch('https://www.google.com', { mode: 'no-cors' });
@@ -2826,6 +2863,14 @@
         document.addEventListener('DOMContentLoaded', function() {
             loadLocalSlaSettings();
             loadAutoCloseSettings();
+            
+            setTimeout(() => {
+                loadSLASettingsFromServer().then(() => {
+                    renderReports();
+                    updateSummary();
+                });
+            }, 1000);
+            
             document.getElementById('refreshBtn').addEventListener('click', () => loadReports());
             document.getElementById('viewReportBtn').addEventListener('click', viewReport);
             document.getElementById('searchInput').addEventListener('input', renderReports);
@@ -2833,7 +2878,7 @@
             document.getElementById('priorityFilter').addEventListener('change', renderReports);
             document.getElementById('locationFilter').addEventListener('change', renderReports);
             document.getElementById('slaSettingsBtn').addEventListener('click', openSlaSettings);
-            document.getElementById('saveSlaSettings').addEventListener('click', saveLocalSlaSettings);
+            document.getElementById('saveSlaSettings').addEventListener('click', saveSlaSettings);
             document.getElementById('autoCloseSettingsBtn').addEventListener('click', openAutoCloseSettings);
             document.getElementById('saveAutoCloseSettings').addEventListener('click', saveAutoCloseSettings);
             document.getElementById('exportBusHistoryBtn').addEventListener('click', exportBusHistory);
@@ -2844,6 +2889,7 @@
                     verifyPassword();
                 }
             });
+            
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
                     const modals = document.querySelectorAll('.modal');
@@ -2854,6 +2900,7 @@
                     });
                 }
             });
+            
             document.addEventListener('click', function(e) {
                 const modals = document.querySelectorAll('.modal');
                 modals.forEach(modal => {
@@ -2863,7 +2910,6 @@
                 });
             });
             
-            // ✅ تحديث دالة التحديث التلقائي
             setInterval(async () => {
                 const isOnline = await checkInternetConnection();
                 if (isOnline) {
@@ -2874,7 +2920,6 @@
             loadReports();
         });
 
-        // إضافة معالجة الأخطاء العامة
         window.addEventListener('error', function(e) {
             console.error('❌ خطأ في النظام:', e.error);
             showToast('حدث خطأ في النظام، يرجى تحديث الصفحة', 'error');
