@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
+        /* جميع الأنماط تبقى كما هي */
         :root {
             --primary: #1976d2;
             --primary-dark: #1565c0;
@@ -467,10 +468,6 @@
         }
         .btn-edit { 
             background: linear-gradient(135deg, #ff9800, #f57c00); 
-            color: white; 
-        }
-        .btn-wa { 
-            background: linear-gradient(135deg, #25d366, #128c7e); 
             color: white; 
         }
         .btn-delete { 
@@ -1183,11 +1180,11 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>الساعات</label>
-                            <input type="number" id="highHours" class="form-control" min="0" max="24" value="1">
+                            <input type="number" id="highHours" class="form-control" min="0" max="24" value="1" disabled>
                         </div>
                         <div class="form-group">
                             <label>الدقائق</label>
-                            <input type="number" id="highMinutes" class="form-control" min="0" max="59" value="0">
+                            <input type="number" id="highMinutes" class="form-control" min="0" max="59" value="0" disabled>
                         </div>
                     </div>
                 </div>
@@ -1196,11 +1193,11 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>الساعات</label>
-                            <input type="number" id="mediumHours" class="form-control" min="0" max="24" value="2">
+                            <input type="number" id="mediumHours" class="form-control" min="0" max="24" value="2" disabled>
                         </div>
                         <div class="form-group">
                             <label>الدقائق</label>
-                            <input type="number" id="mediumMinutes" class="form-control" min="0" max="59" value="0">
+                            <input type="number" id="mediumMinutes" class="form-control" min="0" max="59" value="0" disabled>
                         </div>
                     </div>
                 </div>
@@ -1209,11 +1206,11 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>الساعات</label>
-                            <input type="number" id="normalHours" class="form-control" min="0" max="24" value="4">
+                            <input type="number" id="normalHours" class="form-control" min="0" max="24" value="3" disabled>
                         </div>
                         <div class="form-group">
                             <label>الدقائق</label>
-                            <input type="number" id="normalMinutes" class="form-control" min="0" max="59" value="0">
+                            <input type="number" id="normalMinutes" class="form-control" min="0" max="59" value="0" disabled>
                         </div>
                     </div>
                 </div>
@@ -1222,11 +1219,11 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>الساعات</label>
-                            <input type="number" id="stopHours" class="form-control" min="0" max="24" value="0">
+                            <input type="number" id="stopHours" class="form-control" min="0" max="24" value="0" disabled>
                         </div>
                         <div class="form-group">
                             <label>الدقائق</label>
-                            <input type="number" id="stopMinutes" class="form-control" min="0" max="59" value="30">
+                            <input type="number" id="stopMinutes" class="form-control" min="0" max="59" value="40" disabled>
                         </div>
                     </div>
                 </div>
@@ -1235,21 +1232,26 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>الساعات</label>
-                            <input type="number" id="violationHours" class="form-control" min="0" max="24" value="0">
+                            <input type="number" id="violationHours" class="form-control" min="0" max="24" value="8" disabled>
                         </div>
                         <div class="form-group">
                             <label>الدقائق</label>
-                            <input type="number" id="violationMinutes" class="form-control" min="0" max="59" value="15">
+                            <input type="number" id="violationMinutes" class="form-control" min="0" max="59" value="0" disabled>
                         </div>
                     </div>
                 </div>
+                <div style="background: #e3f2fd; padding: 15px; border-radius: var(--radius); margin-top: 20px; border-right: 4px solid var(--primary);">
+                    <p style="color: var(--primary-dark); font-weight: 600; margin: 0;">
+                        <i class="fas fa-info-circle"></i> النظام يعتمد على الإعدادات الافتراضية الثابتة
+                    </p>
+                </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" id="saveSlaSettings">
+                <button class="btn btn-success" id="saveSlaSettings" style="display: none;">
                     <i class="fas fa-save"></i> حفظ الإعدادات
                 </button>
                 <button class="btn btn-danger" onclick="closeModal('slaModal')">
-                    <i class="fas fa-times"></i> إلغاء
+                    <i class="fas fa-times"></i> إغلاق
                 </button>
             </div>
         </div>
@@ -1451,7 +1453,7 @@
     <script>
         // ===== الإعدادات والدوال الأساسية =====
         const CONFIG = {
-            APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxN5s0icdPkZhC8CU7Ilb0GM0ZqisRTyMsdlQthxoeb6ojHC5m5iQNyUzlSxXXCUzNwUA/exec',
+            APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwCp-Dy3RgxrOjmbPf8q6juRI0Egpxc1p6MBwkV7iVRMzxQJZq_wg-8TY-xYr4xSWWX/exec',
             REFRESH_INTERVAL: 30000,
             ADMIN_PASSWORD: '0000'
         };
@@ -1477,13 +1479,16 @@
             'انتظار الموافقة': { icon: '📝', class: 'status-waiting' },
             'مغلق': { icon: '🔒', class: 'status-closed' }
         };
-        let SLA_SETTINGS = {
-            'عادي': 240,
-            'متوسط': 120,
-            'عالي': 60,
-            'مسار متوقف': 30,
-            'مخالفة تطوير': 15
+        
+        // ===== إعدادات SLA الثابتة =====
+        const SLA_SETTINGS = {
+            'عادي': 180,      // 3 ساعات
+            'متوسط': 120,     // 2 ساعة  
+            'عالي': 60,       // 1 ساعة
+            'مسار متوقف': 40,  // 40 دقيقة
+            'مخالفة تطوير': 480 // 8 ساعات
         };
+        
         let AUTO_CLOSE_SETTINGS = {
             closeDays: 1,
             closeHours: 0,
@@ -1538,126 +1543,16 @@
             }
         }
 
-        // ===== دوال إعدادات SLA المحسنة =====
-        function loadLocalSlaSettings() {
-            const saved = localStorage.getItem('slaSettings');
-            if (saved) {
-                try {
-                    SLA_SETTINGS = JSON.parse(saved);
-                    console.log('✅ تم تحميل إعدادات SLA محلية:', SLA_SETTINGS);
-                } catch (e) {
-                    console.error('❌ خطأ في تحميل إعدادات SLA:', e);
-                    SLA_SETTINGS = {
-                        'عادي': 240,
-                        'متوسط': 120,
-                        'عالي': 60,
-                        'مسار متوقف': 30,
-                        'مخالفة تطوير': 15
-                    };
-                }
-            } else {
-                SLA_SETTINGS = {
-                    'عادي': 240,
-                    'متوسط': 120,
-                    'عالي': 60,
-                    'مسار متوقف': 30,
-                    'مخالفة تطوير': 15
-                };
-            }
-        }
-
-        async function loadSLASettingsFromServer() {
-            try {
-                const response = await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=getSLASettings`);
-                const result = await response.json();
-                
-                if (result.status === 'success') {
-                    Object.keys(result.data).forEach(level => {
-                        const settings = result.data[level];
-                        SLA_SETTINGS[level] = settings.totalMinutes || (settings.hours * 60 + settings.minutes);
-                    });
-                    
-                    localStorage.setItem('slaSettings', JSON.stringify(SLA_SETTINGS));
-                    console.log('✅ تم تحميل إعدادات SLA من الخادم:', SLA_SETTINGS);
-                    return true;
-                }
-            } catch (error) {
-                console.error('❌ خطأ في تحميل إعدادات SLA من الخادم:', error);
-                loadLocalSlaSettings();
-            }
-            return false;
-        }
-
-        async function saveSlaSettings() {
-            const normalHours = parseInt(document.getElementById('normalHours').value) || 0;
-            const normalMinutes = parseInt(document.getElementById('normalMinutes').value) || 0;
-            const mediumHours = parseInt(document.getElementById('mediumHours').value) || 0;
-            const mediumMinutes = parseInt(document.getElementById('mediumMinutes').value) || 0;
-            const highHours = parseInt(document.getElementById('highHours').value) || 0;
-            const highMinutes = parseInt(document.getElementById('highMinutes').value) || 0;
-            const stopHours = parseInt(document.getElementById('stopHours').value) || 0;
-            const stopMinutes = parseInt(document.getElementById('stopMinutes').value) || 0;
-            const violationHours = parseInt(document.getElementById('violationHours').value) || 0;
-            const violationMinutes = parseInt(document.getElementById('violationMinutes').value) || 0;
-
-            if (normalHours < 0 || normalMinutes < 0 || normalMinutes > 59 ||
-                mediumHours < 0 || mediumMinutes < 0 || mediumMinutes > 59 ||
-                highHours < 0 || highMinutes < 0 || highMinutes > 59 ||
-                stopHours < 0 || stopMinutes < 0 || stopMinutes > 59 ||
-                violationHours < 0 || violationMinutes < 0 || violationMinutes > 59) {
-                showToast('❌ يرجى إدخال قيم صحيحة للوقت', 'error');
-                return;
-            }
-
-            SLA_SETTINGS = {
-                'عادي': (normalHours * 60) + normalMinutes,
-                'متوسط': (mediumHours * 60) + mediumMinutes,
-                'عالي': (highHours * 60) + highMinutes,
-                'مسار متوقف': (stopHours * 60) + stopMinutes,
-                'مخالفة تطوير': (violationHours * 60) + violationMinutes
-            };
-
-            localStorage.setItem('slaSettings', JSON.stringify(SLA_SETTINGS));
-
-            try {
-                const slaParams = {
-                    'عادي': JSON.stringify({ hours: normalHours, minutes: normalMinutes }),
-                    'متوسط': JSON.stringify({ hours: mediumHours, minutes: mediumMinutes }),
-                    'عالي': JSON.stringify({ hours: highHours, minutes: highMinutes }),
-                    'مسار متوقف': JSON.stringify({ hours: stopHours, minutes: stopMinutes }),
-                    'مخالفة تطوير': JSON.stringify({ hours: violationHours, minutes: violationMinutes })
-                };
-
-                const url = new URL(CONFIG.APPS_SCRIPT_URL);
-                url.searchParams.append('action', 'updateSlaSettings');
-                Object.keys(slaParams).forEach(key => {
-                    url.searchParams.append(key, slaParams[key]);
-                });
-
-                const response = await fetch(url, { method: 'POST' });
-                const result = await response.json();
-
-                if (result.status === 'success') {
-                    showToast('✅ تم حفظ إعدادات SLA على الخادم والمحلي', 'success');
-                    closeModal('slaModal');
-                    renderReports();
-                    updateSummary();
-                } else {
-                    throw new Error(result.data);
-                }
-            } catch (error) {
-                console.error('❌ خطأ في حفظ إعدادات SLA على الخادم:', error);
-                showToast('⚠️ تم الحفظ محلياً فقط - تعذر الاتصال بالخادم', 'warning');
-                closeModal('slaModal');
-                renderReports();
-                updateSummary();
-            }
+        // ===== دوال إعدادات SLA المبسطة =====
+        async function loadSLASettings() {
+            // لا نحتاج لتحميل أي شيء - نستخدم الإعدادات الثابتة
+            console.log('✅ استخدام إعدادات SLA الثابتة:', SLA_SETTINGS);
+            return true;
         }
 
         async function openSlaSettings() {
-            const openModal = async () => {
-                await loadSLASettingsFromServer();
-                
+            const openModal = () => {
+                // تعبئة الحقول بالإعدادات الثابتة
                 document.getElementById('normalHours').value = Math.floor(SLA_SETTINGS['عادي'] / 60);
                 document.getElementById('normalMinutes').value = SLA_SETTINGS['عادي'] % 60;
                 document.getElementById('mediumHours').value = Math.floor(SLA_SETTINGS['متوسط'] / 60);
@@ -1668,6 +1563,12 @@
                 document.getElementById('stopMinutes').value = SLA_SETTINGS['مسار متوقف'] % 60;
                 document.getElementById('violationHours').value = Math.floor(SLA_SETTINGS['مخالفة تطوير'] / 60);
                 document.getElementById('violationMinutes').value = SLA_SETTINGS['مخالفة تطوير'] % 60;
+                
+                // جعل الحقول للقراءة فقط
+                document.querySelectorAll('#slaModal input').forEach(input => {
+                    input.disabled = true;
+                });
+                document.getElementById('saveSlaSettings').style.display = 'none';
                 
                 document.getElementById('slaModal').style.display = 'flex';
             };
@@ -1791,7 +1692,7 @@
             });
         }
 
-        // ===== دوال العد التنازلي =====
+        // ===== دوال العد التنازلي المحسنة =====
         function getCountdownInfo(r) {
             const hideCountdownStates = ['لم يتم الإصلاح', 'مغلق', 'تم الإصلاح', 'انتظار توفر قطع غيار', 'عدم توفر قطع غيار', 'انتظار الموافقة'];
             if (hideCountdownStates.includes(r['الحالة'])) {
@@ -1803,6 +1704,7 @@
                     showCountdown: false 
                 };
             }
+            
             const showCountdownStates = ['تم الاستلام', 'جاري الإصلاح'];
             if (!showCountdownStates.includes(r['الحالة'])) {
                 return { 
@@ -1813,15 +1715,39 @@
                     showCountdown: false 
                 };
             }
+            
             const priority = r['مستوى الأهمية'];
-            const slaTime = SLA_SETTINGS[priority] || 240;
-            const start = new Date(r['وقت آخر تحديث'] || r['وقت الإنشاء']);
-            const diff = (Date.now() - start.getTime()) / 60000;
+            
+            // ✅ استخدام الإعدادات الثابتة مباشرة
+            const slaTime = SLA_SETTINGS[priority] || 180; // افتراضي 3 ساعات
+            
+            // ✅ التصحيح: استخدام وقت آخر تحديث بدلاً من وقت الإنشاء
+            let startTime;
+            if (r['الحالة'] === 'بلاغ جديد') {
+                startTime = new Date(r['وقت الإنشاء']);
+            } else {
+                // للحالات الأخرى، نستخدم وقت آخر تحديث
+                startTime = new Date(r['وقت آخر تحديث'] || r['وقت الإنشاء']);
+            }
+            
+            if (!startTime || isNaN(startTime.getTime())) {
+                return { 
+                    text: '-', 
+                    cls: '', 
+                    rowCls: '', 
+                    progress: 0, 
+                    showCountdown: false 
+                };
+            }
+            
+            const diff = (Date.now() - startTime.getTime()) / 60000;
             const remain = Math.round(slaTime - diff);
             const pct = Math.max(0, Math.min(100, ((slaTime - diff) / slaTime) * 100));
+            
             let color = 'green';
             if (pct <= 50) color = 'orange';
             if (pct <= 10) color = 'red';
+            
             if (remain <= 0) return { 
                 text: '⚠️ متأخر', 
                 cls: 'urgent', 
@@ -1833,6 +1759,7 @@
                 isLate: true,
                 showCountdown: true
             };
+            
             if (remain <= 10) return { 
                 text: `${remain} دقيقة`, 
                 cls: 'warning', 
@@ -1844,6 +1771,7 @@
                 isLate: false,
                 showCountdown: true
             };
+            
             return { 
                 text: `${remain} دقيقة`, 
                 cls: '', 
@@ -1952,30 +1880,44 @@
             });
         }
 
-        function formatDateTimeForDisplay(dateTimeStr) {
-            if (!dateTimeStr) return '-';
-            try {
-                const date = new Date(dateTimeStr);
-                if (isNaN(date.getTime())) return dateTimeStr;
-                
-                let hours = date.getHours();
-                let minutes = date.getMinutes();
-                const ampm = hours >= 12 ? 'م' : 'ص';
-                hours = hours % 12;
-                hours = hours ? hours : 12;
-                minutes = minutes < 10 ? '0' + minutes : minutes;
-                
-                const year = date.getFullYear();
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const day = String(date.getDate()).padStart(2, '0');
-                
-                return `${ampm} ${hours}:${minutes} ${year}-${month}-${day}`;
-            } catch (e) {
-                console.error('خطأ في تنسيق التاريخ:', e);
-                return dateTimeStr;
-            }
+        // ===== الأدوات المساعدة =====
+function formatDateTimeForDisplay(dateTimeStr) {
+    if (!dateTimeStr) return '-';
+    try {
+        const date = new Date(dateTimeStr);
+        if (isNaN(date.getTime())) return dateTimeStr;
+        
+        // استخدام Intl.DateTimeFormat للتنسيق المتوافق مع جميع المتصفحات
+        const formatter = new Intl.DateTimeFormat('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: 'numeric',
+            minute: '2-digit',
+            hour12: true
+        });
+        
+        return formatter.format(date).replace(',', '');
+    } catch (e) {
+        console.error('خطأ في تنسيق التاريخ:', e);
+        // بديل آمن يعمل في جميع المتصفحات
+        try {
+            return new Date(dateTimeStr).toLocaleString('en-US', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            }).replace(',', '');
+        } catch (e2) {
+            return String(dateTimeStr);
         }
-
+    }
+}
+		
+		
+		
         function filterReports() {
             const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
             const statusFilter = document.getElementById('statusFilter')?.value || '';
@@ -2167,9 +2109,6 @@
                         <button class="btn btn-warning" onclick="requestEditReport(${r.rowId})" title="تعديل البلاغ">
                             <i class="fas fa-edit"></i> تعديل
                         </button>
-                        <button class="btn btn-wa" onclick="sendWhatsApp(${r.rowId})" title="إرسال واتساب">
-                            <i class="fab fa-whatsapp"></i> واتساب
-                        </button>
                         <button class="btn btn-danger" onclick="requestDeleteReport(${r.rowId})" title="حذف البلاغ">
                             <i class="fas fa-trash"></i> حذف
                         </button>
@@ -2182,7 +2121,7 @@
 
         function getPriorityClass(priority) {
             switch(priority) {
-                case 'عالي': return 'priority-high';
+                case 'عادي': return 'priority-normal';
                 case 'متوسط': return 'priority-medium';
                 case 'مسار متوقف': return 'priority-stop';
                 case 'مخالفة تطوير': return 'priority-violation';
@@ -2600,156 +2539,6 @@
             }
         }
 
-        async function sendWhatsApp(id) {
-            try {
-                const r = allReports.find(x => x.rowId === id);
-                if (!r) {
-                    showToast('❌ البلاغ غير موجود', 'error');
-                    return;
-                }
-                const timeStr = formatDateTimeForDisplay(r['وقت آخر تحديث'] || r['التاريخ'] || r['وقت الإنشاء'] || '');
-                const locationText = r['الموقع الحالي'] || 'غير محدد';
-                const coordinatesText = r['الإحداثيات'] || '';
-                const isOutside = r['الموقع الحالي']?.startsWith('خارج الكراج');
-                let message = '';
-                switch (r['الحالة']) {
-                    case 'تم الإصلاح':
-                        message = `*✅ تم الإصلاح بنجاح*
-📋 رقم البلاغ: ${r['رقم البلاغ'] || '---'}
-🚍 رقم الحافلة: ${r['رقم الحافلة'] || 'غير معروف'}
-🔧 نوع العطل: ${r['نوع العطل'] || 'غير محدد'}
-📝 الوصف: ${r['الوصف'] || 'لا يوجد'}
-📍 الموقع: ${locationText}`;
-                        if (coordinatesText) {
-                            message += `
-🌐 الإحداثيات: ${coordinatesText}`;
-                        }
-                        if (r['رقم الجوال']) {
-                            message += `
-📱 الجوال: ${r['رقم الجوال']}`;
-                        }
-                        message += `
-⚡ الأهمية: ${r['مستوى الأهمية'] || 'متوسط'}
-📌 الملاحظات: ${r['الملاحظات']?.trim() || 'لا يوجد'}
-🔧 وصف الإصلاح: ${r['وصف الإصلاح / قطع الغيار التي تم تركيبها']?.trim() || 'لا يوجد'}
-⏰ وقت الإصلاح: ${timeStr}
-⚙️ نظام إدارة بلاغات الحافلات`;
-                        break;
-                    case 'لم يتم الإصلاح':
-                        message = `*❌ لم يتم الإصلاح*
-📋 رقم البلاغ: ${r['رقم البلاغ'] || '---'}
-🚍 رقم الحافلة: ${r['رقم الحافلة'] || 'غير معروف'}
-🔧 نوع العطل: ${r['نوع العطل'] || 'غير محدد'}
-📍 الموقع: ${locationText}`;
-                        if (coordinatesText) {
-                            message += `
-🌐 الإحداثيات: ${coordinatesText}`;
-                        }
-                        message += `
-⚡ الأهمية: ${r['مستوى الأهمية'] || 'متوسط'}
-📌 السبب: ${r['الملاحظات']?.trim() || 'غير محدد'}
-⏰ وقت التحديث: ${timeStr}
-⚙️ نظام إدارة بلاغات الحافلات`;
-                        break;
-                    case 'مغلق':
-                        message = `*🔒 البلاغ مغلق*
-📋 رقم البلاغ: ${r['رقم البلاغ'] || '---'}
-🚍 رقم الحافلة: ${r['رقم الحافلة'] || 'غير معروف'}
-📍 الموقع: ${locationText}`;
-                        if (coordinatesText) {
-                            message += `
-🌐 الإحداثيات: ${coordinatesText}`;
-                        }
-                        message += `
-📌 سبب الإغلاق: ${r['الملاحظات']?.trim() || 'تم الإغلاق بعد المراجعة'}
-⏰ وقت الإغلاق: ${timeStr}
-⚙️ نظام إدارة بلاغات الحافلات`;
-                        break;
-                    case 'بلاغ جديد':
-                        if (isOutside) {
-                            message = `*🔔 بلاغ جديد تم تسجيله (خارج الكراج)*
-📋 رقم البلاغ: ${r['رقم البلاغ'] || '---'}
-🚍 رقم الحافلة: ${r['رقم الحافلة'] || 'غير معروف'}
-🔧 نوع العطل: ${r['نوع العطل'] || 'غير محدد'}
-📝 الوصف: ${r['الوصف'] || 'لا يوجد'}
-📍 الموقع الحالي: ${locationText}`;
-                            if (coordinatesText) {
-                                message += `
-🌐 الإحداثيات: ${coordinatesText}`;
-                            }
-                            if (r['رقم الجوال']) {
-                                message += `
-📱 الجوال: ${r['رقم الجوال']}`;
-                            }
-                            message += `
-⚡ الأهمية: ${r['مستوى الأهمية'] || 'غير محدد'}
-⏰ وقت الإنشاء: ${timeStr}
-⚙️ نظام إدارة بلاغات الحافلات`;
-                        } else {
-                            message = `*🔔 بلاغ جديد تم تسجيله (داخل الكراج)*
-📋 رقم البلاغ: ${r['رقم البلاغ'] || '---'}
-🚍 رقم الحافلة: ${r['رقم الحافلة'] || 'غير معروف'}
-🔧 نوع العطل: ${r['نوع العطل'] || 'غير محدد'}
-📝 الوصف: ${r['الوصف'] || 'لا يوجد'}
-⚡ الأهمية: ${r['مستوى الأهمية'] || 'غير محدد'}
-⏰ وقت الإنشاء: ${timeStr}
-⚙️ نظام إدارة بلاغات الحافلات`;
-                        }
-                        break;
-                    case 'جاري الإصلاح':
-                    case 'انتظار توفر قطع غيار':
-                    case 'عدم توفر قطع غيار':
-                    case 'انتظار الموافقة':
-                        message = `*🔄 ${r['الحالة']}*
-📋 رقم البلاغ: ${r['رقم البلاغ'] || '---'}
-🚍 رقم الحافلة: ${r['رقم الحافلة'] || 'غير معروف'}
-🔧 نوع العطل: ${r['نوع العطل'] || 'غير محدد'}
-📍 الموقع: ${locationText}`;
-                        if (coordinatesText) {
-                            message += `
-🌐 الإحداثيات: ${coordinatesText}`;
-                        }
-                        if (r['مدة الإصلاح المتوقعة']?.trim()) {
-                            message += `
-⏱️ المدة المتوقعة: ${r['مدة الإصلاح المتوقعة']}`;
-                        }
-                        if (r['الملاحظات']?.trim()) {
-                            message += `
-📌 الملاحظات: ${r['الملاحظات']}`;
-                        }
-                        message += `
-⏰ آخر تحديث: ${timeStr}
-⚙️ نظام إدارة بلاغات الحافلات`;
-                        break;
-                    default:
-                        message = `*📌 تحديث حالة - ${r['الحالة'] || '---'}*
-📋 رقم البلاغ: ${r['رقم البلاغ'] || '---'}
-🚍 رقم الحافلة: ${r['رقم الحافلة'] || '---'}
-📍 الموقع: ${locationText}`;
-                        if (coordinatesText) {
-                            message += `
-🌐 الإحداثيات: ${coordinatesText}`;
-                        }
-                        message += `
-⏰ وقت التحديث: ${timeStr}
-⚙️ نظام إدارة بلاغات الحافلات`;
-                }
-                if (r['مستوى الأهمية'] === 'عالي' && r['الحالة'] === 'بلاغ جديد') {
-                    message += `
-🚨 تنبيه: هذا بلاغ عالي الأهمية يتطلب إجراء فوري!`;
-                } else if (r['مستوى الأهمية'] === 'مسار متوقف') {
-                    message += `
-🛑 تنبيه: مسار الحافلة متوقف - يتطلب تدخل عاجل!`;
-                }
-                const encodedMessage = encodeURIComponent(message);
-                const url = `https://wa.me/?text=${encodedMessage}`;
-                window.open(url, '_blank');
-            } catch (error) {
-                console.error('خطأ في إرسال واتساب:', error);
-                showToast('❌ حدث خطأ في إعداد الرسالة', 'error');
-            }
-        }
-
         function exportToExcel() {
             if (!allReports.length) {
                 showToast('❌ لا توجد بيانات للتصدير', 'warning');
@@ -2861,15 +2650,9 @@
 
         // ===== تهيئة الأحداث =====
         document.addEventListener('DOMContentLoaded', function() {
-            loadLocalSlaSettings();
+            // استخدام إعدادات SLA الثابتة مباشرة
+            console.log('✅ استخدام إعدادات SLA الثابتة:', SLA_SETTINGS);
             loadAutoCloseSettings();
-            
-            setTimeout(() => {
-                loadSLASettingsFromServer().then(() => {
-                    renderReports();
-                    updateSummary();
-                });
-            }, 1000);
             
             document.getElementById('refreshBtn').addEventListener('click', () => loadReports());
             document.getElementById('viewReportBtn').addEventListener('click', viewReport);
@@ -2878,7 +2661,6 @@
             document.getElementById('priorityFilter').addEventListener('change', renderReports);
             document.getElementById('locationFilter').addEventListener('change', renderReports);
             document.getElementById('slaSettingsBtn').addEventListener('click', openSlaSettings);
-            document.getElementById('saveSlaSettings').addEventListener('click', saveSlaSettings);
             document.getElementById('autoCloseSettingsBtn').addEventListener('click', openAutoCloseSettings);
             document.getElementById('saveAutoCloseSettings').addEventListener('click', saveAutoCloseSettings);
             document.getElementById('exportBusHistoryBtn').addEventListener('click', exportBusHistory);
