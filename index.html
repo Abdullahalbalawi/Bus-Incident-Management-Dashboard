@@ -917,111 +917,241 @@
         }
         @media (max-width: 768px) {
             .container {
-                padding: 15px;
+                padding: 10px;
+            }
+            header {
+                padding: 20px 15px;
             }
             header h1 {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            header p {
+                font-size: 0.9rem;
+            }
+            .security-badge {
+                position: static;
+                margin-bottom: 10px;
+                justify-content: center;
             }
             .summary-grid {
-                grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            .summary-card {
+                padding: 15px 10px;
+                flex-direction: column;
+                text-align: center;
+            }
+            .summary-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            .summary-value {
+                font-size: 1.5rem;
+            }
+            .summary-title {
+                font-size: 0.85rem;
             }
             .detail-grid {
                 grid-template-columns: 1fr;
             }
             .modal-content {
-                padding: 20px;
+                padding: 15px;
+                margin: 10px;
+                max-height: 95vh;
             }
             .action-buttons {
                 gap: 5px;
             }
             .btn-action {
-                width: 38px;
-                height: 38px;
-                font-size: 0.95rem;
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
             }
             .filter-group {
-                flex-wrap: wrap;
+                flex-direction: column;
+                width: 100%;
                 gap: 10px;
             }
             select {
-                min-width: 140px;
+                width: 100%;
+                min-width: unset;
                 font-size: 0.95rem;
+                padding: 12px 15px;
             }
             .controls {
                 flex-direction: column;
                 gap: 12px;
+                padding: 15px;
             }
             .search-box {
                 width: 100%;
                 min-width: unset;
             }
+            .search-box input {
+                padding: 12px 15px 12px 45px;
+            }
             table {
-                font-size: 0.85rem;
-                min-width: 600px;
+                font-size: 0.8rem;
+                min-width: 700px;
             }
             th, td {
-                padding: 10px 8px;
+                padding: 10px 6px;
+            }
+            .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 15px;
             }
         }
         @media (max-width: 480px) {
+            .container {
+                padding: 8px;
+            }
+            header {
+                padding: 15px 10px;
+                border-radius: 6px;
+            }
+            header h1 {
+                font-size: 1.1rem;
+            }
+            header p {
+                font-size: 0.8rem;
+            }
             .form-row {
                 flex-direction: column;
             }
             .controls {
-                padding: 12px;
-                gap: 10px;
+                padding: 10px;
+                gap: 8px;
             }
             .btn {
-                padding: 12px 15px;
-                font-size: 0.9rem;
-                flex: 1;
-                min-width: auto;
+                padding: 10px 12px;
+                font-size: 0.85rem;
+                min-height: 42px;
             }
             table {
-                font-size: 0.75rem;
-                min-width: 500px;
+                font-size: 0.7rem;
+                min-width: 550px;
             }
             th, td {
-                padding: 8px 6px;
+                padding: 8px 4px;
             }
             .summary-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
             }
-            header h1 {
-                font-size: 1.2rem;
+            .summary-card {
+                padding: 12px 8px;
+            }
+            .summary-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            .summary-value {
+                font-size: 1.3rem;
+            }
+            .summary-title {
+                font-size: 0.75rem;
             }
             .modal-content {
-                padding: 15px;
-                width: 95vw !important;
-                max-width: 95vw !important;
+                padding: 12px;
+                width: 98vw !important;
+                max-width: 98vw !important;
+                margin: 5px;
+                border-radius: 6px;
+            }
+            .modal-header {
+                padding-bottom: 12px;
+                margin-bottom: 15px;
+            }
+            .modal-title {
+                font-size: 1.1rem;
             }
             .search-box input {
-                padding: 10px 15px 10px 40px;
-                font-size: 0.9rem;
+                padding: 10px 12px 10px 38px;
+                font-size: 0.85rem;
             }
             .search-box i {
                 left: 12px;
-                font-size: 1rem;
-            }
-            .filter-group {
-                flex-direction: column;
+                font-size: 0.95rem;
             }
             select {
-                width: 100%;
-                min-width: unset;
+                padding: 10px 12px;
+                font-size: 0.85rem;
             }
             .btn-action {
-                width: 36px;
-                height: 36px;
-                font-size: 0.85rem;
+                width: 32px;
+                height: 32px;
+                font-size: 0.8rem;
             }
             #pageNumberControls {
                 flex-wrap: wrap;
                 justify-content: center;
+                gap: 3px;
+            }
+            #pageNumberControls button {
+                padding: 6px 10px !important;
+                font-size: 0.8rem !important;
+                min-width: 32px !important;
             }
             .status-badge {
-                padding: 6px 10px;
+                padding: 4px 8px;
+                font-size: 0.7rem;
+            }
+            .detail-section {
+                padding: 15px;
+            }
+            .detail-item {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .detail-label {
+                min-width: unset;
+                font-size: 0.85rem;
+            }
+            .detail-value {
+                font-size: 0.85rem;
+            }
+            .progress-bar {
+                height: 10px;
+            }
+            .countdown {
                 font-size: 0.75rem;
+            }
+        }
+        @media (max-width: 360px) {
+            .container {
+                padding: 5px;
+            }
+            header h1 {
+                font-size: 1rem;
+            }
+            .summary-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 5px;
+            }
+            .summary-card {
+                padding: 10px 5px;
+            }
+            .summary-value {
+                font-size: 1.1rem;
+            }
+            table {
+                font-size: 0.65rem;
+                min-width: 450px;
+            }
+            th, td {
+                padding: 6px 3px;
+            }
+            .btn-action {
+                width: 28px;
+                height: 28px;
+                font-size: 0.7rem;
             }
         }
     </style>
@@ -1156,7 +1286,7 @@
                 </button>
             </div>
         </div>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 10px; background: white; border-radius: var(--radius);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 10px; background: white; border-radius: var(--radius); flex-wrap: wrap; gap: 10px;">
             <div style="color: var(--primary); font-weight: 600; font-size: 1rem;">
                 <i class="fas fa-list"></i> <span id="totalResultsCount">0</span> عدد النتائج
             </div>
@@ -1184,14 +1314,13 @@
                 </tbody>
             </table>
         </div>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding: 10px; background: white; border-radius: var(--radius);">
-            <div style="color: var(--gray); font-size: 0.9rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding: 10px; background: white; border-radius: var(--radius); flex-wrap: wrap; gap: 10px;">
+            <div style="color: var(--gray); font-size: 0.9rem; flex: 1; min-width: 200px;">
                 عرض <span id="pageStartItem">0</span> إلى <span id="pageEndItem">0</span> من <span id="totalRecordsCount">0</span> سجل
             </div>
-            <div style="display: flex; gap: 15px; align-items: center;">
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <label for="itemsPerPageSelect" style="color: var(--gray); font-size: 0.9rem;">عدد الصفوف:</label>
-                    <select id="itemsPerPageSelect" style="padding: 8px 12px; border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-family: 'Cairo', sans-serif;" onchange="changeItemsPerPage(this.value)">
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: flex-end;">
+                <div style="display: flex; align-items: center; gap: 5px;">
+                    <select id="itemsPerPageSelect" style="padding: 8px 12px; border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-family: 'Cairo', sans-serif; font-size: 0.9rem;" onchange="changeItemsPerPage(this.value)">
                         <option value="5">5</option>
                         <option value="10" selected>10</option>
                         <option value="20">20</option>
@@ -1199,7 +1328,7 @@
                         <option value="100">100</option>
                     </select>
                 </div>
-                <div id="pageNumberControls" style="display: flex; gap: 5px; align-items: center;"></div>
+                <div id="pageNumberControls" style="display: flex; gap: 5px; align-items: center; flex-wrap: wrap;"></div>
             </div>
         </div>
     </div>
