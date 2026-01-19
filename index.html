@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>نظام إدارة بلاغات الحافلات - لوحة التحكم</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -26,35 +26,82 @@
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             --radius: 8px;
             --transition: all 0.3s ease;
+            /* متغيرات الوضع الفاتح */
+            --bg-body: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --bg-card: #ffffff;
+            --bg-table-even: #f8f9fa;
+            --bg-table-odd: #ffffff;
+            --bg-table-hover: linear-gradient(90deg, #e3f2fd, #f5f5f5);
+            --text-primary: #333;
+            --text-secondary: #6c757d;
+            --bg-header: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            --bg-controls: #ffffff;
+            --bg-input: #ffffff;
+            --border-input: #dee2e6;
+            --bg-modal: #ffffff;
+            --bg-detail: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            --th-bg: linear-gradient(135deg, var(--primary-light), #bbdefb);
+            --th-color: var(--primary-dark);
+        }
+        /* الوضع الداكن */
+        [data-theme="dark"] {
+            --bg-body: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --bg-card: #1e1e2f;
+            --bg-table-even: #252538;
+            --bg-table-odd: #1e1e2f;
+            --bg-table-hover: linear-gradient(90deg, #2d2d44, #252538);
+            --text-primary: #e4e4e7;
+            --text-secondary: #a1a1aa;
+            --bg-header: linear-gradient(135deg, #0f3460, #16213e);
+            --bg-controls: #1e1e2f;
+            --bg-input: #252538;
+            --border-input: #3f3f5a;
+            --bg-modal: #1e1e2f;
+            --bg-detail: linear-gradient(135deg, #252538, #1e1e2f);
+            --th-bg: linear-gradient(135deg, #0f3460, #1a1a2e);
+            --th-color: #60a5fa;
+            --primary-light: #1e3a5f;
+            --border: #3f3f5a;
+            --dark: #e4e4e7;
+            --light: #1e1e2f;
+            --gray: #a1a1aa;
         }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
         body {
             font-family: 'Cairo', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: var(--dark);
+            background: var(--bg-body);
+            color: var(--text-primary);
             line-height: 1.6;
-            font-size: 16px;
+            font-size: 1rem;
             min-height: 100vh;
+            min-height: 100dvh;
+            transition: background 0.3s ease, color 0.3s ease;
         }
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
+            padding: clamp(10px, 3vw, 20px);
+            width: 100%;
         }
         header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: var(--bg-header);
             color: white;
-            padding: 30px 25px;
+            padding: clamp(15px, 4vw, 30px) clamp(15px, 3vw, 25px);
             border-radius: var(--radius);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: clamp(15px, 3vw, 25px);
             position: relative;
             overflow: hidden;
+            transition: background 0.3s ease;
         }
         header::before {
             content: '';
@@ -72,35 +119,36 @@
             50% { transform: translateY(-20px); }
         }
         header h1 {
-            font-size: 2rem;
+            font-size: clamp(1.1rem, 4vw, 2rem);
             margin-bottom: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: clamp(8px, 2vw, 12px);
             position: relative;
             z-index: 1;
+            flex-wrap: wrap;
         }
         header p {
             opacity: 0.95;
-            font-size: 1.1rem;
+            font-size: clamp(0.85rem, 2.5vw, 1.1rem);
             position: relative;
             z-index: 1;
         }
         .summary-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(min(140px, 45%), 1fr));
+            gap: clamp(8px, 2vw, 15px);
+            margin-bottom: clamp(15px, 3vw, 25px);
         }
         .summary-card {
-            background: white;
+            background: var(--bg-card);
             border-radius: var(--radius);
-            padding: 20px;
+            padding: clamp(12px, 2.5vw, 20px);
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: clamp(10px, 2vw, 15px);
             transition: var(--transition);
             border: 2px solid transparent;
         }
@@ -110,29 +158,31 @@
             border-color: var(--primary-light);
         }
         .summary-icon {
-            width: 60px;
-            height: 60px;
+            width: clamp(40px, 10vw, 60px);
+            height: clamp(40px, 10vw, 60px);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: clamp(1rem, 3vw, 1.5rem);
             transition: var(--transition);
+            flex-shrink: 0;
         }
         .summary-card:hover .summary-icon {
             transform: rotate(360deg);
         }
         .summary-content {
             flex: 1;
+            min-width: 0;
         }
         .summary-title {
-            font-size: 0.95rem;
-            color: var(--gray);
+            font-size: clamp(0.75rem, 2vw, 0.95rem);
+            color: var(--text-secondary);
             margin-bottom: 5px;
             font-weight: 600;
         }
         .summary-value {
-            font-size: 1.8rem;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
             font-weight: 700;
         }
         .new .summary-icon { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
@@ -143,30 +193,33 @@
         .duplicate .summary-icon { background: linear-gradient(135deg, #30cfd0, #330867); color: white; }
         .total .summary-icon { background: linear-gradient(135deg, #a8edea, #fed6e3); color: white; }
         .controls {
-            background: white;
+            background: var(--bg-controls);
             border-radius: var(--radius);
-            padding: 20px;
+            padding: clamp(12px, 3vw, 20px);
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            margin-bottom: 20px;
+            margin-bottom: clamp(15px, 3vw, 20px);
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
             align-items: center;
             justify-content: space-between;
+            transition: background 0.3s ease;
         }
         .search-box {
-            flex: 1;
-            min-width: 250px;
+            flex: 1 1 250px;
+            min-width: 0;
             position: relative;
         }
         .search-box input {
             width: 100%;
-            padding: 14px 18px 14px 50px;
-            border: 2px solid var(--border);
+            padding: clamp(10px, 2vw, 14px) clamp(12px, 2vw, 18px) clamp(10px, 2vw, 14px) clamp(40px, 8vw, 50px);
+            border: 2px solid var(--border-input);
             border-radius: var(--radius);
             font-family: 'Cairo', sans-serif;
-            font-size: 1rem;
+            font-size: clamp(0.85rem, 2vw, 1rem);
             transition: var(--transition);
+            background: var(--bg-input);
+            color: var(--text-primary);
         }
         .search-box input:focus {
             outline: none;
@@ -175,27 +228,29 @@
         }
         .search-box i {
             position: absolute;
-            left: 18px;
+            left: clamp(12px, 2vw, 18px);
             top: 50%;
             transform: translateY(-50%);
             color: var(--gray);
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
         }
         .filter-group {
             display: flex;
-            gap: 10px;
+            gap: clamp(8px, 2vw, 10px);
             flex-wrap: wrap;
-            flex: 1;
-            min-width: 300px;
+            flex: 1 1 300px;
+            min-width: 0;
         }
         select {
-            padding: 14px 18px;
-            border: 2px solid var(--border);
+            padding: clamp(10px, 2vw, 14px) clamp(12px, 2vw, 18px);
+            border: 2px solid var(--border-input);
             border-radius: var(--radius);
             font-family: 'Cairo', sans-serif;
-            background: white;
-            min-width: 150px;
-            font-size: 1rem;
+            background: var(--bg-input);
+            color: var(--text-primary);
+            min-width: 0;
+            flex: 1 1 130px;
+            font-size: clamp(0.85rem, 2vw, 1rem);
             transition: var(--transition);
             cursor: pointer;
             max-width: 100%;
@@ -209,21 +264,24 @@
             box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
         }
         .btn {
-            padding: 14px 24px;
+            padding: clamp(10px, 2vw, 14px) clamp(15px, 3vw, 24px);
             border: none;
             border-radius: var(--radius);
             cursor: pointer;
             font-family: 'Cairo', sans-serif;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            gap: clamp(5px, 1vw, 8px);
             transition: var(--transition);
-            font-size: 1rem;
+            font-size: clamp(0.85rem, 2vw, 1rem);
             font-weight: 600;
-            min-height: 48px;
+            min-height: clamp(40px, 8vw, 48px);
             position: relative;
             overflow: hidden;
             white-space: nowrap;
+            flex: 1 1 auto;
+            min-width: 0;
         }
         .btn::before {
             content: '';
@@ -274,13 +332,14 @@
             box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
         }
         .table-container {
-            background: white;
+            background: var(--bg-card);
             border-radius: var(--radius);
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
             overflow: hidden;
             margin-bottom: 20px;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
+            transition: background 0.3s ease;
         }
         table {
             width: 100%;
@@ -293,19 +352,20 @@
             border-bottom: 1px solid var(--border);
             text-align: right;
             vertical-align: middle;
+            color: var(--text-primary);
         }
         tr {
             transition: var(--transition);
         }
         tr:nth-child(even) {
-            background: #f8f9fa;
+            background: var(--bg-table-even);
         }
         tr:nth-child(odd) {
-            background: #ffffff;
+            background: var(--bg-table-odd);
         }
         th {
-            background: linear-gradient(135deg, var(--primary-light), #bbdefb);
-            color: var(--primary-dark);
+            background: var(--th-bg);
+            color: var(--th-color);
             font-weight: 700;
             position: sticky;
             top: 0;
@@ -313,7 +373,7 @@
             z-index: 10;
         }
         tr:hover {
-            background: linear-gradient(90deg, #e3f2fd, #f5f5f5) !important;
+            background: var(--bg-table-hover) !important;
             transform: scale(1.01);
         }
         .priority-high { 
@@ -550,7 +610,7 @@
             to { opacity: 1; }
         }
         .modal-content {
-            background: white;
+            background: var(--bg-modal);
             padding: 30px;
             border-radius: 12px;
             width: 100%;
@@ -559,6 +619,8 @@
             max-height: 90vh;
             overflow-y: auto;
             animation: slideUp 0.3s ease;
+            color: var(--text-primary);
+            transition: background 0.3s ease;
         }
         @keyframes slideUp {
             from { 
@@ -638,10 +700,12 @@
         .password-input-group input {
             width: 100%;
             padding: 14px 50px 14px 18px;
-            border: 2px solid var(--border);
+            border: 2px solid var(--border-input);
             border-radius: var(--radius);
             font-size: 1.1rem;
             transition: var(--transition);
+            background: var(--bg-input);
+            color: var(--text-primary);
         }
         .password-input-group input:focus {
             outline: none;
@@ -685,17 +749,19 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: var(--dark);
+            color: var(--text-primary);
             font-size: 0.95rem;
         }
         .form-control {
             width: 100%;
             padding: 12px 16px;
-            border: 2px solid var(--border);
+            border: 2px solid var(--border-input);
             border-radius: var(--radius);
             font-family: 'Cairo', sans-serif;
             font-size: 1rem;
             transition: var(--transition);
+            background: var(--bg-input);
+            color: var(--text-primary);
         }
         .form-control:focus {
             outline: none;
@@ -756,7 +822,7 @@
             margin-bottom: 20px;
         }
         .detail-section {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            background: var(--bg-detail);
             padding: 22px;
             border-radius: var(--radius);
             border-right: 4px solid var(--primary);
@@ -781,7 +847,7 @@
             align-items: flex-start;
             margin-bottom: 14px;
             padding-bottom: 14px;
-            border-bottom: 1px solid #dee2e6;
+            border-bottom: 1px solid var(--border);
         }
         .detail-item:last-child {
             border-bottom: none;
@@ -790,19 +856,19 @@
         }
         .detail-label {
             font-weight: 600;
-            color: var(--dark);
+            color: var(--text-primary);
             min-width: 140px;
             font-size: 0.95rem;
         }
         .detail-value {
-            color: var(--gray);
+            color: var(--text-secondary);
             text-align: left;
             flex: 1;
             font-size: 0.95rem;
             line-height: 1.6;
         }
         .sla-level {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            background: var(--bg-detail);
             border-radius: var(--radius);
             padding: 22px;
             margin-bottom: 20px;
@@ -826,10 +892,10 @@
             align-items: center;
             gap: 12px;
             font-size: 1.15rem;
-            color: var(--dark);
+            color: var(--text-primary);
         }
         .auto-close-section {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            background: var(--bg-detail);
             border-radius: var(--radius);
             padding: 22px;
             margin-bottom: 20px;
@@ -848,12 +914,12 @@
             align-items: center;
             gap: 12px;
             font-size: 1.15rem;
-            color: var(--dark);
+            color: var(--text-primary);
         }
         .empty-state {
             text-align: center;
             padding: 60px 20px;
-            color: var(--gray);
+            color: var(--text-secondary);
         }
         .empty-state i {
             font-size: 4rem;
@@ -915,248 +981,508 @@
         .notes-field.active {
             opacity: 1;
         }
-        @media (max-width: 768px) {
+        /* زر تبديل الوضع الداكن */
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            font-size: 1.4rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            z-index: 9998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+        .theme-toggle .fa-sun {
+            display: none;
+        }
+        .theme-toggle .fa-moon {
+            display: block;
+        }
+        [data-theme="dark"] .theme-toggle {
+            background: linear-gradient(135deg, #ffd700, #ff9800);
+        }
+        [data-theme="dark"] .theme-toggle .fa-sun {
+            display: block;
+            color: #1a1a2e;
+        }
+        [data-theme="dark"] .theme-toggle .fa-moon {
+            display: none;
+        }
+        /* تحسينات للشاشات الكبيرة */
+        @media (min-width: 1400px) {
             .container {
-                padding: 10px;
+                max-width: 1600px;
+            }
+            .summary-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+            table {
+                font-size: 1rem;
+            }
+            th, td {
+                padding: 18px 15px;
+            }
+        }
+        /* تحسينات للطباعة */
+        @media print {
+            .controls, .action-buttons, .loading-overlay, .toast, .modal {
+                display: none !important;
+            }
+            .container {
+                max-width: 100%;
+                padding: 0;
+            }
+            table {
+                min-width: auto;
+                font-size: 10pt;
+            }
+            th, td {
+                padding: 5px 8px;
+                border: 1px solid #ccc;
+            }
+            .summary-grid {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 10px;
+            }
+        }
+        /* تحسينات للأجهزة اللوحية في الوضع الأفقي */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .summary-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .controls {
+                flex-wrap: wrap;
+            }
+            .filter-group {
+                flex: 1 1 100%;
+            }
+        }
+        @media (max-width: 768px) {
+            .theme-toggle {
+                width: clamp(45px, 12vw, 55px);
+                height: clamp(45px, 12vw, 55px);
+                font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+                bottom: 20px;
+                left: 20px;
+            }
+            .container {
+                padding: clamp(8px, 2vw, 15px);
             }
             header {
-                padding: 20px 15px;
+                padding: clamp(15px, 4vw, 25px) clamp(10px, 3vw, 20px);
             }
             header h1 {
-                font-size: 1.3rem;
+                font-size: clamp(1.1rem, 4vw, 1.4rem);
                 flex-wrap: wrap;
                 justify-content: center;
+                gap: 8px;
             }
             header p {
-                font-size: 0.9rem;
+                font-size: clamp(0.8rem, 2.5vw, 1rem);
             }
             .security-badge {
                 position: static;
                 margin-bottom: 10px;
                 justify-content: center;
+                font-size: clamp(0.75rem, 2vw, 0.9rem);
             }
             .summary-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
+                gap: clamp(8px, 2vw, 12px);
             }
             .summary-card {
-                padding: 15px 10px;
+                padding: clamp(12px, 3vw, 18px) clamp(8px, 2vw, 12px);
                 flex-direction: column;
                 text-align: center;
+                min-height: auto;
             }
             .summary-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
+                width: clamp(40px, 10vw, 55px);
+                height: clamp(40px, 10vw, 55px);
+                font-size: clamp(1rem, 3vw, 1.3rem);
+                margin: 0 auto 8px auto;
             }
             .summary-value {
-                font-size: 1.5rem;
+                font-size: clamp(1.3rem, 5vw, 1.8rem);
             }
             .summary-title {
-                font-size: 0.85rem;
+                font-size: clamp(0.75rem, 2.5vw, 0.95rem);
             }
             .detail-grid {
                 grid-template-columns: 1fr;
             }
             .modal-content {
-                padding: 15px;
-                margin: 10px;
+                padding: clamp(12px, 3vw, 20px);
+                margin: clamp(5px, 2vw, 15px);
                 max-height: 95vh;
+                width: calc(100% - clamp(10px, 4vw, 30px));
             }
             .action-buttons {
-                gap: 5px;
+                gap: clamp(4px, 1vw, 8px);
             }
             .btn-action {
-                width: 36px;
-                height: 36px;
-                font-size: 0.9rem;
+                width: clamp(32px, 8vw, 40px);
+                height: clamp(32px, 8vw, 40px);
+                font-size: clamp(0.8rem, 2.5vw, 1rem);
+                min-width: clamp(32px, 8vw, 40px);
             }
             .filter-group {
                 flex-direction: column;
                 width: 100%;
-                gap: 10px;
+                gap: clamp(8px, 2vw, 12px);
             }
             select {
                 width: 100%;
                 min-width: unset;
-                font-size: 0.95rem;
-                padding: 12px 15px;
+                font-size: clamp(0.85rem, 2.5vw, 1rem);
+                padding: clamp(10px, 2.5vw, 14px) clamp(12px, 3vw, 18px);
             }
             .controls {
                 flex-direction: column;
-                gap: 12px;
-                padding: 15px;
+                gap: clamp(10px, 2.5vw, 15px);
+                padding: clamp(12px, 3vw, 18px);
             }
             .search-box {
                 width: 100%;
                 min-width: unset;
             }
             .search-box input {
-                padding: 12px 15px 12px 45px;
+                padding: clamp(10px, 2.5vw, 14px) clamp(12px, 3vw, 18px) clamp(10px, 2.5vw, 14px) clamp(38px, 10vw, 50px);
+                font-size: clamp(0.85rem, 2.5vw, 1rem);
+            }
+            .search-box i {
+                left: clamp(12px, 3vw, 18px);
+                font-size: clamp(0.9rem, 2.5vw, 1.1rem);
             }
             table {
-                font-size: 0.8rem;
-                min-width: 700px;
+                font-size: clamp(0.7rem, 2vw, 0.85rem);
+                min-width: 650px;
             }
             th, td {
-                padding: 10px 6px;
+                padding: clamp(8px, 2vw, 12px) clamp(5px, 1.5vw, 8px);
             }
             .btn {
                 width: 100%;
                 justify-content: center;
-                padding: 12px 15px;
+                padding: clamp(10px, 2.5vw, 14px) clamp(12px, 3vw, 18px);
+                font-size: clamp(0.85rem, 2.5vw, 1rem);
+            }
+            .status-badge {
+                padding: clamp(5px, 1.5vw, 8px) clamp(8px, 2vw, 14px);
+                font-size: clamp(0.7rem, 2vw, 0.85rem);
+            }
+            #pageNumberControls {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: clamp(3px, 1vw, 6px);
+            }
+            #pageNumberControls button {
+                padding: clamp(6px, 1.5vw, 10px) clamp(8px, 2vw, 14px) !important;
+                font-size: clamp(0.75rem, 2vw, 0.9rem) !important;
+                min-width: clamp(30px, 8vw, 40px) !important;
+            }
+            .results-count {
+                font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+            }
+            .form-control {
+                padding: clamp(10px, 2.5vw, 14px) clamp(12px, 3vw, 18px);
+                font-size: clamp(0.9rem, 2.5vw, 1rem);
             }
         }
         @media (max-width: 480px) {
+            .theme-toggle {
+                width: clamp(40px, 11vw, 48px);
+                height: clamp(40px, 11vw, 48px);
+                font-size: clamp(1rem, 3vw, 1.2rem);
+                bottom: 15px;
+                left: 15px;
+            }
             .container {
-                padding: 8px;
+                padding: clamp(5px, 1.5vw, 10px);
             }
             header {
-                padding: 15px 10px;
-                border-radius: 6px;
+                padding: clamp(12px, 3vw, 18px) clamp(8px, 2vw, 12px);
+                border-radius: clamp(6px, 1.5vw, 10px);
             }
             header h1 {
-                font-size: 1.1rem;
+                font-size: clamp(0.95rem, 4vw, 1.2rem);
             }
             header p {
-                font-size: 0.8rem;
+                font-size: clamp(0.7rem, 2.5vw, 0.85rem);
             }
             .form-row {
                 flex-direction: column;
             }
             .controls {
-                padding: 10px;
-                gap: 8px;
+                padding: clamp(8px, 2vw, 12px);
+                gap: clamp(6px, 2vw, 10px);
             }
             .btn {
-                padding: 10px 12px;
-                font-size: 0.85rem;
-                min-height: 42px;
+                padding: clamp(8px, 2vw, 12px) clamp(10px, 2.5vw, 15px);
+                font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+                min-height: clamp(38px, 10vw, 45px);
             }
             table {
-                font-size: 0.7rem;
-                min-width: 550px;
+                font-size: clamp(0.6rem, 2vw, 0.75rem);
+                min-width: 500px;
             }
             th, td {
-                padding: 8px 4px;
+                padding: clamp(6px, 1.5vw, 10px) clamp(3px, 1vw, 6px);
+            }
+            th {
+                font-size: clamp(0.65rem, 2vw, 0.8rem);
             }
             .summary-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
+                gap: clamp(5px, 1.5vw, 10px);
             }
             .summary-card {
-                padding: 12px 8px;
+                padding: clamp(10px, 2.5vw, 15px) clamp(6px, 1.5vw, 10px);
             }
             .summary-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
+                width: clamp(35px, 9vw, 45px);
+                height: clamp(35px, 9vw, 45px);
+                font-size: clamp(0.9rem, 2.5vw, 1.1rem);
             }
             .summary-value {
-                font-size: 1.3rem;
+                font-size: clamp(1.1rem, 4vw, 1.5rem);
             }
             .summary-title {
-                font-size: 0.75rem;
+                font-size: clamp(0.65rem, 2vw, 0.8rem);
             }
             .modal-content {
-                padding: 12px;
-                width: 98vw !important;
-                max-width: 98vw !important;
-                margin: 5px;
-                border-radius: 6px;
+                padding: clamp(10px, 2.5vw, 15px);
+                width: 96vw !important;
+                max-width: 96vw !important;
+                margin: clamp(3px, 1vw, 8px);
+                border-radius: clamp(6px, 1.5vw, 10px);
             }
             .modal-header {
-                padding-bottom: 12px;
-                margin-bottom: 15px;
+                padding-bottom: clamp(10px, 2.5vw, 15px);
+                margin-bottom: clamp(12px, 3vw, 18px);
             }
             .modal-title {
-                font-size: 1.1rem;
+                font-size: clamp(0.95rem, 3.5vw, 1.2rem);
+            }
+            .close-btn {
+                width: clamp(32px, 8vw, 40px);
+                height: clamp(32px, 8vw, 40px);
+                font-size: clamp(1.3rem, 4vw, 1.6rem);
             }
             .search-box input {
-                padding: 10px 12px 10px 38px;
-                font-size: 0.85rem;
+                padding: clamp(8px, 2vw, 12px) clamp(10px, 2.5vw, 15px) clamp(8px, 2vw, 12px) clamp(32px, 9vw, 42px);
+                font-size: clamp(0.8rem, 2.5vw, 0.9rem);
             }
             .search-box i {
-                left: 12px;
-                font-size: 0.95rem;
+                left: clamp(10px, 2.5vw, 15px);
+                font-size: clamp(0.85rem, 2.5vw, 1rem);
             }
             select {
-                padding: 10px 12px;
-                font-size: 0.85rem;
+                padding: clamp(8px, 2vw, 12px) clamp(10px, 2.5vw, 15px);
+                font-size: clamp(0.8rem, 2.5vw, 0.9rem);
             }
             .btn-action {
-                width: 32px;
-                height: 32px;
-                font-size: 0.8rem;
+                width: clamp(28px, 7vw, 36px);
+                height: clamp(28px, 7vw, 36px);
+                font-size: clamp(0.7rem, 2vw, 0.85rem);
+                min-width: clamp(28px, 7vw, 36px);
             }
             #pageNumberControls {
                 flex-wrap: wrap;
                 justify-content: center;
-                gap: 3px;
+                gap: clamp(2px, 0.8vw, 5px);
             }
             #pageNumberControls button {
-                padding: 6px 10px !important;
-                font-size: 0.8rem !important;
-                min-width: 32px !important;
+                padding: clamp(5px, 1.2vw, 8px) clamp(7px, 1.8vw, 12px) !important;
+                font-size: clamp(0.7rem, 2vw, 0.85rem) !important;
+                min-width: clamp(28px, 7vw, 36px) !important;
             }
             .status-badge {
-                padding: 4px 8px;
-                font-size: 0.7rem;
+                padding: clamp(3px, 1vw, 6px) clamp(6px, 1.5vw, 10px);
+                font-size: clamp(0.6rem, 1.8vw, 0.75rem);
+                gap: clamp(3px, 1vw, 5px);
             }
             .detail-section {
-                padding: 15px;
+                padding: clamp(12px, 3vw, 18px);
             }
             .detail-item {
                 flex-direction: column;
-                gap: 5px;
+                gap: clamp(4px, 1vw, 8px);
             }
             .detail-label {
                 min-width: unset;
-                font-size: 0.85rem;
+                font-size: clamp(0.8rem, 2.5vw, 0.9rem);
             }
             .detail-value {
-                font-size: 0.85rem;
+                font-size: clamp(0.8rem, 2.5vw, 0.9rem);
             }
             .progress-bar {
-                height: 10px;
+                height: clamp(8px, 2vw, 12px);
             }
             .countdown {
-                font-size: 0.75rem;
+                font-size: clamp(0.65rem, 2vw, 0.8rem);
+            }
+            .form-control {
+                padding: clamp(8px, 2vw, 12px) clamp(10px, 2.5vw, 15px);
+                font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+            }
+            .form-group label {
+                font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+                margin-bottom: clamp(5px, 1.5vw, 8px);
+            }
+            .results-count {
+                font-size: clamp(0.75rem, 2vw, 0.9rem);
+                padding: clamp(8px, 2vw, 12px);
+            }
+            .toast {
+                right: clamp(10px, 3vw, 20px);
+                bottom: clamp(15px, 4vw, 25px);
+                left: clamp(10px, 3vw, 20px);
+                min-width: auto;
+                font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+                padding: clamp(12px, 3vw, 18px);
             }
         }
         @media (max-width: 360px) {
             .container {
-                padding: 5px;
+                padding: clamp(3px, 1vw, 6px);
             }
             header h1 {
-                font-size: 1rem;
+                font-size: clamp(0.85rem, 4vw, 1rem);
+            }
+            header h1 i {
+                font-size: clamp(1rem, 4vw, 1.2rem);
+            }
+            header p {
+                font-size: clamp(0.65rem, 2.2vw, 0.75rem);
             }
             .summary-grid {
                 grid-template-columns: 1fr 1fr;
-                gap: 5px;
+                gap: clamp(4px, 1.2vw, 8px);
             }
             .summary-card {
-                padding: 10px 5px;
+                padding: clamp(8px, 2vw, 12px) clamp(4px, 1vw, 8px);
+            }
+            .summary-icon {
+                width: clamp(30px, 8vw, 38px);
+                height: clamp(30px, 8vw, 38px);
+                font-size: clamp(0.8rem, 2.2vw, 0.95rem);
             }
             .summary-value {
-                font-size: 1.1rem;
+                font-size: clamp(0.95rem, 3.5vw, 1.2rem);
+            }
+            .summary-title {
+                font-size: clamp(0.6rem, 1.8vw, 0.72rem);
             }
             table {
-                font-size: 0.65rem;
-                min-width: 450px;
+                font-size: clamp(0.55rem, 1.8vw, 0.68rem);
+                min-width: 420px;
             }
             th, td {
-                padding: 6px 3px;
+                padding: clamp(5px, 1.2vw, 8px) clamp(2px, 0.8vw, 4px);
+            }
+            th {
+                font-size: clamp(0.58rem, 1.8vw, 0.7rem);
             }
             .btn-action {
-                width: 28px;
-                height: 28px;
-                font-size: 0.7rem;
+                width: clamp(24px, 6.5vw, 30px);
+                height: clamp(24px, 6.5vw, 30px);
+                font-size: clamp(0.6rem, 1.8vw, 0.75rem);
+                min-width: clamp(24px, 6.5vw, 30px);
+            }
+            .action-buttons {
+                gap: clamp(2px, 0.8vw, 5px);
+            }
+            .controls {
+                padding: clamp(6px, 1.5vw, 10px);
+                gap: clamp(5px, 1.5vw, 8px);
+            }
+            .btn {
+                padding: clamp(7px, 1.8vw, 10px) clamp(8px, 2vw, 12px);
+                font-size: clamp(0.72rem, 2.2vw, 0.85rem);
+                min-height: clamp(34px, 9vw, 42px);
+            }
+            select {
+                padding: clamp(7px, 1.8vw, 10px) clamp(8px, 2vw, 12px);
+                font-size: clamp(0.72rem, 2.2vw, 0.85rem);
+            }
+            .search-box input {
+                padding: clamp(7px, 1.8vw, 10px) clamp(8px, 2vw, 12px) clamp(7px, 1.8vw, 10px) clamp(28px, 8vw, 38px);
+                font-size: clamp(0.72rem, 2.2vw, 0.85rem);
+            }
+            .search-box i {
+                left: clamp(8px, 2vw, 12px);
+                font-size: clamp(0.75rem, 2vw, 0.9rem);
+            }
+            .status-badge {
+                padding: clamp(2px, 0.8vw, 4px) clamp(4px, 1.2vw, 8px);
+                font-size: clamp(0.5rem, 1.5vw, 0.65rem);
+                gap: clamp(2px, 0.6vw, 4px);
+            }
+            .status-badge i {
+                font-size: clamp(0.5rem, 1.5vw, 0.6rem);
+            }
+            #pageNumberControls button {
+                padding: clamp(4px, 1vw, 7px) clamp(6px, 1.5vw, 10px) !important;
+                font-size: clamp(0.65rem, 1.8vw, 0.8rem) !important;
+                min-width: clamp(24px, 6.5vw, 32px) !important;
+            }
+            .modal-content {
+                padding: clamp(8px, 2vw, 12px);
+                margin: clamp(2px, 0.8vw, 5px);
+            }
+            .modal-title {
+                font-size: clamp(0.85rem, 3vw, 1.05rem);
+            }
+            .detail-section {
+                padding: clamp(10px, 2.5vw, 15px);
+            }
+            .detail-section h4 {
+                font-size: clamp(0.85rem, 2.8vw, 1rem);
+                margin-bottom: clamp(10px, 2.5vw, 15px);
+            }
+            .detail-label {
+                font-size: clamp(0.72rem, 2.2vw, 0.85rem);
+            }
+            .detail-value {
+                font-size: clamp(0.72rem, 2.2vw, 0.85rem);
+            }
+            .countdown {
+                font-size: clamp(0.58rem, 1.8vw, 0.72rem);
+            }
+            .results-count {
+                font-size: clamp(0.68rem, 1.8vw, 0.82rem);
+                padding: clamp(6px, 1.5vw, 10px);
+            }
+            .form-control {
+                padding: clamp(7px, 1.8vw, 10px) clamp(8px, 2vw, 12px);
+                font-size: clamp(0.78rem, 2.2vw, 0.9rem);
+            }
+            .form-group label {
+                font-size: clamp(0.72rem, 2.2vw, 0.85rem);
             }
         }
     </style>
 </head>
 <body>
+    <!-- زر تبديل الوضع الداكن -->
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="تبديل الوضع الداكن">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+    </button>
     <!-- شاشة التحميل -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner"></div>
@@ -1379,7 +1705,7 @@
     <!-- Modal لعرض سجل أعطال الحافلة -->
     <div class="modal" id="busHistoryModal">
         <div class="modal-content modal-fullscreen">
-            <div class="modal-header" style="position: sticky; top: 0; background: white; z-index: 10; border-bottom: 2px solid var(--border);">
+            <div class="modal-header" style="position: sticky; top: 0; background: var(--bg-modal); z-index: 10; border-bottom: 2px solid var(--border);">
                 <h3 class="modal-title"><i class="fas fa-history"></i> سجل أعطال الحافلة <span id="busHistoryTitle"></span></h3>
                 <button class="close-btn" onclick="closeModal('busHistoryModal')">&times;</button>
             </div>
@@ -1545,7 +1871,7 @@
     <!-- Modal لعرض سجل البلاغات الكامل -->
     <div class="modal" id="reportModal">
         <div class="modal-content modal-fullscreen">
-            <div class="modal-header" style="position: sticky; top: 0; background: white; z-index: 10; border-bottom: 2px solid var(--border);">
+            <div class="modal-header" style="position: sticky; top: 0; background: var(--bg-modal); z-index: 10; border-bottom: 2px solid var(--border);">
                 <h3 class="modal-title"><i class="fas fa-history"></i> سجل البلاغات</h3>
                 <button class="close-btn" onclick="closeModal('reportModal')">&times;</button>
             </div>
@@ -1682,6 +2008,36 @@
         <source src="https://assets.mixkit.co/active_storage/sfx/110/110-preview.mp3" type="audio/mpeg">
     </audio>
     <script>
+        // ===== وظائف الوضع الداكن =====
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } else if (prefersDark) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        }
+        
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // تأثير بصري عند التبديل
+            const btn = document.getElementById('themeToggle');
+            btn.style.transform = 'scale(1.2) rotate(360deg)';
+            setTimeout(() => {
+                btn.style.transform = '';
+            }, 300);
+        }
+        
+        // تطبيق الوضع المحفوظ عند تحميل الصفحة
+        initTheme();
+        
         // ===== الإعدادات والدوال الأساسية =====
         const CONFIG = {
             APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwCp-Dy3RgxrOjmbPf8q6juRI0Egpxc1p6MBwkV7iVRMzxQJZq_wg-8TY-xYr4xSWWX/exec',
