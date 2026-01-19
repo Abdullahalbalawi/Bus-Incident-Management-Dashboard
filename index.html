@@ -152,6 +152,7 @@
             flex-wrap: wrap;
             gap: 15px;
             align-items: center;
+            justify-content: space-between;
         }
         .search-box {
             flex: 1;
@@ -184,6 +185,8 @@
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
+            flex: 1;
+            min-width: 300px;
         }
         select {
             padding: 14px 18px;
@@ -195,6 +198,7 @@
             font-size: 1rem;
             transition: var(--transition);
             cursor: pointer;
+            max-width: 100%;
         }
         select:hover {
             border-color: var(--primary-light);
@@ -219,6 +223,7 @@
             min-height: 48px;
             position: relative;
             overflow: hidden;
+            white-space: nowrap;
         }
         .btn::before {
             content: '';
@@ -275,6 +280,7 @@
             overflow: hidden;
             margin-bottom: 20px;
             overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
         table {
             width: 100%;
@@ -933,23 +939,89 @@
                 height: 38px;
                 font-size: 0.95rem;
             }
+            .filter-group {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            select {
+                min-width: 140px;
+                font-size: 0.95rem;
+            }
+            .controls {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .search-box {
+                width: 100%;
+                min-width: unset;
+            }
+            table {
+                font-size: 0.85rem;
+                min-width: 600px;
+            }
+            th, td {
+                padding: 10px 8px;
+            }
         }
         @media (max-width: 480px) {
             .form-row {
                 flex-direction: column;
             }
             .controls {
-                padding: 15px;
+                padding: 12px;
+                gap: 10px;
             }
             .btn {
-                padding: 12px 20px;
-                font-size: 0.95rem;
+                padding: 12px 15px;
+                font-size: 0.9rem;
+                flex: 1;
+                min-width: auto;
             }
             table {
-                font-size: 0.85rem;
+                font-size: 0.75rem;
+                min-width: 500px;
             }
             th, td {
-                padding: 10px 8px;
+                padding: 8px 6px;
+            }
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            header h1 {
+                font-size: 1.2rem;
+            }
+            .modal-content {
+                padding: 15px;
+                width: 95vw !important;
+                max-width: 95vw !important;
+            }
+            .search-box input {
+                padding: 10px 15px 10px 40px;
+                font-size: 0.9rem;
+            }
+            .search-box i {
+                left: 12px;
+                font-size: 1rem;
+            }
+            .filter-group {
+                flex-direction: column;
+            }
+            select {
+                width: 100%;
+                min-width: unset;
+            }
+            .btn-action {
+                width: 36px;
+                height: 36px;
+                font-size: 0.85rem;
+            }
+            #pageNumberControls {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .status-badge {
+                padding: 6px 10px;
+                font-size: 0.75rem;
             }
         }
     </style>
