@@ -916,14 +916,47 @@
             header h1 {
                 font-size: 1.5rem;
             }
+            header p {
+                font-size: 0.9rem;
+            }
             .summary-grid {
-                grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 10px;
+            }
+            .summary-value {
+                font-size: 1.5rem;
+            }
+            .summary-title {
+                font-size: 0.85rem;
+            }
+            .controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .search-box {
+                width: 100%;
+                min-width: auto;
+            }
+            .filter-group {
+                width: 100%;
+                flex-direction: column;
+            }
+            .filter-group select {
+                width: 100%;
+                min-width: auto;
+            }
+            .filter-group .btn {
+                width: 100%;
             }
             .detail-grid {
                 grid-template-columns: 1fr;
             }
             .modal-content {
                 padding: 20px;
+                max-width: 95%;
+            }
+            .modal-large, .modal-wide {
+                max-width: 95%;
             }
             .action-buttons {
                 gap: 5px;
@@ -933,23 +966,105 @@
                 height: 38px;
                 font-size: 0.95rem;
             }
+            .table-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            table {
+                font-size: 0.85rem;
+                min-width: 800px;
+            }
+            th, td {
+                padding: 10px 6px;
+                font-size: 0.85rem;
+            }
+            .status-badge {
+                font-size: 0.75rem;
+                padding: 6px 10px;
+            }
         }
         @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.2rem;
+                flex-direction: column;
+                gap: 5px;
+            }
+            header p {
+                font-size: 0.85rem;
+            }
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            .summary-card {
+                padding: 12px;
+                gap: 8px;
+            }
+            .summary-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+            .summary-value {
+                font-size: 1.3rem;
+            }
+            .summary-title {
+                font-size: 0.75rem;
+            }
             .form-row {
                 flex-direction: column;
             }
             .controls {
-                padding: 15px;
+                padding: 10px;
             }
             .btn {
-                padding: 12px 20px;
-                font-size: 0.95rem;
+                padding: 12px 16px;
+                font-size: 0.9rem;
             }
             table {
-                font-size: 0.85rem;
+                font-size: 0.75rem;
+                min-width: 700px;
             }
             th, td {
-                padding: 10px 8px;
+                padding: 8px 4px;
+                font-size: 0.75rem;
+            }
+            .modal-content {
+                padding: 15px;
+                max-width: 98%;
+            }
+            .modal-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .modal-title {
+                font-size: 1.2rem;
+            }
+            .close-btn {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+            }
+            #pageNumberControls button {
+                padding: 6px 8px;
+                font-size: 0.85rem;
+                min-width: 35px;
+            }
+            #itemsPerPageSelect {
+                padding: 6px 8px;
+                font-size: 0.85rem;
+            }
+        }
+        @media (max-width: 360px) {
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+            header h1 {
+                font-size: 1.1rem;
+            }
+            .summary-value {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -1052,6 +1167,7 @@
                     <option value="عدم توفر قطع غيار">عدم توفر قطع غيار</option>
                     <option value="انتظار الموافقة">انتظار الموافقة</option>
                     <option value="متأخر">متأخر</option>
+                    <option value="مكررة">مكررة</option>
                 </select>
                 <select id="priorityFilter">
                     <option value="">جميع المستويات</option>
@@ -1060,6 +1176,9 @@
                     <option value="عالي">عالي</option>
                     <option value="مسار متوقف">مسار متوقف</option>
                     <option value="مخالفة تطوير">مخالفة تطوير</option>
+                </select>
+                <select id="faultTypeFilter">
+                    <option value="">جميع أنواع الأعطال</option>
                 </select>
                 <select id="locationFilter">
                     <option value="">جميع المواقع</option>
@@ -1080,10 +1199,18 @@
                 </button>
             </div>
         </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 10px; background: white; border-radius: var(--radius);">
+            <div style="color: var(--primary); font-weight: 600; font-size: 1rem;">
+                <i class="fas fa-list"></i> <span id="totalResultsCount">0</span> عدد النتائج
+            </div>
+        </div>
         <div class="table-container">
             <table id="reportsTable">
                 <thead>
                     <tr>
+                        <th style="width: 40px;">
+                            <input type="checkbox" id="selectAllReportsMain" onclick="toggleSelectAllMain()" style="cursor: pointer;">
+                        </th>
                         <th>رقم البلاغ</th>
                         <th>التاريخ</th>
                         <th>رقم الحافلة</th>
@@ -1099,6 +1226,24 @@
                     <!-- البيانات سيتم تحميلها هنا -->
                 </tbody>
             </table>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding: 10px; background: white; border-radius: var(--radius);">
+            <div style="color: var(--gray); font-size: 0.9rem;">
+                عرض <span id="pageStartItem">0</span> إلى <span id="pageEndItem">0</span> من <span id="totalRecordsCount">0</span> سجل
+            </div>
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <label for="itemsPerPageSelect" style="color: var(--gray); font-size: 0.9rem;">عدد الصفوف:</label>
+                    <select id="itemsPerPageSelect" style="padding: 8px 12px; border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-family: 'Cairo', sans-serif;" onchange="changeItemsPerPage(this.value)">
+                        <option value="5">5</option>
+                        <option value="10" selected>10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <div id="pageNumberControls" style="display: flex; gap: 5px; align-items: center;"></div>
+            </div>
         </div>
     </div>
     <!-- Modal للتحقق من كلمة المرور -->
@@ -1466,7 +1611,8 @@
             'مغلق': [],
             'انتظار توفر قطع غيار': ['جاري الإصلاح', 'لم يتم الإصلاح', 'تم الإصلاح', 'مغلق'],
             'عدم توفر قطع غيار': ['جاري الإصلاح', 'لم يتم الإصلاح', 'تم الإصلاح', 'مغلق'],
-            'انتظار الموافقة': ['جاري الإصلاح', 'لم يتم الإصلاح', 'تم الإصلاح', 'مغلق']
+            'انتظار الموافقة': ['جاري الإصلاح', 'لم يتم الإصلاح', 'تم الإصلاح', 'مغلق'],
+            'مكررة': ['تم الاستلام']
         };
         const STATE_INFO = {
             'بلاغ جديد': { icon: '🆕', class: 'status-new' },
@@ -1477,7 +1623,8 @@
             'انتظار توفر قطع غيار': { icon: '⏳', class: 'status-waiting' },
             'عدم توفر قطع غيار': { icon: '🚫', class: 'status-waiting' },
             'انتظار الموافقة': { icon: '📝', class: 'status-waiting' },
-            'مغلق': { icon: '🔒', class: 'status-closed' }
+            'مغلق': { icon: '🔒', class: 'status-closed' },
+            'مكررة': { icon: '📑', class: 'status-waiting' }
         };
         
         // ===== إعدادات SLA الثابتة =====
@@ -1496,12 +1643,16 @@
             archiveHours: 0
         };
         let allReports = [];
+        let filteredReports = [];
         let selectedRow = null;
         let alertedReports = new Set();
-        let monthlyDuplicates = {};
+        let busFaultCounts = {};
         let pendingAction = null;
         let currentBusHistory = [];
         let currentEditReport = null;
+        let selectedReportsMain = new Set();
+        let currentPage = 1;
+        let itemsPerPage = 10;
 
         // ===== دوال الأمان =====
         function showPasswordModal(action) {
@@ -1661,11 +1812,12 @@
                 
                 if (data.status === 'success') {
                     allReports = data.data;
-                    calculateMonthlyDuplicates();
+                    calculateBusFaultCounts();
+                    populateFaultTypeFilter();
                     renderReports();
                     updateSummary();
                     checkAlerts();
-                    if (!silent) showToast('✅ تم تحميل البيانات بنجاح', 'success');
+                    if (!silent) showToast(' تم تحميل البيانات بنجاح', 'success');
                 } else {
                     throw new Error(data.data || 'خطأ غير معروف من الخادم');
                 }
@@ -1678,23 +1830,47 @@
         }
 
         // ===== دوال معالجة البيانات =====
-        function calculateMonthlyDuplicates() {
-            monthlyDuplicates = {};
-            const currentMonth = new Date().getMonth();
-            const currentYear = new Date().getFullYear();
+        function calculateBusFaultCounts() {
+            // عدّ إجمالي الأعطال لكل حافلة بدون تقييد بالشهر لضمان دقة الإحصائية الحمراء
+            busFaultCounts = {};
             allReports.forEach(report => {
                 const busNumber = report['رقم الحافلة'];
                 if (!busNumber) return;
-                const reportDate = new Date(report['التاريخ'] || report['وقت الإنشاء']);
-                if (reportDate.getMonth() === currentMonth && reportDate.getFullYear() === currentYear) {
-                    monthlyDuplicates[busNumber] = (monthlyDuplicates[busNumber] || 0) + 1;
+                busFaultCounts[busNumber] = (busFaultCounts[busNumber] || 0) + 1;
+            });
+        }
+
+        function populateFaultTypeFilter() {
+            const faultTypeFilter = document.getElementById('faultTypeFilter');
+            if (!faultTypeFilter) return;
+            
+            // جمع جميع أنواع الأعطال الفريدة
+            const faultTypes = new Set();
+            allReports.forEach(report => {
+                const faultType = report['نوع العطل'];
+                if (faultType && faultType.trim()) {
+                    faultTypes.add(faultType.trim());
                 }
+            });
+            
+            // ترتيب أنواع الأعطال أبجدياً
+            const sortedFaultTypes = Array.from(faultTypes).sort();
+            
+            // مسح الخيارات الحالية والاحتفاظ بالخيار الافتراضي
+            faultTypeFilter.innerHTML = '<option value="">جميع أنواع الأعطال</option>';
+            
+            // إضافة أنواع الأعطال
+            sortedFaultTypes.forEach(faultType => {
+                const option = document.createElement('option');
+                option.value = faultType;
+                option.textContent = faultType;
+                faultTypeFilter.appendChild(option);
             });
         }
 
         // ===== دوال العد التنازلي المحسنة =====
         function getCountdownInfo(r) {
-            const hideCountdownStates = ['لم يتم الإصلاح', 'مغلق', 'تم الإصلاح', 'انتظار توفر قطع غيار', 'عدم توفر قطع غيار', 'انتظار الموافقة'];
+            const hideCountdownStates = ['لم يتم الإصلاح', 'مغلق', 'تم الإصلاح', 'انتظار توفر قطع غيار', 'عدم توفر قطع غيار', 'انتظار الموافقة', 'مكررة'];
             if (hideCountdownStates.includes(r['الحالة'])) {
                 return { 
                     text: '-', 
@@ -1811,10 +1987,36 @@
             if (!body) return;
             body.innerHTML = '';
             
-            if (!allReports.length) {
+            filteredReports = filterReports();
+            
+            // ترتيب من الأحدث إلى الأقدم
+            filteredReports.sort((a, b) => {
+                const dateA = new Date(a['التاريخ'] || a['وقت الإنشاء'] || 0);
+                const dateB = new Date(b['التاريخ'] || b['وقت الإنشاء'] || 0);
+                return dateB - dateA; // من الأحدث إلى الأقدم
+            });
+            
+            // تحديث عدد النتائج
+            document.getElementById('totalResultsCount').innerText = filteredReports.length;
+            document.getElementById('totalRecordsCount').innerText = filteredReports.length;
+            
+            // حساب الصفحات
+            const totalPages = Math.ceil(filteredReports.length / itemsPerPage);
+            const startIdx = (currentPage - 1) * itemsPerPage;
+            const endIdx = Math.min(startIdx + itemsPerPage, filteredReports.length);
+            const pageReports = filteredReports.slice(startIdx, endIdx);
+            
+            // تحديث نطاق العناصر
+            document.getElementById('pageStartItem').innerText = filteredReports.length > 0 ? startIdx + 1 : 0;
+            document.getElementById('pageEndItem').innerText = endIdx;
+            
+            // إنشاء أزرار الترقيم
+            generatePaginationButtons(totalPages);
+            
+            if (!pageReports.length) {
                 body.innerHTML = `
                     <tr>
-                        <td colspan="9">
+                        <td colspan="10">
                             <div class="empty-state">
                                 <i class="fas fa-inbox"></i>
                                 <p>لا توجد بلاغات لعرضها</p>
@@ -1828,8 +2030,7 @@
                 return;
             }
 
-            const filteredReports = filterReports();
-            filteredReports.forEach(r => {
+            pageReports.forEach(r => {
                 const c = getCountdownInfo(r);
                 let finalClass = '';
                 if (['تم الإصلاح', 'مغلق'].includes(r['الحالة'])) {
@@ -1848,14 +2049,17 @@
                 const tr = document.createElement('tr');
                 tr.className = finalClass;
                 tr.innerHTML = `
+                    <td style="width: 40px;">
+                        <input type="checkbox" class="report-checkbox-main" data-row-id="${r.rowId}" onclick="updateSelectAllMain()" style="cursor: pointer;">
+                    </td>
                     <td>${r['رقم البلاغ'] || '---'}</td>
                     <td>${formattedDate}</td>
                     <td>
                         <span class="bus-number-link" onclick="showBusHistory('${r['رقم الحافلة']}')">
                             ${r['رقم الحافلة'] || '-'}
                         </span>
-                        ${monthlyDuplicates[r['رقم الحافلة']] > 1 ? 
-                            `<span style="color: #d32f2f; font-size: 0.8rem; margin-right: 5px;" title="عدد الأعطال هذا الشهر">(${monthlyDuplicates[r['رقم الحافلة']]})</span>` : ''}
+                        ${busFaultCounts[r['رقم الحافلة']] > 1 ? 
+                            `<span style="color: #d32f2f; font-size: 0.8rem; margin-right: 5px;" title="إجمالي الأعطال المسجلة لهذه الحافلة">(${busFaultCounts[r['رقم الحافلة']]})</span>` : ''}
                     </td>
                     <td>${r['نوع العطل'] || '-'}</td>
                     <td>${r['الوصف'] || '-'}</td>
@@ -1922,6 +2126,7 @@ function formatDateTimeForDisplay(dateTimeStr) {
             const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
             const statusFilter = document.getElementById('statusFilter')?.value || '';
             const priorityFilter = document.getElementById('priorityFilter')?.value || '';
+            const faultTypeFilter = document.getElementById('faultTypeFilter')?.value || '';
             const locationFilter = document.getElementById('locationFilter')?.value || '';
             let filtered = allReports;
             if (searchTerm) {
@@ -1937,6 +2142,20 @@ function formatDateTimeForDisplay(dateTimeStr) {
                         const countdownInfo = getCountdownInfo(r);
                         return countdownInfo.isLate;
                     });
+                } else if (statusFilter === 'مكررة') {
+                    // إظهار المكررة: سجل واحد لكل حافلة لها أكثر من عطل
+                    filtered = filtered.filter(r => busFaultCounts[r['رقم الحافلة']] > 1);
+                    
+                    // إزالة التكرارات - الاحتفاظ بأول سجل لكل حافلة فقط
+                    const seenBuses = new Set();
+                    filtered = filtered.filter(r => {
+                        const busNumber = r['رقم الحافلة'];
+                        if (seenBuses.has(busNumber)) {
+                            return false;
+                        }
+                        seenBuses.add(busNumber);
+                        return true;
+                    });
                 } else {
                     filtered = filtered.filter(r => r['الحالة'] === statusFilter);
                 }
@@ -1944,8 +2163,12 @@ function formatDateTimeForDisplay(dateTimeStr) {
             if (priorityFilter) {
                 filtered = filtered.filter(r => r['مستوى الأهمية'] === priorityFilter);
             }
+            if (faultTypeFilter) {
+                filtered = filtered.filter(r => r['نوع العطل'] === faultTypeFilter);
+            }
             if (locationFilter) {
-                filtered = filtered.filter(r => r['الموقع الحالي'].startsWith(locationFilter));
+                // حماية من القيم الفارغة حتى لا يحدث خطأ startsWith على undefined
+                filtered = filtered.filter(r => r['الموقع الحالي']?.startsWith(locationFilter));
             }
             return filtered;
         }
@@ -1979,6 +2202,91 @@ function formatDateTimeForDisplay(dateTimeStr) {
             });
             for (const k in f) if (f[k] > 1) d++;
             return d;
+        }
+
+        // ===== دوال الترقيم والاختيار =====
+        function generatePaginationButtons(totalPages) {
+            const container = document.getElementById('pageNumberControls');
+            container.innerHTML = '';
+            
+            if (totalPages <= 1) return;
+            
+            // زر السابق
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'btn btn-secondary';
+            prevBtn.style.cssText = 'padding: 8px 12px; font-size: 0.9rem;';
+            prevBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            prevBtn.onclick = () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderReports();
+                }
+            };
+            prevBtn.disabled = currentPage === 1;
+            container.appendChild(prevBtn);
+            
+            // أزرار الأرقام
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.className = currentPage === i ? 'btn btn-primary' : 'btn btn-secondary';
+                btn.style.cssText = 'padding: 8px 12px; font-size: 0.9rem; min-width: 40px;';
+                btn.innerText = i;
+                btn.onclick = () => {
+                    currentPage = i;
+                    renderReports();
+                };
+                container.appendChild(btn);
+            }
+            
+            // زر التالي
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'btn btn-secondary';
+            nextBtn.style.cssText = 'padding: 8px 12px; font-size: 0.9rem;';
+            nextBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            nextBtn.onclick = () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderReports();
+                }
+            };
+            nextBtn.disabled = currentPage === totalPages;
+            container.appendChild(nextBtn);
+        }
+
+        function toggleSelectAllMain() {
+            const selectAllCheckbox = document.getElementById('selectAllReportsMain');
+            const checkboxes = document.querySelectorAll('.report-checkbox-main');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = selectAllCheckbox.checked;
+                const rowId = parseInt(checkbox.getAttribute('data-row-id'), 10);
+                if (selectAllCheckbox.checked) {
+                    selectedReportsMain.add(rowId);
+                } else {
+                    selectedReportsMain.delete(rowId);
+                }
+            });
+        }
+
+        function updateSelectAllMain() {
+            const checkboxes = document.querySelectorAll('.report-checkbox-main');
+            const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+            const selectAllCheckbox = document.getElementById('selectAllReportsMain');
+            selectAllCheckbox.checked = checkedCount === checkboxes.length && checkboxes.length > 0;
+            
+            // تحديث المجموعة المختارة
+            selectedReportsMain.clear();
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const rowId = parseInt(checkbox.getAttribute('data-row-id'), 10);
+                    selectedReportsMain.add(rowId);
+                }
+            });
+        }
+
+        function changeItemsPerPage(value) {
+            itemsPerPage = parseInt(value, 10);
+            currentPage = 1; // العودة للصفحة الأولى
+            renderReports();
         }
 
         // ===== دوال إضافية =====
@@ -2074,12 +2382,12 @@ function formatDateTimeForDisplay(dateTimeStr) {
                         <span class="detail-value" style="background: #e8f5e9; padding: 10px; border-radius: 5px; border-right: 3px solid #4caf50;">${notesDisplay}</span>
                     </div>
                 </div>
-                ${monthlyDuplicates[r['رقم الحافلة']] > 1 ? `
+                ${busFaultCounts[r['رقم الحافلة']] > 1 ? `
                 <div class="detail-section">
                     <h4><i class="fas fa-chart-bar"></i> الإحصائيات</h4>
                     <div class="detail-item">
-                        <span class="detail-label">عدد الأعطال هذا الشهر:</span>
-                        <span class="detail-value" style="color: #d32f2f; font-weight: bold;">${monthlyDuplicates[r['رقم الحافلة']]} عطل</span>
+                        <span class="detail-label">إجمالي الأعطال المسجلة:</span>
+                        <span class="detail-value" style="color: #d32f2f; font-weight: bold;">${busFaultCounts[r['رقم الحافلة']]} عطل</span>
                     </div>
                 </div>
                 ` : ''}
@@ -2659,6 +2967,7 @@ function formatDateTimeForDisplay(dateTimeStr) {
             document.getElementById('searchInput').addEventListener('input', renderReports);
             document.getElementById('statusFilter').addEventListener('change', renderReports);
             document.getElementById('priorityFilter').addEventListener('change', renderReports);
+            document.getElementById('faultTypeFilter').addEventListener('change', renderReports);
             document.getElementById('locationFilter').addEventListener('change', renderReports);
             document.getElementById('slaSettingsBtn').addEventListener('click', openSlaSettings);
             document.getElementById('autoCloseSettingsBtn').addEventListener('click', openAutoCloseSettings);
